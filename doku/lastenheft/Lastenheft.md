@@ -1,4 +1,4 @@
-# Lastenheft
+# Lastenheft Team 2
 
 **Entwicklung einer Hello-world Anwendung in Java**
 
@@ -86,14 +86,14 @@ Es gibt nur zwei Anforderungen: die Hauptfunktion und eine Hilfefunktion. Der am
 ### 4.1 Klassendiagramm
 *Bevor Sie Beginnen zu implementieren ist hier ein Klassendiagramm anzugeben.*
 
-![Klassendiagramm](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/HEBK-BGM/dynamische-Datenstrukturen-Team1/master/doku/lastenheft/Diagramme/Klassendiagramm.puml)
+![Klassendiagramm](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/HEBK-BGM/dynamische-Datenstrukturen-Team-2/master/doku/lastenheft/Diagramme/Klassendiagramm.puml)
 
 ### 4.2 Objektdiagramm
 *Auf Basis Ihres Klassendiagramms ist hier ein Objektdiagramm anzugeben.*
 
-![Objektdiagramm](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/HEBK-BGM/dynamische-Datenstrukturen-Team1/master/doku/lastenheft/Diagramme/Objektdiagramm.puml)
+![Objektdiagramm](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/HEBK-BGM/dynamische-Datenstrukturen-Team-2/master/doku/lastenheft/Diagramme/Objektdiagramm.puml)
 
 ### 4.3 Sequenzdiagramm
 *Hier wird ein Sequenzdiagramm zu einer Funktion aus 3.1 dargestellt.*
 
-![Sequenzdiagramm](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/HEBK-BGM/dynamische-Datenstrukturen-Team1/master/doku/lastenheft/Diagramme/Sequenzdiagramm.puml)
+![Sequenzdiagramm](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/HEBK-BGM/dynamische-Datenstrukturen-Team-2/master/doku/lastenheft/Diagramme/Sequenzdiagramm.puml)
