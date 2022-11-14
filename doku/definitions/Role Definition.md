@@ -1,9 +1,10 @@
 # Rollendefinition
-*Hier beschreiben Sie Ihre Teamrollen. Neben den drei vorgegebenen dürfen Sie bei Bedarf weitere hinzufügen.*
 
 ## 1. Teamleiter
+> Timo
 
 ## 2. Klausurvorbereitung
+> Max und Jonas
 
 ## 3. Dokumentationsverantwortlicher 
-
+> Maarten und Niklas
