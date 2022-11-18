@@ -7,4 +7,4 @@
 > Max und Jonas
 
 ## 3. Dokumentationsverantwortlicher 
-> Maarten und Niklas
+> Niklas
