@@ -1,21 +1,11 @@
 package de.hebk.gamemodes;
 
-import de.hebk.Config;
 import de.hebk.Question;
+import de.hebk.media.sound.SoundManager;
 import de.hebk.model.stack.Stack;
-import de.hebk.SQLManager;
-import de.hebk.model.list.List;
 
 public class Hardcore {
+    SoundManager soundManager = new SoundManager();
 
-    private Stack<Question> question;
-
-    SQLManager sqlm = new SQLManager(Config.getDatabaseURL());
-
-    List<Question> name = sqlm.getQuestionsFromLevel(15);
-
-    //question.push(name.getFirst);
-    public void Hardcore(){
-
-    }
+    Stack<Question> question = new Stack<Question>();
 }
