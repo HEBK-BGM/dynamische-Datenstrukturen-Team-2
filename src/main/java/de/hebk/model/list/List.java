@@ -91,14 +91,6 @@ public class List<T> {
     }
 
     /**
-     * Falls die Liste nicht leer ist, wird das letzte Objekt der Liste
-     * aktuelles Objekt. Ist die Liste leer, geschieht nichts.
-     */
-    public void toLast(){
-        //TODO fill
-    }
-
-    /**
      * Falls es ein aktuelles Objekt gibt, wird das aktuelle Objekt
      * zurückgegeben, andernfalls gibt die Anfrage den Wert null
      * zurück.

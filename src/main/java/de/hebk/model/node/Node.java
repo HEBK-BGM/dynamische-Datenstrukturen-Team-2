@@ -9,6 +9,9 @@ public class Node<T> {
     private T context;
     private Node<T> next;
 
+    public Node(T context) {
+        this.context = context;
+    }
 
     /**
      * returns context of a node

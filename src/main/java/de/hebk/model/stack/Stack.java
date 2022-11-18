@@ -15,8 +15,7 @@ public class Stack<T> {
      * Objekte enthält, sonst liefert sie den Wert false.
      */
     public boolean isEmpty(){
-        //TODO fill
-        return true;
+        return first == null;
     }
 
     /**
@@ -56,7 +55,6 @@ public class Stack<T> {
      * unverändert. Falls der Stapel leer ist, wird null zurückgegeben.
      */
     public T top(){
-        //TODO fill
         return this.first.getContext();
     }
 }
