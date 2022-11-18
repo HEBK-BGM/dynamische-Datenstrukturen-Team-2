@@ -32,7 +32,7 @@ public class Client {
         }
     }
 
-    public void sent(String msg) {
+    public void send(String msg) {
         try {
             writer.write(msg);
             writer.flush();
