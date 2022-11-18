@@ -3,14 +3,18 @@ package de.hebk.multiplayer;
 import java.io.*;
 import java.net.Socket;
 
-public class ClientConnection {
+public class Client {
     private Socket socket;
-    private BufferedReader reader;
-    private BufferedWriter writer;
+    BufferedReader reader;
+    BufferedWriter writer;
 
-    public ClientConnection(Socket socket) {
-        this.socket = socket;
+    public Client(String ip, int port) {
+        connect(ip, port);
+    }
+
+    public void connect(String ip, int port) {
         try {
+            socket = new Socket(ip, port);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
@@ -18,7 +22,17 @@ public class ClientConnection {
         }
     }
 
-    public void send(String msg) {
+    public void closeConnection() {
+        try {
+            reader.close();
+            writer.close();
+            socket.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void sent(String msg) {
         try {
             writer.write(msg);
             writer.flush();
