@@ -24,7 +24,18 @@ public class Stack<T> {
      * pObject gleich null ist, bleibt der Stapel unverändert
      */
     public void push(T pObjekt){
-        //TODO fill
+        if (pObjekt == null) {
+            return;
+        }
+
+        if (first == null) {
+            first = new Node<T>(pObjekt);
+            return;
+        }
+
+        Node<T> tmp = first;
+        first = new Node<T>(pObjekt);
+        first.setNext(tmp);
     }
 
     /**

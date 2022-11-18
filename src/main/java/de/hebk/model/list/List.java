@@ -218,7 +218,23 @@ public class List<T> {
      * unverändert.
      */
     public void remove(){
-        //TODO fill
+        if (isEmpty() || !hasAccess()) {
+            return;
+        }
+
+        if (first.equals(aktuelleNode)) {
+            first = aktuelleNode.getNext();
+            return;
+        }
+
+        Node tmp = first;
+        while (tmp.getNext() != null) {
+            if (tmp.equals(aktuelleNode)) {
+                tmp.setNext(aktuelleNode.getNext());
+                return;
+            }
+            tmp = tmp.getNext();
+        }
     }
 
 }
