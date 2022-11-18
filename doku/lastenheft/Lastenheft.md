@@ -1,8 +1,8 @@
 # Lastenheft Team 2
 
-**Entwicklung einer Hello-world Anwendung in Java**
+**Entwicklung von "Wer Wird Millionär"**
 
-| Stand        | 06.11.2022                                                  |
+| Stand        | 16.11.2022                                                  |
 |--------------|-------------------------------------------------------------|
 | Auftraggeber | Hermann-Emanuel-Berufskolleg Informatik LK Abschlussprojekt |
 
@@ -14,57 +14,38 @@
 
 
 ## 1 Einleitung
-*Eine kurze Einstimmung zum Projekthintergrund*
 
-Im Informatik Leistungskurs entwickeln die Lernenden ein Softwareprojekt. Im Rahmen des
-Softwareentwicklungsprozesses sind typische Dokumente wie das Pflichtenheft zu erstellen. Mit der Entwicklung einer Hello-world-Anwendung soll der
-Softwareentwicklungsprozess praktisch mit den entsprechenden Dokumenten aufgezeigt werden.
+Wir haben uns Gedacht, dass jeder kennt die Serie aus dem Fernsehen und daher haben wir die Idee, dass wir eine verbesserte
+Version des "Wer Wird Millionärs" Spieles Implementieren.
 
 ## 2 Soll-Konzept
 
 ### 2.1 Anwendungsbreiche
-*Beschreibung der vorgesehenen Anwendungsfälle des zu schaffenden Systems.*
 
-Das System hat nur beispielhaften Charakter. Somit ist eine klassische Hello-world-Anwendung ausreichend.
-Eventuell soll noch optional ein Hilfetext ausgegeben werd
+Wenn man sein Wissen unter Beweis stellen oder sich einfach nur die Zeit verteiben möchte.
+Wenn man das Spiel staret hat man verschiedene Modies (Normal, Hardcore und True or Not) zur Auswahl, auch einen Multiplayer und eine Highscore Liste.
 
 ### 2.2 Systemidee
-*Welche Idee wird mit dem System umgesetzt?*
 
-Eine einfache und übersichtliche Java-Anwendung, welche in der Konsole zu starten ist, gibt einen kurzen
-Text aus. Wird die Anwendung mit einem entsprechenden Parameter gestartet, wird ein Hilfetext
-ausgegeben
+Eine Java Anwendung mit GUI die sich an die Fernsehsendung "Wer Wird Millionär" orientiert.
 
 ### 2.3 Ziele
-*Welche konkreten Ziele sollen erreicht werden? (Aufteilung der Idee in Teilziele)*
 
-Nicht mit dem System, sondern anhand des Systems soll der Softwareentwicklungsprozess veranschaulicht
-werden
+Anwendung von Dynamischen Datenstrukturen, Datenbanken, GUI, Networking und allgemeine Java Kenntnisse.
 
 ### 2.4 Zielgruppe
-*Benennung der Anforderungsbeitragenden mit Bezug zu deren Anforderungen*
 
-us dem Ziel, den Softwareentwicklungsprozess zu veranschaulichen und andererseits ein einfaches Hello-world-Programm zu entwickeln, lassen sich folgende Beteiligte den grob erfassten Anforderungen zuordnen:
+Um den Schülern dynamische Datenstrukturen näher zu bringen und für die Nutzer ein interessantes, anprechendes Spielerlebniss zu bieten, lassen sich folgende Beteiligte den grob erfassten Anforderungen zuordnen:
 
-| **Anforderungsbeitragende** | **Anforderung**                                                                                                                                                                                          |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Lernende                    | Anhand des Systems soll der Softwareentwicklungsprozess praktisch veranschaulicht werde                                                                                                                  |
-| Nutzer                      | Das System soll die Zeichenkette „hello world“ ausgeben. Das System soll an das Betriebssystem einen Exit-Code zurückgeben. Das System kann  einen Hilfetext ausgeben                                    |
-| Lehrkräfte                  | Die Analyse des Systems soll objektorientiert erfolgen. Für Modellierung und Dokumentation soll UML2 genutzt werden. Die Implementierung soll in Java erfolgen, der Code soll gewisse Vorgaben erfüllen. |
-
+| **Anforderungsbeitragende** | **Anforderung**                          |
+|-----------------------------|------------------------------------------|
+| Lernende                    | Lernen Dynamische Datenstrukturen kennen |
+| Nutzer                      | Haben Spaß                               |
+| Lehrkräfte                  | Nehmen Pullrequests an (°v°)             |
+ 
 ## 3 Anforderungen
 
 ### 3.1 Funktionale Anforderungen
-*Hier sind die Anforderungen in einer einheitlichen
-und übersichtlichen Form darzustellen.*
-
-*Als Template eignet sich z. B. eine Tabelle.
-Eine Gruppierung nach Prozessen, Nutzerrollen
-oder fachlichen Bereichen und das Vergeben
-eines Identifikators, sowie Verweise auf verwandte
-Anforderungen ist ratsam*
-
-Es gibt nur zwei Anforderungen: die Hauptfunktion und eine Hilfefunktion. Der am Betriebssystem angemeldete Nutzer führt das Programm in der Konsole aus. Der Aufruf erfolgt mittels Java-Interpreter.
 
 | Kürzel | Funktionsname                  | Funktionsbeschreibung                   |
 |--------|--------------------------------|-----------------------------------------|
@@ -84,9 +65,8 @@ Es gibt nur zwei Anforderungen: die Hauptfunktion und eine Hilfefunktion. Der am
 ## 4 Entwürfe
 
 ### 4.1 Klassendiagramm
-*Bevor Sie Beginnen zu implementieren ist hier ein Klassendiagramm anzugeben.*
 
-![Klassendiagramm](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/HEBK-BGM/dynamische-Datenstrukturen-Team-2/master/doku/lastenheft/Diagramme/Klassendiagramm.puml)
+![Klassendiagramm](https://www.plantuml.com/plantuml/png/hLH1Rziy3BtxL-YO3zy6xB9BC1HDKw_rbjfBx2w7OIXKcqczE98coUc2OFzzb6n2RXfW232WKCL7yJtocSYbiLpRTjj4KTbmOzZDVS8EqMyAxq2qmpYL5NmeBX1woqefBFooOrPW8DoDqj7_R0rsskL7_-4BH4n02gRwA-PsigwwWhH_7LXC3vAiSfU-9ZGrgusbfbQrDg4H1FZ6jj0qu90XTMtYhR9xf_SePGDS8FZ4pQGimPYNi70zX5Qj_8WgBv4P9u2coHv_G1cc9y0Dtzt2QwuKYEgaBRKme4yxXlwNt8veUkKk8QjXAtSmUcLMRdcvENBhBwwerZnHsvk1X99gw44N5K5gta8Bvqc1-EcAJfbKGPSAo4gZ9KUQjrnNfTJWDOriHNN71L-3PcEM3qBC8fsnjHG6Kvqhynwv62wytlBcF3Q_aAV82jr2fbDfp-JpHfuY9CZpFSfgxoRHjLXZsC0EcZ6hXSM02_CCsb3wstV4q2QD3lidtSfU8GFwIHmUctIL0SPQdvWvVeH3-RGZ92oi7EWTQFhD453wkNgRfaqD0ai9lt3E-89SbXkmA1iY9sGirwZ1Q0qG27iOH8zvEyk9qlz7G0ElG8_PLRjQWOPguMDCFElQ3XDB7pir4DLG7HbyJAOTDV2FPCcuKQV2QlN6USoKr7RGJDb80s7cqESPVUVp6IqbVJ5y5KW7BuSBV41ErV2z1qV-BFOAcCNZrSVvMbSWZoizEF9dg6IX54IxPO7u4Ctluxn8iZHQBhBqvc6Iviju4IsIczk2WkHw5aTvCLaKqJ99e_Vl7l3lK_OPKqKyYx_SPcdSnvFxwoHEfnIIOEZd42LfiSXSvXBDRBVD7m00)
 
 ### 4.2 Objektdiagramm
 *Auf Basis Ihres Klassendiagramms ist hier ein Objektdiagramm anzugeben.*
