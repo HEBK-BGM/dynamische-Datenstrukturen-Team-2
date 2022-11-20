@@ -14,9 +14,6 @@ public class Node<T> {
         setContext(pObject);
     }
 
-    public Node() {
-
-    }
 
     /**
      * returns context of a node
