@@ -1,17 +1,15 @@
 package de.hebk;
 
-import de.hebk.model.list.List;
-
-import java.util.Scanner;
+import de.hebk.media.sound.SoundManager;
+import de.hebk.media.sound.SoundType;
+import javafx.embed.swing.JFXPanel;
 
 public class Main {
+    static {
+        JFXPanel panel = new JFXPanel();
+    }
+
     public static void main(String[] args) {
-
-        Anmeldung a1 = new Anmeldung();
-
-        //Erstellt eine List für den Typ String
-        List<String> l1 = new List<String>();
-
 
     }
 }
