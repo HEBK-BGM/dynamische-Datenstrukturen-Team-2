@@ -4,9 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="Init Project">
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="[ADD] Alle Klassen&#10;(Alle haben gearbeitet)">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_11_2022_15_18_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_11_2022_15_18__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_11_2022_15_20_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_11_2022_15_20__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/Anmeldung.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/multiplayer/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/node/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/node/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java" afterDir="false" />
+    </list>
+    <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java" afterDir="false" />
+    </list>
+    <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/SQLManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/SQLManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/media/sound/SoundType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/media/sound/SoundType.java" afterDir="false" />
+    </list>
+    <list id="6877c9ce-fa7f-4bb9-8281-999c1e84a751" name="Changes by timo.kruse" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/node/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/node/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/queue/Queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/queue/Queue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,14 +44,50 @@
         <option value="UML Sequence" />
         <option value="UML Class" />
         <option value="UML Object" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/de/hebk/model/stack/Stack.java">
+      <ranges>
+        <range start1="17" end1="19" start2="17" end2="18" changelist="6877c9ce-fa7f-4bb9-8281-999c1e84a751" />
+        <range start1="26" end1="27" start2="25" end2="37" changelist="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" />
+        <range start1="33" end1="35" start2="43" end2="50" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="42" end1="43" start2="57" end2="57" changelist="6877c9ce-fa7f-4bb9-8281-999c1e84a751" />
+        <range start1="46" end1="47" start2="60" end2="60" changelist="6877c9ce-fa7f-4bb9-8281-999c1e84a751" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java">
+      <ranges>
+        <range start1="27" end1="29" start2="27" end2="29" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="37" end1="39" start2="37" end2="39" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="49" end1="50" start2="49" end2="61" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="57" end1="58" start2="68" end2="90" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="59" end1="67" start2="91" end2="91" changelist="6877c9ce-fa7f-4bb9-8281-999c1e84a751" />
+        <range start1="74" end1="75" start2="98" end2="103" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="82" end1="84" start2="110" end2="134" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="93" end1="95" start2="143" end2="159" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="106" end1="108" start2="170" end2="180" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="116" end1="117" start2="188" end2="201" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="128" end1="129" start2="212" end2="229" changelist="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/hebk/model/node/Node.java">
+      <ranges>
+        <range start1="11" end1="11" start2="11" end2="14" changelist="6877c9ce-fa7f-4bb9-8281-999c1e84a751" />
+        <range start1="43" end1="43" start2="46" end2="48" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2HBYoget7g6hULhRWUFk73OXd0C" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -41,6 +102,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
   }
 }</component>
@@ -76,6 +138,11 @@
       <workItem from="1667762750058" duration="500000" />
       <workItem from="1667763934260" duration="66000" />
       <workItem from="1667766340571" duration="42000" />
+      <workItem from="1668589571280" duration="708000" />
+      <workItem from="1668755478410" duration="4225000" />
+      <workItem from="1668781053853" duration="2517000" />
+      <workItem from="1668784016130" duration="2092000" />
+      <workItem from="1668786507163" duration="296000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -110,7 +177,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init Project" />
+    <MESSAGE value="[ADD] Alle Klassen&#10;(Alle haben gearbeitet)" />
+    <option name="LAST_COMMIT_MESSAGE" value="[ADD] Alle Klassen&#10;(Alle haben gearbeitet)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

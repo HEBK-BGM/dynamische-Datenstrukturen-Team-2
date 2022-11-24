@@ -25,8 +25,8 @@ public class List<T> {
      * @return
      */
     public boolean isEmpty(){
-        //TODO fill
-        return true;
+        return first == null;
+
     }
 
     /**
@@ -35,8 +35,8 @@ public class List<T> {
      * @return
      */
     public  boolean hasAccess(){
-        //TODO fill
-        return true;
+        return this.aktuelleNode != null;
+
     }
 
     /**
@@ -47,7 +47,18 @@ public class List<T> {
      * aktuelles Objekt.
      */
     public void next(){
-        //TODO fill
+        if (isEmpty()) {
+            return;
+        }
+
+        if (!hasAccess()) {
+            aktuelleNode = first;
+            return;
+        }
+
+        if (aktuelleNode.getNext() != null) {
+            aktuelleNode = aktuelleNode.getNext();
+        }
     }
 
     /**
@@ -55,7 +66,28 @@ public class List<T> {
      * aktuelles Objekt. Ist die Liste leer, geschieht nichts
      */
     public void toFirst(){
-        //TODO fill
+        if (isEmpty()) {
+            return;
+        }
+
+        aktuelleNode = first;
+    }
+
+    /**
+     * Falls die Liste nicht leer ist, wird das letzte Objekt der Liste
+     * aktuelles Objekt. Ist die Liste leer, geschieht nichts.
+     */
+    public void toLast() {
+        if (isEmpty()) {
+            return;
+        }
+
+        Node<T> tmp = first;
+        while (tmp.getNext() != null) {
+            tmp = tmp.getNext();
+        }
+
+        aktuelleNode = tmp;
     }
 
     /**
@@ -72,7 +104,11 @@ public class List<T> {
      * zurück.
      * @return
      */
-    public T getObject(){
+    public T getObject()  {
+        if (isEmpty()) {
+            return null;
+        }
+
         return aktuelleNode.getContext();
     }
 
@@ -80,8 +116,30 @@ public class List<T> {
      * Falls es ein aktuelles Objekt gibt und pObject ungleich null ist,
      * wird das aktuelle Objekt durch pObject ersetzt.
      */
-    public void setObject(){
-        //TODO fill
+    public void setObject(T str) {
+        if (str == null || isEmpty() || !hasAccess()) {
+            return;
+        }
+
+        if (first.equals(aktuelleNode)) {
+            Node<T> tmp = first;
+
+            first = new Node<T>(str);
+            first.setNext(tmp.getNext());
+            aktuelleNode = first;
+            return;
+        }
+
+        Node<T> tmp = first;
+        while (tmp.getNext() != null) {
+            if (tmp.getNext().equals(aktuelleNode)) {
+                Node<T> newNode = new Node<T>(str);
+                newNode.setNext(tmp.getNext().getNext());
+                tmp.setNext(newNode);
+                break;
+            }
+            tmp = tmp.getNext();
+        }
     }
 
     /**
@@ -91,8 +149,22 @@ public class List<T> {
      * weiterhin kein aktuelles Objekt.
      * Falls pObject gleich null ist, bleibt die Liste unverändert.
      */
-    public void append(T pContext){
-        //TODO fill
+    public void append(T str){
+        if (str == null) {
+            return;
+        }
+
+        if (isEmpty()) {
+            first = new Node<T>(str);
+            return;
+        }
+
+        Node<T> tmp = first;
+        while (tmp.getNext() != null) {
+            tmp = tmp.getNext();
+        }
+
+        tmp.setNext(new Node<T>(str));
     }
 
     /**
@@ -104,8 +176,16 @@ public class List<T> {
      * Objekt gibt und die Liste nicht leer ist oder pObject gleich null
      * ist, bleibt die Liste unverändert.
      */
-    public void insert(T pContext){
-        //TODO fill
+    public void insert(T pInhalt ){
+        Node<T> tmp = first;
+        if (first == null){
+            first = new Node<T>(pInhalt);
+        } else {
+            while (tmp.getNext() != null){
+                tmp = tmp.getNext();
+            }
+            tmp.setNext(new Node<T>(pInhalt));
+        }
     }
 
     /**
@@ -114,7 +194,19 @@ public class List<T> {
      * bleibt die Liste unverändert
      */
     public void concat(List<T> pList){
-        //TODO fill
+        if (pList == null || pList.isEmpty()) {
+            return;
+        }
+
+        if (isEmpty()) {
+            first = pList.first;
+        }
+
+        Node<T> tmp = first;
+        while (tmp.getNext() != null) {
+            tmp = tmp.getNext();
+        }
+        tmp.setNext(pList.first);
     }
 
     /**

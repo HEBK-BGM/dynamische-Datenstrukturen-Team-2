@@ -31,8 +31,13 @@ public class Stack<T> {
      * Das zuletzt eingefügte Objekt wird von dem Stapel entfernt.
      * Falls der Stapel leer ist, bleibt er unverändert.
      */
-    public void pop(){
-        //TODO fill
+    public T pop(){
+        Node<T> tmp = first;
+        if (first.getNext() != null) {
+            first = tmp.getNext();
+        }
+
+        return tmp.getContext();
     }
 
     /**
