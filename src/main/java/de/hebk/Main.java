@@ -1,15 +1,15 @@
 package de.hebk;
 
-import de.hebk.media.sound.SoundManager;
-import de.hebk.media.sound.SoundType;
-import javafx.embed.swing.JFXPanel;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
-    static {
-        JFXPanel panel = new JFXPanel();
+public class Main extends Application {
+    public static void main(String[] args) {
+        launch();
     }
 
-    public static void main(String[] args) {
+    @Override
+    public void start(Stage stage) throws Exception {
 
     }
 }
