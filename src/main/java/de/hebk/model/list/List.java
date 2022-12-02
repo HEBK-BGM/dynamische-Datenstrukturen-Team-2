@@ -214,6 +214,8 @@ public class List<T> {
             return;
         }
 
+        //ToDo sofern ihr keine eigene equals() Methode implementiert habt macht besser: first == aktuelleNode
+        //ToDo denn hier genügt es ja zu überprüfen, ob die beiden Zeiger auf das gleiche Objekt im Speicher zeigen
         if (first.equals(aktuelleNode)) {
             first = aktuelleNode.getNext();
             return;

@@ -46,7 +46,7 @@ public class Stack<T> {
         if (first.getNext() != null) {
             first = tmp.getNext();
         }
-
+        //ToDo hier knallt es sofern tmp== null ist. Das muss einmal abgefangen/überprüft werden
         return tmp.getContext();
     }
 
@@ -55,6 +55,7 @@ public class Stack<T> {
      * unverändert. Falls der Stapel leer ist, wird null zurückgegeben.
      */
     public T top(){
+        //ToDo knallt sofern first null ist. Daher muss das vorher einmal überprüft werden
         return this.first.getContext();
     }
 }
