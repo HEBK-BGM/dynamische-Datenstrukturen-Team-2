@@ -13,6 +13,11 @@ public class Node<T> {
         this.context = context;
     }
 
+    public Node(T pObject) {
+        setContext(pObject);
+    }
+
+
     /**
      * returns context of a node
      * @return
@@ -44,6 +49,4 @@ public class Node<T> {
     public void setNext(Node<T> pNode){
         this.next = pNode;
     }
-
-
 }
