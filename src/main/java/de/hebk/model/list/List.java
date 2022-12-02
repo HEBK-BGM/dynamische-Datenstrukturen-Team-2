@@ -210,7 +210,30 @@ public class List<T> {
      * unverändert.
      */
     public void remove(){
-        //TODO fill
+        if (isEmpty() || !hasAccess()) {
+            return;
+        }
+
+        if (first.equals(aktuelleNode)) {
+            first = aktuelleNode.getNext();
+            return;
+        }
+
+        Node tmp = first;
+        while (tmp.getNext() != null) {
+            if (tmp.equals(aktuelleNode)) {
+                if (aktuelleNode.getNext() != null) {
+                    tmp.setNext(aktuelleNode.getNext());
+                }
+                else {
+                    tmp.setNext(null);
+                }
+                return;
+            }
+            tmp = tmp.getNext();
+        }
     }
 
 }
+
+
