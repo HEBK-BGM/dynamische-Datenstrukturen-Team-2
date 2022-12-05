@@ -35,14 +35,7 @@ public class Menu {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(20), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                try {
-                    fxmlLoader = new FXMLLoader(Main.class.getResource("main_menu.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load());
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                // TODO: Add Main Menu
             }
         }));
         timeline.play();
