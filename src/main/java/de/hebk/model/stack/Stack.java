@@ -27,11 +27,6 @@ public class Stack<T> {
             return;
         }
 
-        if (first == null) {
-            first = new Node<T>(pObjekt);
-            return;
-        }
-
         Node<T> tmp = first;
         first = new Node<T>(pObjekt);
         first.setNext(tmp);
@@ -46,9 +41,7 @@ public class Stack<T> {
             return null;
         }
         Node<T> tmp = first;
-        if (first.getNext() != null) {
-            first = tmp.getNext();
-        }
+        first = first.getNext();
 
         return tmp.getContext();
     }
@@ -61,6 +54,6 @@ public class Stack<T> {
         if (isEmpty()) {
             return null;
         }
-        return this.first.getContext();
+        return first.getContext();
     }
 }

@@ -214,20 +214,18 @@ public class List<T> {
             return;
         }
 
-
         if (first==aktuelleNode) {
-            first = aktuelleNode.getNext();
+            first = first.getNext();
+            aktuelleNode = aktuelleNode.getNext();
             return;
         }
 
         Node<T> tmp = first;
-        while (tmp.getNext() != null) {
-            if (tmp.getNext()==aktuelleNode) {
-                tmp.setNext(aktuelleNode.getNext());
-                return;
-            }
+        while (tmp.getNext() != aktuelleNode) {
             tmp = tmp.getNext();
         }
+        tmp.setNext(aktuelleNode.getNext());
+        aktuelleNode = aktuelleNode.getNext();
     }
 
 }

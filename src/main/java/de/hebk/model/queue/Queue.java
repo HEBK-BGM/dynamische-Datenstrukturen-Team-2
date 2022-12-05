@@ -41,12 +41,12 @@ public class Queue<T> {
      * Schlange leer ist, wird sie nicht verändert.
      */
     public T dequeue(){
-        Node<T> tmp = first;
-        if (tmp != null) {
-            first = tmp.getNext();
+        if (!isEmpty()){
+            Node<T> tmp = first;
+            first = first.getNext();
+            return tmp.getContext();
         }
-
-        return tmp.getContext();
+        return  null;
     }
 
     /**
@@ -55,6 +55,9 @@ public class Queue<T> {
      * null zurückgegeben.
      */
     public T front(){
-        return first.getContext();
+        if(!isEmpty()){
+            return first.getContext();
+        }
+        return  null;
     }
 }
