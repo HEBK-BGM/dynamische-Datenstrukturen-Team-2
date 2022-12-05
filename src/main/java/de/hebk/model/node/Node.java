@@ -9,7 +9,6 @@ public class Node<T> {
     private T context;
     private Node<T> next;
 
-
     public Node(T pObject) {
         setContext(pObject);
     }

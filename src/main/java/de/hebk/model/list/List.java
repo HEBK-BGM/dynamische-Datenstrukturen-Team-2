@@ -91,14 +91,6 @@ public class List<T> {
     }
 
     /**
-     * Falls die Liste nicht leer ist, wird das letzte Objekt der Liste
-     * aktuelles Objekt. Ist die Liste leer, geschieht nichts.
-     */
-    public void toLast(){
-        //TODO fill
-    }
-
-    /**
      * Falls es ein aktuelles Objekt gibt, wird das aktuelle Objekt
      * zurückgegeben, andernfalls gibt die Anfrage den Wert null
      * zurück.
@@ -218,7 +210,22 @@ public class List<T> {
      * unverändert.
      */
     public void remove(){
-        //TODO fill
+        if (isEmpty() || !hasAccess()) {
+            return;
+        }
+
+        if (first==aktuelleNode) {
+            first = first.getNext();
+            aktuelleNode = aktuelleNode.getNext();
+            return;
+        }
+
+        Node<T> tmp = first;
+        while (tmp.getNext() != aktuelleNode) {
+            tmp = tmp.getNext();
+        }
+        tmp.setNext(aktuelleNode.getNext());
+        aktuelleNode = aktuelleNode.getNext();
     }
 
 }
