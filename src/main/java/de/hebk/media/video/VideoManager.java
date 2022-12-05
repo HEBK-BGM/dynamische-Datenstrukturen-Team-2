@@ -22,7 +22,7 @@ public class VideoManager {
         String path = "src\\main\\java\\de\\hebk\\assets\\video\\";
 
         switch (type) {
-            case INTRO -> path += "intro_2.mp4";
+            case INTRO -> path += "intro.mp4";
         }
 
         Media media = new Media(new File(path).toURI().toString());

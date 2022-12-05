@@ -1,10 +1,7 @@
 package de.hebk;
 
 import de.hebk.gui.Menu;
-import de.hebk.media.video.VideoManager;
-import de.hebk.media.video.VideoType;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
