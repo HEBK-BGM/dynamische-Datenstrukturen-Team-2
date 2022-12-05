@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [ADD] Vermutlich Stack u. Queue">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" afterDir="false" />
-    </list>
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [FIX] Queue und List" />
     <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
     <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="Changes by niklas.schoe" />
     <list id="6877c9ce-fa7f-4bb9-8281-999c1e84a751" name="Changes by timo.kruse" comment="Changes by timo.kruse" />
@@ -91,6 +88,7 @@
       <workItem from="1668786507163" duration="1814000" />
       <workItem from="1669016980400" duration="1433000" />
       <workItem from="1669964770633" duration="4745000" />
+      <workItem from="1670223985798" duration="748000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -141,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669967331028</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary=" [FIX] Queue und List">
+      <created>1670224725109</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670224725109</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +170,8 @@
     <MESSAGE value="Changes by niklas.schoe" />
     <MESSAGE value="Changes by timo.kruse" />
     <MESSAGE value=" [ADD] Vermutlich Stack u. Queue" />
-    <option name="LAST_COMMIT_MESSAGE" value=" [ADD] Vermutlich Stack u. Queue" />
+    <MESSAGE value=" [FIX] Queue und List" />
+    <option name="LAST_COMMIT_MESSAGE" value=" [FIX] Queue und List" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

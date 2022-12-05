@@ -222,7 +222,7 @@ public class List<T> {
 
         Node<T> tmp = first;
         while (tmp.getNext() != null) {
-            if (tmp.getNext().equals(aktuelleNode)) {
+            if (tmp.getNext()==aktuelleNode) {
                 tmp.setNext(aktuelleNode.getNext());
                 return;
             }
