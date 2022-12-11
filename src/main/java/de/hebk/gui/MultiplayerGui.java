@@ -25,5 +25,25 @@ public class MultiplayerGui {
                 frame.setVisible(true);
             }
         });
+
+        spielBeitretenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(panel1);
+                new MultiplayerJoinGui(frame);
+            }
+        });
+
+        spielErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(panel1);
+                new MultiplayerCreateGui(frame);
+            }
+        });
+    }
+
+    private JPanel getPanel() {
+        return panel1;
     }
 }

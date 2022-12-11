@@ -14,8 +14,10 @@ public class StartGui extends JFrame {
     public StartGui() {
         super("Wer wird Millionär");
 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(panel1);
         this.setSize(960, 540);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
         /*highscoreButton.addActionListener(new ActionListener() {
@@ -27,11 +29,18 @@ public class StartGui extends JFrame {
             }
         });*/
 
+        beendenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
         multiplayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 remove(panel1);
-                MultiplayerGui multiplayerGui = new MultiplayerGui(StartGui.this);
+                new MultiplayerGui(StartGui.this);
             }
         });
     }
