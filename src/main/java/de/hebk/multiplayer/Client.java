@@ -1,22 +1,32 @@
 package de.hebk.multiplayer;
 
+import com.google.gson.Gson;
+
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.Socket;
 
 public class Client {
-    private Socket socket;
-    BufferedReader reader;
-    BufferedWriter writer;
+    private SSLSocket sslSocket;
+    private BufferedReader reader;
+    private BufferedWriter writer;
+    private Gson gson;
 
-    public Client(String ip, int port) {
-        connect(ip, port);
+    public Client(String ip, int port, String username) {
+        connect(ip, port, username);
     }
 
-    public void connect(String ip, int port) {
+    public void connect(String ip, int port, String username) {
         try {
-            socket = new Socket(ip, port);
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+
+            sslSocket = (SSLSocket) sslSocketFactory.createSocket(ip, port);
+            reader = new BufferedReader(new InputStreamReader(sslSocket.getInputStream()));
+            writer = new BufferedWriter(new OutputStreamWriter(sslSocket.getOutputStream()));
+
+            Packet packet = new Packet(PacketType.JOIN, username);
+            send(gson.toJson(packet));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -26,7 +36,7 @@ public class Client {
         try {
             reader.close();
             writer.close();
-            socket.close();
+            sslSocket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
