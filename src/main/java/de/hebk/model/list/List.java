@@ -228,4 +228,18 @@ public class List<T> {
         aktuelleNode = aktuelleNode.getNext();
     }
 
+    public int size() {
+        int counter = 1;
+        if (first == null) {
+            return 0;
+        }
+
+        Node tmp = first;
+        while (tmp.getNext() != null) {
+            counter++;
+            tmp = tmp.getNext();
+        }
+
+        return counter;
+    }
 }
