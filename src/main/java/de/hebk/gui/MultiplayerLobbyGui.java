@@ -1,5 +1,6 @@
 package de.hebk.gui;
 
+import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Server;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class MultiplayerLobbyGui {
     private JButton zurueckButton;
     private JLabel mitspielerLabel;
 
-    public MultiplayerLobbyGui(StartGui gui, Server server) {
+    public MultiplayerLobbyGui(StartGui gui, Server server, Client client) {
         this.frame = gui;
         this.server = server;
         frame.add(panel1);
@@ -35,5 +36,9 @@ public class MultiplayerLobbyGui {
 
             }
         });
+    }
+
+    private void createUIComponents() {
+        mitspielerLabel = new JLabel("Mitspieler:\n");
     }
 }

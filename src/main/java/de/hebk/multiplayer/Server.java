@@ -2,32 +2,32 @@ package de.hebk.multiplayer;
 
 import de.hebk.model.list.List;
 
-import javax.net.ssl.SSLServerSocket;
-import javax.net.ssl.SSLServerSocketFactory;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 
 public class Server {
-    private SSLServerSocket sslServerSocket;
+    private ServerSocket serverSocket;
     private Thread thread;
     private List<ClientConnection> connections = new List<>();
 
-    public void start(int port) {
+    public void start(int port, String gamemode) {
         System.out.println("Starting server...");
 
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-                    sslServerSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(port);
+                    serverSocket = new ServerSocket(port);
 
-                    SSLSocket socket;
+                    Socket socket;
                     while (true) {
-                        socket = (SSLSocket) sslServerSocket.accept();
+                        socket = serverSocket.accept();
+                        System.out.println("new connection");
                         connections.insert(new ClientConnection(socket));
                     }
                 } catch (IOException e) {
@@ -50,7 +50,7 @@ public class Server {
                 connections.remove();
             }
 
-            sslServerSocket.close();
+            serverSocket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

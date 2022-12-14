@@ -1,5 +1,6 @@
 package de.hebk.gui;
 
+import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Server;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ public class MultiplayerCreateGui {
     private JTextField portField;
     private JButton erstellenButton;
     private JButton zurueckButton;
+    private JList list1;
 
     public MultiplayerCreateGui(StartGui gui) {
         this.frame = gui;
@@ -47,10 +49,19 @@ public class MultiplayerCreateGui {
             return;
         }
 
+        if (list1.isSelectionEmpty()) {
+            System.out.println("Kein Spielmodus ausgewählt");
+            return;
+        }
+
+        String gamemode = list1.getSelectedValue().toString();
+
         Server server = new Server();
-        server.start(Integer.parseInt(port));
+        server.start(Integer.parseInt(port), gamemode);
+
+        Client client = new Client("127.0.0.1", Integer.parseInt(port), username);
 
         frame.remove(panel1);
-        new MultiplayerLobbyGui(frame, server);
+        new MultiplayerLobbyGui(frame, server, client);
     }
 }

@@ -7,13 +7,13 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientConnection {
-    private SSLSocket socket;
+    private Socket socket;
     private String username;
     private Gson gson;
     private BufferedReader reader;
     private BufferedWriter writer;
 
-    public ClientConnection(SSLSocket socket) {
+    public ClientConnection(Socket socket) {
         this.socket = socket;
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));

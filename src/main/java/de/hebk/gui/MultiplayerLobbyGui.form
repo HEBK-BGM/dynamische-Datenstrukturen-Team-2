@@ -24,7 +24,7 @@
               <text value="Warte auf Mitspieler..."/>
             </properties>
           </component>
-          <component id="49d48" class="javax.swing.JLabel" binding="mitspielerLabel">
+          <component id="49d48" class="javax.swing.JLabel" binding="mitspielerLabel" custom-create="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
