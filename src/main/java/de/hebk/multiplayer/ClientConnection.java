@@ -15,14 +15,19 @@ public class ClientConnection {
 
     public ClientConnection(Socket socket) {
         this.socket = socket;
+    }
+
+    public String connect() {
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             gson = new Gson();
 
-            Packet p = gson.fromJson(read(), Packet.class);
+            String content = reader.readLine();
+            Packet p = gson.fromJson(content, Packet.class);
             if (p.getPacketType().equals(PacketType.JOIN)) {
                 username = p.getContent();
+                return username;
             }
             else {
                 closeConnection();
@@ -30,6 +35,11 @@ public class ClientConnection {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return null;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void send(String msg) {

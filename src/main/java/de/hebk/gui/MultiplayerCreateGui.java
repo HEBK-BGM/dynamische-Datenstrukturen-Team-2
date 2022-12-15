@@ -56,9 +56,7 @@ public class MultiplayerCreateGui {
 
         String gamemode = list1.getSelectedValue().toString();
 
-        Server server = new Server();
-        server.start(Integer.parseInt(port), gamemode);
-
+        Server server = new Server(frame, Integer.parseInt(port));
         Client client = new Client("127.0.0.1", Integer.parseInt(port), username);
 
         frame.remove(panel1);

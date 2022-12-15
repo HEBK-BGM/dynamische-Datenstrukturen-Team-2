@@ -18,6 +18,9 @@ public class MultiplayerLobbyGui {
     public MultiplayerLobbyGui(StartGui gui, Server server, Client client) {
         this.frame = gui;
         this.server = server;
+        server.setPlayerLabel(mitspielerLabel);
+        server.start();
+        client.start();
         frame.add(panel1);
         frame.setVisible(true);
 
@@ -25,7 +28,7 @@ public class MultiplayerLobbyGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.remove(panel1);
-                server.stop();
+                server.stopServer();
                 new MultiplayerCreateGui(frame);
             }
         });
@@ -39,6 +42,6 @@ public class MultiplayerLobbyGui {
     }
 
     private void createUIComponents() {
-        mitspielerLabel = new JLabel("Mitspieler:\n");
+        mitspielerLabel = new JLabel("Mitspieler: ");
     }
 }
