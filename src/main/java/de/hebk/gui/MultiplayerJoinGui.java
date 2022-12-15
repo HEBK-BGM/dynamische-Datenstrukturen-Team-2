@@ -1,5 +1,7 @@
 package de.hebk.gui;
 
+import de.hebk.multiplayer.Client;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,5 +53,8 @@ public class MultiplayerJoinGui {
             System.out.println("Kein gültiger Port!");
             return;
         }
+
+        Client client = new Client(ip, Integer.parseInt(port), username);
+        client.start();
     }
 }

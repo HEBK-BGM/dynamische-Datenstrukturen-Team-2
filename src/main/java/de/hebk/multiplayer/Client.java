@@ -32,6 +32,8 @@ public class Client extends Thread {
 
             Packet packet = new Packet(PacketType.JOIN, username);
             send(gson.toJson(packet));
+
+            System.out.println("[Client] Connected to server");
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {

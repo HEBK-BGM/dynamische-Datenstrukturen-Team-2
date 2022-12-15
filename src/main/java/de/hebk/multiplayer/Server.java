@@ -54,6 +54,8 @@ public class Server extends Thread {
 
             playerLabel.setText(playerLabel.getText() + " " + conn.connect());
             gui.setVisible(true);
+
+            connections.insert(conn);
         }
     }
 
