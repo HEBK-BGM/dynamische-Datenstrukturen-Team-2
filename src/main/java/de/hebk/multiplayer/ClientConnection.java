@@ -45,8 +45,8 @@ public class ClientConnection {
     public void send(String msg) {
         try {
             writer.write(msg);
-            writer.flush();
             writer.newLine();
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
