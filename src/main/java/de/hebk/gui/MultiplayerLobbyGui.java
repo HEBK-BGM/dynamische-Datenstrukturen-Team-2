@@ -1,6 +1,8 @@
 package de.hebk.gui;
 
 import de.hebk.multiplayer.Client;
+import de.hebk.multiplayer.Packet;
+import de.hebk.multiplayer.PacketType;
 import de.hebk.multiplayer.Server;
 
 import javax.swing.*;
@@ -39,6 +41,38 @@ public class MultiplayerLobbyGui {
 
             }
         });
+    }
+
+    public MultiplayerLobbyGui(StartGui gui, Client client) {
+        this.frame = gui;
+
+        panel1.remove(startenButton);
+        frame.add(panel1);
+        frame.repaint();
+        frame.setVisible(true);
+
+        Packet packet = client.read();
+
+        zurueckButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(panel1);
+                new MultiplayerCreateGui(frame);
+            }
+        });
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    Packet p = client.read();
+                    if (p.getPacketType().equals(PacketType.PLAYER_JOIN)) {
+                        mitspielerLabel.setText(mitspielerLabel.getText() + ", " + p.getContent());
+                    }
+                }
+            }
+        });
+        thread.start();
     }
 
     private void createUIComponents() {

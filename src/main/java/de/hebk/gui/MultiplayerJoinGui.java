@@ -54,7 +54,7 @@ public class MultiplayerJoinGui {
             return;
         }
 
-        Client client = new Client(ip, Integer.parseInt(port), username);
+        Client client = new Client(frame, ip, Integer.parseInt(port), username);
         client.start();
     }
 }

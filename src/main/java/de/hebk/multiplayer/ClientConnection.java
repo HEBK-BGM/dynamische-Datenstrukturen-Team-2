@@ -42,9 +42,9 @@ public class ClientConnection {
         return username;
     }
 
-    public void send(String msg) {
+    public void send(Packet packet) {
         try {
-            writer.write(msg);
+            writer.write(gson.toJson(packet));
             writer.newLine();
             writer.flush();
         } catch (IOException e) {
@@ -52,9 +52,9 @@ public class ClientConnection {
         }
     }
 
-    public String read() {
+    public Packet read() {
         try {
-            return reader.readLine();
+            return gson.fromJson(reader.readLine(), Packet.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,8 @@
 package de.hebk.multiplayer;
 
 import com.google.gson.Gson;
+import de.hebk.gui.MultiplayerLobbyGui;
+import de.hebk.gui.StartGui;
 
 import java.io.*;
 import java.net.Socket;
@@ -10,12 +12,14 @@ public class Client extends Thread {
     private BufferedReader reader;
     private BufferedWriter writer;
     private Gson gson;
+    private StartGui frame;
     private String ip;
     private int port;
     private String username;
 
-    public Client(String ip, int port, String username) {
+    public Client(StartGui gui, String ip, int port, String username) {
         gson = new Gson();
+        this.frame = gui;
         this.ip = ip;
         this.port = port;
         this.username = username;
@@ -31,9 +35,10 @@ public class Client extends Thread {
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             Packet packet = new Packet(PacketType.JOIN, username);
-            send(gson.toJson(packet));
-
+            send(packet);
             System.out.println("[Client] Connected to server");
+
+            new MultiplayerLobbyGui(frame, this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
@@ -51,9 +56,9 @@ public class Client extends Thread {
         }
     }
 
-    public void send(String msg) {
+    public void send(Packet packet) {
         try {
-            writer.write(msg);
+            writer.write(gson.toJson(packet));
             writer.newLine();
             writer.flush();
         } catch (IOException e) {
@@ -61,9 +66,9 @@ public class Client extends Thread {
         }
     }
 
-    public String read() {
+    public Packet read() {
         try {
-            return reader.readLine();
+            return gson.fromJson(reader.readLine(), Packet.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

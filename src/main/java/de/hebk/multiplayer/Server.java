@@ -1,5 +1,6 @@
 package de.hebk.multiplayer;
 
+import de.hebk.gui.MultiplayerLobbyGui;
 import de.hebk.gui.StartGui;
 import de.hebk.model.list.List;
 
@@ -15,13 +16,15 @@ import java.security.NoSuchAlgorithmException;
 public class Server extends Thread {
     private StartGui gui;
     private JLabel playerLabel;
+    private String gamemode;
     private int port;
     private ServerSocket serverSocket;
     private List<ClientConnection> connections = new List<>();
 
-    public Server(StartGui frame, int port) {
+    public Server(StartGui frame, int port, String gamemode) {
         this.gui = frame;
         this.port = port;
+        this.gamemode = gamemode;
     }
 
     public void setPlayerLabel(JLabel playerLabel) {
@@ -52,8 +55,22 @@ public class Server extends Thread {
                 playerLabel.setText(playerLabel.getText() + ",");
             }
 
-            playerLabel.setText(playerLabel.getText() + " " + conn.connect());
+            String username = conn.connect();
+            playerLabel.setText(playerLabel.getText() + " " + username);
             gui.setVisible(true);
+
+            Packet playerJoinPacket = new Packet(PacketType.PLAYER_JOIN, username);
+
+            connections.toFirst();
+            ClientConnection tmpConn = null;
+            while (connections.getObject() != null) {
+                tmpConn = connections.getObject();
+
+                tmpConn.send(playerJoinPacket);
+
+                connections.next();
+                tmpConn = connections.getObject();
+            }
 
             connections.insert(conn);
         }
