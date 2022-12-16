@@ -4,5 +4,6 @@ public enum PacketType {
     JOIN,
     QUIT,
     ANSWER,
-    PLAYER_JOIN
+    PLAYER_JOIN,
+    ALL_PLAYERS
 }

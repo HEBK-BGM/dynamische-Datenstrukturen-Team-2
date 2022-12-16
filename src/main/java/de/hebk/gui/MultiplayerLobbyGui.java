@@ -17,12 +17,10 @@ public class MultiplayerLobbyGui {
     private JButton zurueckButton;
     private JLabel mitspielerLabel;
 
-    public MultiplayerLobbyGui(StartGui gui, Server server, Client client) {
+    public MultiplayerLobbyGui(StartGui gui, Server server) {
         this.frame = gui;
         this.server = server;
-        server.setPlayerLabel(mitspielerLabel);
         server.start();
-        client.start();
         frame.add(panel1);
         frame.setVisible(true);
 
@@ -43,39 +41,33 @@ public class MultiplayerLobbyGui {
         });
     }
 
-    public MultiplayerLobbyGui(StartGui gui, Client client) {
+    public MultiplayerLobbyGui(StartGui gui) {
         this.frame = gui;
 
-        panel1.remove(startenButton);
+        startenButton.setVisible(false);
         frame.add(panel1);
         frame.repaint();
         frame.setVisible(true);
-
-        Packet packet = client.read();
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.remove(panel1);
-                new MultiplayerCreateGui(frame);
+                new MultiplayerJoinGui(frame);
             }
         });
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    Packet p = client.read();
-                    if (p.getPacketType().equals(PacketType.PLAYER_JOIN)) {
-                        mitspielerLabel.setText(mitspielerLabel.getText() + ", " + p.getContent());
-                    }
-                }
-            }
-        });
-        thread.start();
     }
 
     private void createUIComponents() {
         mitspielerLabel = new JLabel("Mitspieler: ");
+    }
+
+    public void setMitspielerLabel(String label) {
+        this.mitspielerLabel.setText(label);
+        frame.setVisible(true);
+    }
+
+    public JLabel getMitspielerLabel() {
+        return this.mitspielerLabel;
     }
 }

@@ -14,21 +14,14 @@ import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 
 public class Server extends Thread {
-    private StartGui gui;
-    private JLabel playerLabel;
     private String gamemode;
     private int port;
     private ServerSocket serverSocket;
     private List<ClientConnection> connections = new List<>();
 
-    public Server(StartGui frame, int port, String gamemode) {
-        this.gui = frame;
+    public Server(int port, String gamemode) {
         this.port = port;
         this.gamemode = gamemode;
-    }
-
-    public void setPlayerLabel(JLabel playerLabel) {
-        this.playerLabel = playerLabel;
     }
 
     public void run() {
@@ -50,29 +43,33 @@ public class Server extends Thread {
 
             System.out.println("[Server] new connection");
             ClientConnection conn = new ClientConnection(socket);
+            String username = " " + conn.connect();
 
-            if (!connections.isEmpty()) {
-                playerLabel.setText(playerLabel.getText() + ",");
+            String players = "";
+            connections.toFirst();
+            for (int i = 0; i < connections.size(); i++) {
+                if (i != 0) {
+                    players += ",";
+                }
+                players += connections.getObject().getUsername();
+                connections.next();
             }
+            players = " " + players;
+            Packet allPlayers = new Packet(PacketType.ALL_PLAYERS, players);
+            conn.send(allPlayers);
 
-            String username = conn.connect();
-            playerLabel.setText(playerLabel.getText() + " " + username);
-            gui.setVisible(true);
+            if (!players.equals(" ")) {
+                username = "," + username;
+            }
 
             Packet playerJoinPacket = new Packet(PacketType.PLAYER_JOIN, username);
-
-            connections.toFirst();
-            ClientConnection tmpConn = null;
-            while (connections.getObject() != null) {
-                tmpConn = connections.getObject();
-
-                tmpConn.send(playerJoinPacket);
-
-                connections.next();
-                tmpConn = connections.getObject();
-            }
-
             connections.insert(conn);
+            connections.toFirst();
+            for (int i = 0; i < connections.size(); i++) {
+                System.out.println("Sending username " + username + " to " + connections.getObject().getUsername());
+                connections.getObject().send(playerJoinPacket);
+                connections.next();
+            }
         }
     }
 

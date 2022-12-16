@@ -13,16 +13,18 @@ public class Client extends Thread {
     private BufferedWriter writer;
     private Gson gson;
     private StartGui frame;
+    private MultiplayerLobbyGui lobbyGui;
     private String ip;
     private int port;
     private String username;
 
-    public Client(StartGui gui, String ip, int port, String username) {
+    public Client(StartGui gui, MultiplayerLobbyGui lobbyGui, String ip, int port, String username) {
         gson = new Gson();
         this.frame = gui;
         this.ip = ip;
         this.port = port;
         this.username = username;
+        this.lobbyGui = lobbyGui;
     }
 
     public void run() {
@@ -38,10 +40,25 @@ public class Client extends Thread {
             send(packet);
             System.out.println("[Client] Connected to server");
 
-            new MultiplayerLobbyGui(frame, this);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+            Packet packet2 = read();
+            if (packet2.getPacketType().equals(PacketType.ALL_PLAYERS)) {
+                lobbyGui.setMitspielerLabel(lobbyGui.getMitspielerLabel().getText() + packet2.getContent());
+            }
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        Packet p = read();
+                        if (p.getPacketType().equals(PacketType.PLAYER_JOIN)) {
+                            lobbyGui.setMitspielerLabel(lobbyGui.getMitspielerLabel().getText() + p.getContent());
+                            System.out.println("Join " + p.getContent());
+                        }
+                    }
+                }
+            });
+            thread.start();
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

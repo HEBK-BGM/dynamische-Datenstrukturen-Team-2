@@ -55,11 +55,12 @@ public class MultiplayerCreateGui {
         }
 
         String gamemode = list1.getSelectedValue().toString();
-
-        Server server = new Server(frame, Integer.parseInt(port), gamemode);
-        Client client = new Client(frame, "127.0.0.1", Integer.parseInt(port), username);
+        Server server = new Server(Integer.parseInt(port), gamemode);
 
         frame.remove(panel1);
-        new MultiplayerLobbyGui(frame, server, client);
+        MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame, server);
+
+        Client client = new Client(frame, lobbyGui, "127.0.0.1", Integer.parseInt(port), username);
+        client.start();
     }
 }
