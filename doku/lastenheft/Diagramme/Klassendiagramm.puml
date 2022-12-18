@@ -1,299 +1,273 @@
 @startuml
-  namespace de.hebk {
-    class de.hebk.Anmeldung {
-        ~ alter : int
-        ~ nachname : String
-        ~ passwort : String
-        ~ sc : Scanner
-        ~ vorname : String
-        + breakline()
-        ~ Anmeldung()
-    }
-  }
+class de.hebk.gamemodes.mutliplayer.MultiplayerHardcore {
+- List<ClientConnection> connections
+- Gson gson
+- SQLManager sqlManager
++ void startGame()
+}
+class de.hebk.model.node.Node {
+- T context
+- Node<T> next
++ T getContext()
++ void setContext(T)
++ Node<T> getNext()
++ void setNext(Node<T>)
+}
+class de.hebk.Anmeldung {
+~ Scanner sc
+~ String vorname
+~ String nachname
+~ String passwort
+~ int alter
++ void breakline()
+}
+class de.hebk.gui.multiplayer.MultiplayerJoinGui {
+- StartGui frame
+- JPanel panel1
+- JButton beitretenButton
+- JButton zurueckButton
+- JTextField usernameField
+- JTextField serveripField
+- JTextField portField
+- void joinGame(String,String,String)
+}
+class de.hebk.gamemodes.Hardcore {
+- Stack<Question> question
+~ SQLManager sqlm
+~ List<Question> name
++ void Hardcore()
+}
+class de.hebk.gui.multiplayer.MultiplayerQuestionIsSelectedGui {
+- JPanel panel1
+- JLabel label
+- void createUIComponents()
+}
+class de.hebk.Question {
+- String body
+- int level
+- String[] answers
+- int correct
++ String getBody()
++ int getLevel()
++ String[] getAnswers()
++ int getCorrect()
+}
+class de.hebk.model.list.List {
+- Node<T> first
+- Node<T> aktuelleNode
++ boolean isEmpty()
++ boolean hasAccess()
++ void next()
++ void toFirst()
++ void toLast()
++ T getObject()
++ void setObject(T)
++ void append(T)
++ void insert(T)
++ void concat(List<T>)
++ void remove()
++ int size()
+}
+class de.hebk.multiplayer.Server {
+- String gamemode
+- Gson gson
+- int port
+- ServerSocket serverSocket
+- List<ClientConnection> connections
+- List<Question> questionList
+- SQLManager sqlManager
++ void run()
++ void startGame()
++ void stopServer()
++ List<ClientConnection> getConnections()
+}
+class de.hebk.gamemodes.TrueOrNot {
+- String statement
+- Question currentQuestion
+- Queue<Question> questions
++ void startTrueOrNot()
++ void setCurrentQuestion()
++ void createQuestion()
++ String getStatement()
+}
+class de.hebk.gamemodes.mutliplayer.MultiplayerNormal {
+- List<ClientConnection> connections
+- Gson gson
+- SQLManager sqlManager
++ void startGame()
+- Question selectPlayerQuestion(int)
+- void askQuestion(Question)
+}
+class de.hebk.multiplayer.ClientConnection {
+- Socket socket
+- String username
+- Gson gson
+- BufferedReader reader
+- BufferedWriter writer
+- boolean failed
++ String connect()
++ String getUsername()
++ void send(Packet)
++ Packet read()
++ void closeConnection()
++ boolean hasFailed()
++ void setFailed(boolean)
+}
+class de.hebk.gamemodes.mutliplayer.MultiplayerTrueOrNot {
+- List<ClientConnection> connections
+- Gson gson
+- SQLManager sqlManager
++ void startGame()
+}
+class de.hebk.Main {
++ {static} void main(String[])
+- {static} void write(Robot,String)
+}
+class de.hebk.gui.StartGui {
+- JPanel panel1
+- JButton highscoreButton
+- JButton multiplayerButton
+- JButton spielenButton
+- JButton beendenButton
++ JPanel getPanel()
+}
+class de.hebk.model.queue.Queue {
+- Node<T> first
++ boolean isEmpty()
++ void enqueue(T)
++ T dequeue()
++ T front()
+}
+class de.hebk.gui.multiplayer.MultiplayerSelectQuestionGui {
+- StartGui frame
+- Client client
+- JPanel panel1
+- JButton button1
+- JButton button3
+- JButton button4
+- JButton button2
+- void sendQuestion(String)
+}
+class de.hebk.gamemodes.Normal {
+- Config config
+- SQLManager manager
+- int stufe
+- int money
++ int getMoney()
+- void game()
+- boolean stelleFrage()
+}
+enum de.hebk.multiplayer.PacketType {
++  JOIN
++  QUIT
++  CONNECTION_CLOSE
++  ANSWER
++  PLAYER_JOIN
++  ALL_PLAYERS
++  CLEAR
++  SELECT_QUESTION
++  QUESTION_IS_SELECTED
++  QUESTION_SELECTED
++  ASK_QUESTION
++  RIGHT_ANSWER
++  WRONG_ANSWER
+}
+class de.hebk.gui.multiplayer.MultiplayerLobbyGui {
+- StartGui frame
+- Server server
+- JPanel panel1
+- JButton startenButton
+- JButton zurueckButton
+- JLabel mitspielerLabel
+- JLabel errorLabel
+- void createUIComponents()
++ void setMitspielerLabel(String)
++ JLabel getMitspielerLabel()
+}
+class de.hebk.Person {
+~ String vorname
+~ String nachname
+~ String passwort
+~ int alter
+}
+class de.hebk.gui.multiplayer.MultiplayerQuestionGui {
+- JPanel panel1
+- JButton button1
+- JButton button2
+- JButton button3
+- JButton button4
+- JLabel questionLabel
+- void createUIComponents()
+}
+class de.hebk.multiplayer.Packet {
+- PacketType type
+- String content
++ PacketType getPacketType()
++ String getContent()
+}
+class de.hebk.Config {
+- {static} String databaseURL
++ {static} String getDatabaseURL()
+}
+class de.hebk.Game {
+}
+class de.hebk.gui.multiplayer.MultiplayerGui {
+- StartGui frame
+- JButton spielBeitretenButton
+- JPanel panel1
+- JButton spielErstellenButton
+- JButton zurueckButton
+- JPanel getPanel()
+}
+class de.hebk.model.stack.Stack {
+- Node<T> first
++ boolean isEmpty()
++ void push(T)
++ T pop()
++ T top()
+}
+class de.hebk.gui.multiplayer.MultiplayerInfoGui {
+- JPanel panel1
+- JLabel infoLabel
+- void createUIComponents()
+}
+class de.hebk.gui.multiplayer.MultiplayerCreateGui {
+- StartGui frame
+- JPanel panel1
+- JTextField usernameField
+- JTextField portField
+- JButton erstellenButton
+- JButton zurueckButton
+- JList list1
+- void createMultiplayer(String,String)
+}
+class de.hebk.SQLManager {
+- Connection conn
++ List<Question> getQuestions()
++ Question getRandomQuestions()
++ Queue<Question> getQueueQuestions()
++ List<Question> getQuestionsFromLevel(int)
++ List<Question> getRandomQuestionsFromLevel(int,int)
++ void addQuestion(Question)
+}
+class de.hebk.multiplayer.Client {
+- Socket socket
+- BufferedReader reader
+- BufferedWriter writer
+- Gson gson
+- StartGui frame
+- MultiplayerLobbyGui lobbyGui
+- String ip
+- int port
+- String username
++ void run()
++ void closeConnection()
++ void send(Packet)
++ Packet read()
+}
 
 
-  namespace de.hebk {
-    class de.hebk.Game {
-    }
-  }
-
-
-  namespace de.hebk {
-    class de.hebk.Main {
-        {static} + main()
-    }
-  }
-
-
-  namespace de.hebk {
-    class de.hebk.Person {
-        ~ alter : int
-        ~ nachname : String
-        ~ passwort : String
-        ~ vorname : String
-        + Person()
-    }
-  }
-
-
-  namespace de.hebk {
-    class de.hebk.Question {
-        - answers : String[]
-        - body : String
-        - correct : int
-        - level : int
-        + Question()
-        + getAnswers()
-        + getBody()
-        + getCorrect()
-        + getLevel()
-    }
-  }
-
-
-  namespace de.hebk {
-    class de.hebk.SQLManager {
-        - conn : Connection
-        + SQLManager()
-        + addQuestion()
-        + getQuestions()
-    }
-  }
-
-namespace de.hebk {
-    namespace multiplayer {
-      class de.hebk.multiplayer.Client {
-          - gson : Gson
-          - reader : BufferedReader
-          - sslSocket : SSLSocket
-          - writer : BufferedWriter
-          + Client()
-          + closeConnection()
-          + connect()
-          + read()
-          + send()
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace multiplayer {
-      class de.hebk.multiplayer.ClientConnection {
-          - gson : Gson
-          - reader : BufferedReader
-          - socket : SSLSocket
-          - username : String
-          - writer : BufferedWriter
-          + ClientConnection()
-          + closeConnection()
-          + read()
-          + send()
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace multiplayer {
-      class de.hebk.multiplayer.Packet {
-          - content : String
-          + Packet()
-          + getContent()
-          + getPacketType()
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace multiplayer {
-      enum PacketType {
-        ANSWER
-        JOIN
-        QUIT
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace multiplayer {
-      class de.hebk.multiplayer.Server {
-          - connections : List<ClientConnection>
-          - sslServerSocket : SSLServerSocket
-          - thread : Thread
-          + getConnections()
-          + start()
-          + stop()
-      }
-    }
-  }
-
-
-  de.hebk.multiplayer.Packet o-- de.hebk.multiplayer.PacketType : type
-
-namespace de.hebk {
-    namespace gamemodes {
-      class de.hebk.gamemodes.Hardcore {
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace gamemodes {
-      class de.hebk.gamemodes.Normal {
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace gamemodes {
-      class de.hebk.gamemodes.TrueOrNot {
-      }
-    }
-  }
-
-  namespace de.hebk {
-    namespace gui {
-      class de.hebk.gui.MultiplayerCreateGui {
-          - erstellenButton : JButton
-          - panel1 : JPanel
-          - portField : JTextField
-          - usernameField : JTextField
-          - zurueckButton : JButton
-          + MultiplayerCreateGui()
-          - createMultiplayer()
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace gui {
-      class de.hebk.gui.MultiplayerGui {
-          - panel1 : JPanel
-          - spielBeitretenButton : JButton
-          - spielErstellenButton : JButton
-          - zurueckButton : JButton
-          + MultiplayerGui()
-          - getPanel()
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace gui {
-      class de.hebk.gui.MultiplayerJoinGui {
-          - beitretenButton : JButton
-          - panel1 : JPanel
-          - portField : JTextField
-          - serveripField : JTextField
-          - usernameField : JTextField
-          - zurueckButton : JButton
-          + MultiplayerJoinGui()
-          - joinGame()
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace gui {
-      class de.hebk.gui.MultiplayerLobbyGui {
-          - mitspielerLabel : JLabel
-          - panel1 : JPanel
-          - startenButton : JButton
-          - zurueckButton : JButton
-          + MultiplayerLobbyGui()
-      }
-    }
-  }
-
-
-  namespace de.hebk {
-    namespace gui {
-      class de.hebk.gui.StartGui {
-          - beendenButton : JButton
-          - highscoreButton : JButton
-          - multiplayerButton : JButton
-          - panel1 : JPanel
-          - spielenButton : JButton
-          + StartGui()
-          + getPanel()
-      }
-    }
-  }
-
-
-  de.hebk.gui.MultiplayerCreateGui o-- de.hebk.gui.StartGui : frame
-  de.hebk.gui.MultiplayerGui o-- de.hebk.gui.StartGui : frame
-  de.hebk.gui.MultiplayerJoinGui o-- de.hebk.gui.StartGui : frame
-  de.hebk.gui.MultiplayerLobbyGui o-- de.hebk.gui.StartGui : frame
-  de.hebk.gui.MultiplayerLobbyGui o-- de.hebk.multiplayer.Server : server
-  de.hebk.gui.StartGui -up-|> javax.swing.JFrame
-
-  namespace de.hebk {
-    namespace model.list {
-      class de.hebk.model.list.List {
-          - aktuelleNode : Node<T>
-          - first : Node<T>
-          + append()
-          + concat()
-          + getObject()
-          + hasAccess()
-          + insert()
-          + isEmpty()
-          + next()
-          + remove()
-          + setObject()
-          + size()
-          + toFirst()
-          + toLast()
-      }
-    }
-  }
-
-  namespace de.hebk {
-    namespace model.node {
-      class de.hebk.model.node.Node {
-          - next : Node<T>
-          + Node()
-          + getContext()
-          + getNext()
-          + setContext()
-          + setNext()
-      }
-    }
-  }
-
-
-  de.hebk.model.node.Node o-- T : context
-
-  namespace de.hebk {
-    namespace model.queue {
-      class de.hebk.model.queue.Queue {
-          - first : Node<T>
-          + dequeue()
-          + enqueue()
-          + front()
-          + isEmpty()
-      }
-    }
-  }
-
-  namespace de.hebk {
-    namespace model.stack {
-      class de.hebk.model.stack.Stack {
-          - first : Node<T>
-          + isEmpty()
-          + pop()
-          + push()
-          + top()
-      }
-    }
-  }
+de.hebk.multiplayer.Thread <|-- de.hebk.multiplayer.Server
+de.hebk.gui.JFrame <|-- de.hebk.gui.StartGui
+de.hebk.multiplayer.Thread <|-- de.hebk.multiplayer.Client
 @enduml
