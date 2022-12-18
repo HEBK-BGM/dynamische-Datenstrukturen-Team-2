@@ -1,4 +1,6 @@
-package de.hebk.gui;
+package de.hebk.gui.multiplayer;
+
+import de.hebk.gui.StartGui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

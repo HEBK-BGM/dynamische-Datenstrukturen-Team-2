@@ -1,23 +1,23 @@
-package de.hebk.gui;
+package de.hebk.gui.multiplayer;
 
+import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
-import de.hebk.multiplayer.Server;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MultiplayerCreateGui {
+public class MultiplayerJoinGui {
     private StartGui frame;
     private JPanel panel1;
-    private JTextField usernameField;
-    private JTextField portField;
-    private JButton erstellenButton;
+    private JButton beitretenButton;
     private JButton zurueckButton;
-    private JList list1;
+    private JTextField usernameField;
+    private JTextField serveripField;
+    private JTextField portField;
 
-    public MultiplayerCreateGui(StartGui gui) {
-        this.frame = gui;
+    public MultiplayerJoinGui(StartGui frame) {
+        this.frame = frame;
         frame.add(panel1);
         frame.setVisible(true);
 
@@ -29,15 +29,15 @@ public class MultiplayerCreateGui {
             }
         });
 
-        erstellenButton.addActionListener(new ActionListener() {
+        beitretenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createMultiplayer(usernameField.getText(), portField.getText());
+                joinGame(usernameField.getText(), serveripField.getText(), portField.getText());
             }
         });
     }
 
-    private void createMultiplayer(String username, String port) {
+    private void joinGame(String username, String ip, String port) {
         if (!(username.length() > 0)) {
             System.out.println("Kein gültiger Username!");
             return;
@@ -49,18 +49,9 @@ public class MultiplayerCreateGui {
             return;
         }
 
-        if (list1.isSelectionEmpty()) {
-            System.out.println("Kein Spielmodus ausgewählt");
-            return;
-        }
-
-        String gamemode = list1.getSelectedValue().toString();
-        Server server = new Server(Integer.parseInt(port), gamemode);
-
         frame.remove(panel1);
-        MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame, server);
-
-        Client client = new Client(frame, lobbyGui, "127.0.0.1", Integer.parseInt(port), username);
+        MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame);
+        Client client = new Client(frame, lobbyGui, ip, Integer.parseInt(port), username);
         client.start();
     }
 }

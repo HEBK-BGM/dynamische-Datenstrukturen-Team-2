@@ -1,32 +1,45 @@
 package de.hebk.multiplayer;
 
-import de.hebk.gui.MultiplayerLobbyGui;
-import de.hebk.gui.StartGui;
+import com.google.gson.Gson;
+import de.hebk.Config;
+import de.hebk.Question;
+import de.hebk.SQLManager;
+import de.hebk.gamemodes.mutliplayer.MultiplayerHardcore;
+import de.hebk.gamemodes.mutliplayer.MultiplayerNormal;
+import de.hebk.gamemodes.mutliplayer.MultiplayerTrueOrNot;
 import de.hebk.model.list.List;
 
-import javax.net.ssl.*;
-import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.NoSuchAlgorithmException;
 
 public class Server extends Thread {
     private String gamemode;
+    private Gson gson;
     private int port;
     private ServerSocket serverSocket;
     private List<ClientConnection> connections = new List<>();
+    private List<Question> questionList = new List<>();
+    private SQLManager sqlManager;
 
+    /**
+     * Contructor for the server
+     * @param port      Port where the server should listen for incoming connections
+     * @param gamemode  Gamemode
+     */
     public Server(int port, String gamemode) {
         this.port = port;
         this.gamemode = gamemode;
     }
 
+    /**
+     * Creates a new thread and listens for new connections
+     */
     public void run() {
         System.out.println("[Server] Starting server...");
-
+        gson = new Gson();
+        sqlManager = new SQLManager(Config.getDatabaseURL());
+        
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
@@ -66,20 +79,56 @@ public class Server extends Thread {
             connections.insert(conn);
             connections.toFirst();
             for (int i = 0; i < connections.size(); i++) {
-                System.out.println("Sending username " + username + " to " + connections.getObject().getUsername());
+                System.out.println("Sending username " + username.substring(2) + " to " + connections.getObject().getUsername());
                 connections.getObject().send(playerJoinPacket);
                 connections.next();
             }
         }
     }
 
+    /**
+     * Starts the game
+     */
+    public void startGame() {
+        Packet p = new Packet(PacketType.CLEAR, "");
+        connections.toFirst();
+        for (int i = 0; i < connections.size(); i++) {
+            connections.getObject().send(p);
+            connections.next();
+        }
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (gamemode.equals("Normal")) {
+                    MultiplayerNormal multiplayerNormal = new MultiplayerNormal(connections, sqlManager);
+                    multiplayerNormal.startGame();
+                }
+                else if (gamemode.equals("Hardcore")) {
+                    MultiplayerHardcore multiplayerHardcore = new MultiplayerHardcore(connections, sqlManager);
+                    multiplayerHardcore.startGame();
+                }
+                else if (gamemode.equals("True or Not")) {
+                    MultiplayerTrueOrNot multiplayerTrueOrNot = new MultiplayerTrueOrNot(connections, sqlManager);
+                    multiplayerTrueOrNot.startGame();
+                }
+            }
+        });
+        thread.start();
+    }
+
+    /**
+     * Stops the server and closes every connection
+     */
     public void stopServer() {
         System.out.println("Stopping server...");
 
         try {
+            Packet closePacket = new Packet(PacketType.CONNECTION_CLOSE, "");
             connections.toFirst();
             for (int i = 0; i < connections.size(); i++) {
                 ClientConnection c = connections.getObject();
+                c.send(closePacket);
                 c.closeConnection();
                 connections.remove();
             }
@@ -90,6 +139,10 @@ public class Server extends Thread {
         }
     }
 
+    /**
+     * Returns every connection
+     * @return Every connection
+     */
     public List<ClientConnection> getConnections() {
         return connections;
     }

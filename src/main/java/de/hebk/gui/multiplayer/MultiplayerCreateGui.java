@@ -1,22 +1,24 @@
-package de.hebk.gui;
+package de.hebk.gui.multiplayer;
 
+import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
+import de.hebk.multiplayer.Server;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MultiplayerJoinGui {
+public class MultiplayerCreateGui {
     private StartGui frame;
     private JPanel panel1;
-    private JButton beitretenButton;
-    private JButton zurueckButton;
     private JTextField usernameField;
-    private JTextField serveripField;
     private JTextField portField;
+    private JButton erstellenButton;
+    private JButton zurueckButton;
+    private JList list1;
 
-    public MultiplayerJoinGui(StartGui frame) {
-        this.frame = frame;
+    public MultiplayerCreateGui(StartGui gui) {
+        this.frame = gui;
         frame.add(panel1);
         frame.setVisible(true);
 
@@ -28,23 +30,17 @@ public class MultiplayerJoinGui {
             }
         });
 
-        beitretenButton.addActionListener(new ActionListener() {
+        erstellenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                joinGame(usernameField.getText(), serveripField.getText(), portField.getText());
+                createMultiplayer(usernameField.getText(), portField.getText());
             }
         });
     }
 
-    private void joinGame(String username, String ip, String port) {
+    private void createMultiplayer(String username, String port) {
         if (!(username.length() > 0)) {
             System.out.println("Kein gültiger Username!");
-            return;
-        }
-
-        String ipregex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
-        if (!ip.matches(ipregex)) {
-            System.out.println("Keine gültige IP");
             return;
         }
 
@@ -54,9 +50,18 @@ public class MultiplayerJoinGui {
             return;
         }
 
+        if (list1.isSelectionEmpty()) {
+            System.out.println("Kein Spielmodus ausgewählt");
+            return;
+        }
+
+        String gamemode = list1.getSelectedValue().toString();
+        Server server = new Server(Integer.parseInt(port), gamemode);
+
         frame.remove(panel1);
-        MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame);
-        Client client = new Client(frame, lobbyGui, ip, Integer.parseInt(port), username);
+        MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame, server);
+
+        Client client = new Client(frame, lobbyGui, "127.0.0.1", Integer.parseInt(port), username);
         client.start();
     }
 }
