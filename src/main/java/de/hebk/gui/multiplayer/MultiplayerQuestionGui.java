@@ -17,6 +17,9 @@ public class MultiplayerQuestionGui {
     private JButton button3;
     private JButton button4;
     private JLabel questionLabel;
+    private JButton telefonjokerButton;
+    private JButton publikumsJokerButton;
+    private JButton a5050JokerButton;
 
     public MultiplayerQuestionGui(StartGui gui, Client client, Question question) {
         questionLabel.setText(question.getBody());
