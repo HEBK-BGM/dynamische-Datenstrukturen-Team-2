@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import de.hebk.Question;
 import de.hebk.gui.multiplayer.*;
 import de.hebk.gui.StartGui;
+import de.hebk.utils.Joker;
+import de.hebk.utils.JokerType;
 
 import javax.swing.*;
 import java.io.*;
@@ -19,6 +21,7 @@ public class Client extends Thread {
     private String ip;
     private int port;
     private String username;
+    private Joker[] joker = new Joker[3];
 
     /**
      * Contructor for the client
@@ -35,6 +38,10 @@ public class Client extends Thread {
         this.port = port;
         this.username = username;
         this.lobbyGui = lobbyGui;
+
+        joker[0] = new Joker(JokerType.TELEPHONE_JOKER);
+        joker[1] = new Joker(JokerType.AUDIENCE_JOKER);
+        joker[2] = new Joker(JokerType.HALF_JOKER);
     }
 
     /**
@@ -43,7 +50,7 @@ public class Client extends Thread {
     public void run() {
         System.out.println("[Client] Connecting to Server");
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
 
             socket = new Socket(ip, port);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -87,7 +94,7 @@ public class Client extends Thread {
                         new MultiplayerQuestionIsSelectedGui(frame, p.getContent());
                         break;
                     case ASK_QUESTION:
-                        new MultiplayerQuestionGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class));
+                        new MultiplayerQuestionGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
                         break;
                     case WRONG_ANSWER:
                         new MultiplayerInfoGui(frame, "Deine Antwort war leider Falsch!");

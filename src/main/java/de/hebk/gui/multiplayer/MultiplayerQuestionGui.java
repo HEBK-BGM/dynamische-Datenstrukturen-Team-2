@@ -2,11 +2,14 @@ package de.hebk.gui.multiplayer;
 
 import de.hebk.Question;
 import de.hebk.gui.StartGui;
+import de.hebk.model.list.List;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
+import de.hebk.utils.Joker;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,12 +24,23 @@ public class MultiplayerQuestionGui {
     private JButton publikumsJokerButton;
     private JButton a5050JokerButton;
 
-    public MultiplayerQuestionGui(StartGui gui, Client client, Question question) {
+    public MultiplayerQuestionGui(StartGui gui, Client client, Question question, Joker[] joker) {
         questionLabel.setText(question.getBody());
         button1.setText(question.getAnswers()[0]);
         button2.setText(question.getAnswers()[1]);
         button3.setText(question.getAnswers()[2]);
         button4.setText(question.getAnswers()[3]);
+
+        if (joker[0].isUsed()) {
+            telefonjokerButton.setBackground(Color.GRAY);
+        }
+        if (joker[1].isUsed()) {
+            publikumsJokerButton.setBackground(Color.GRAY);
+        }
+        if (joker[2].isUsed()) {
+            a5050JokerButton.setBackground(Color.GRAY);
+        }
+
         gui.setContentPane(panel1);
         gui.revalidate();
         gui.repaint();
@@ -65,6 +79,71 @@ public class MultiplayerQuestionGui {
                 Packet packet = new Packet(PacketType.ANSWER, "4");
                 client.send(packet);
                 new MultiplayerInfoGui(gui, info);
+            }
+        });
+
+        telefonjokerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<String> answers = joker[0].use(question);
+                answers.toFirst();
+
+                if (!button1.getText().equals(answers.getObject())) {
+                    button1.setText("");
+                }
+                if (!button2.getText().equals(answers.getObject())) {
+                    button2.setText("");
+                }
+                if (!button3.getText().equals(answers.getObject())) {
+                    button3.setText("");
+                }
+                if (!button4.getText().equals(answers.getObject())) {
+                    button4.setText("");
+                }
+            }
+        });
+
+        publikumsJokerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<String> answers = joker[2].use(question);
+                answers.toFirst();
+
+                if (!button1.getText().equals(answers.getObject())) {
+                    button1.setText("");
+                }
+                if (!button2.getText().equals(answers.getObject())) {
+                    button2.setText("");
+                }
+                if (!button3.getText().equals(answers.getObject())) {
+                    button3.setText("");
+                }
+                if (!button4.getText().equals(answers.getObject())) {
+                    button4.setText("");
+                }
+            }
+        });
+
+        a5050JokerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<String> answers = joker[1].use(question);
+                answers.toFirst();
+
+                for (int i = 0; i < answers.size(); i++) {
+                    if (!button1.getText().equals(answers.getObject())) {
+                        button1.setText("");
+                    }
+                    else if (!button2.getText().equals(answers.getObject())) {
+                        button2.setText("");
+                    }
+                    else if (!button3.getText().equals(answers.getObject())) {
+                        button3.setText("");
+                    }
+                    else if (!button4.getText().equals(answers.getObject())) {
+                        button4.setText("");
+                    }
+                }
             }
         });
     }
