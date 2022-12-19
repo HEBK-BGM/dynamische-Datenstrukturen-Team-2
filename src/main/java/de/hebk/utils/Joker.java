@@ -42,13 +42,18 @@ public class Joker {
         this.used = used;
     }
 
+    /**
+     * Returns possible answers
+     * @param question  The given question
+     * @return          Possible answers
+     */
     public List<String> use(Question question) {
         List<String> answers = new List<>();
         Random rand = new Random();
 
         switch (type) {
             case TELEPHONE_JOKER:
-                if (rand.nextInt(100) >= 75) {
+                if (rand.nextInt(100) <= 75) {
                     answers.insert(question.getAnswers()[question.getCorrect()-1]);
                 }
                 else {
@@ -56,11 +61,12 @@ public class Joker {
                     while (random == question.getCorrect()-1) {
                         random = rand.nextInt(4);
                     }
+
                     answers.insert(question.getAnswers()[random]);
                 }
                 break;
             case AUDIENCE_JOKER:
-                if (rand.nextInt(100) >= 80) {
+                if (rand.nextInt(100) <= 80) {
                     answers.insert(question.getAnswers()[question.getCorrect()-1]);
                 }
                 else {
@@ -68,17 +74,21 @@ public class Joker {
                     while (random == question.getCorrect()-1) {
                         random = rand.nextInt(4);
                     }
+
                     answers.insert(question.getAnswers()[random]);
                 }
                 break;
             case HALF_JOKER:
-                answers.insert(question.getAnswers()[question.getCorrect()-1]);
+                for (int i = 0; i < 2; i++) {
+                    int random = rand.nextInt(4);
+                    answers.toFirst();
+                    while (random == question.getCorrect()-1 || (answers.getObject() != null && answers.getObject().equals(question.getAnswers()[random]))) {
+                        random = rand.nextInt(4);
+                    }
 
-                int random = rand.nextInt(4);
-                while (random == question.getCorrect()-1) {
-                    random = rand.nextInt(4);
+                    answers.insert(question.getAnswers()[random]);
                 }
-                answers.insert(question.getAnswers()[random]);
+
                 break;
         }
 

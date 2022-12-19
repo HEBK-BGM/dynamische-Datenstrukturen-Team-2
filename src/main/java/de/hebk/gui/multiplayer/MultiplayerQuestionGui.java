@@ -49,56 +49,67 @@ public class MultiplayerQuestionGui {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Packet packet = new Packet(PacketType.ANSWER, "1");
-                client.send(packet);
-                new MultiplayerInfoGui(gui, info);
+                if (!button1.getText().equals(" ")) {
+                    Packet packet = new Packet(PacketType.ANSWER, "1");
+                    client.send(packet);
+                    new MultiplayerInfoGui(gui, info);
+                }
             }
         });
 
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Packet packet = new Packet(PacketType.ANSWER, "2");
-                client.send(packet);
-                new MultiplayerInfoGui(gui, info);
+                if (!button2.getText().equals(" ")) {
+                    Packet packet = new Packet(PacketType.ANSWER, "2");
+                    client.send(packet);
+                    new MultiplayerInfoGui(gui, info);
+                }
             }
         });
 
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Packet packet = new Packet(PacketType.ANSWER, "3");
-                client.send(packet);
-                new MultiplayerInfoGui(gui, info);
+                if (!button3.getText().equals(" ")) {
+                    Packet packet = new Packet(PacketType.ANSWER, "3");
+                    client.send(packet);
+                    new MultiplayerInfoGui(gui, info);
+                }
             }
         });
 
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Packet packet = new Packet(PacketType.ANSWER, "4");
-                client.send(packet);
-                new MultiplayerInfoGui(gui, info);
+                if (!button4.getText().equals(" ")) {
+                    Packet packet = new Packet(PacketType.ANSWER, "4");
+                    client.send(packet);
+                    new MultiplayerInfoGui(gui, info);
+                }
             }
         });
 
         telefonjokerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<String> answers = joker[0].use(question);
-                answers.toFirst();
+                if (!telefonjokerButton.getBackground().equals(Color.GRAY)) {
+                    List<String> answer = joker[0].use(question);
+                    answer.toFirst();
 
-                if (!button1.getText().equals(answers.getObject())) {
-                    button1.setText("");
-                }
-                if (!button2.getText().equals(answers.getObject())) {
-                    button2.setText("");
-                }
-                if (!button3.getText().equals(answers.getObject())) {
-                    button3.setText("");
-                }
-                if (!button4.getText().equals(answers.getObject())) {
-                    button4.setText("");
+                    if (button1.getText().equals(answer.getObject())) {
+                        button1.setBackground(Color.GREEN);
+                    }
+                    if (button2.getText().equals(answer.getObject())) {
+                        button2.setBackground(Color.GREEN);
+                    }
+                    if (button3.getText().equals(answer.getObject())) {
+                        button3.setBackground(Color.GREEN);
+                    }
+                    if (button4.getText().equals(answer.getObject())) {
+                        button4.setBackground(Color.GREEN);
+                    }
+                    telefonjokerButton.setBackground(Color.GRAY);
                 }
             }
         });
@@ -106,20 +117,23 @@ public class MultiplayerQuestionGui {
         publikumsJokerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<String> answers = joker[2].use(question);
-                answers.toFirst();
+                if (!publikumsJokerButton.getBackground().equals(Color.GRAY)) {
+                    List<String> answer = joker[0].use(question);
+                    answer.toFirst();
 
-                if (!button1.getText().equals(answers.getObject())) {
-                    button1.setText("");
-                }
-                if (!button2.getText().equals(answers.getObject())) {
-                    button2.setText("");
-                }
-                if (!button3.getText().equals(answers.getObject())) {
-                    button3.setText("");
-                }
-                if (!button4.getText().equals(answers.getObject())) {
-                    button4.setText("");
+                    if (button1.getText().equals(answer.getObject())) {
+                        button1.setBackground(Color.GREEN);
+                    }
+                    if (button2.getText().equals(answer.getObject())) {
+                        button2.setBackground(Color.GREEN);
+                    }
+                    if (button3.getText().equals(answer.getObject())) {
+                        button3.setBackground(Color.GREEN);
+                    }
+                    if (button4.getText().equals(answer.getObject())) {
+                        button4.setBackground(Color.GREEN);
+                    }
+                    telefonjokerButton.setBackground(Color.GRAY);
                 }
             }
         });
@@ -127,22 +141,26 @@ public class MultiplayerQuestionGui {
         a5050JokerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<String> answers = joker[1].use(question);
-                answers.toFirst();
+                if (!a5050JokerButton.getBackground().equals(Color.GRAY)) {
+                    List<String> answer = joker[2].use(question);
+                    answer.toFirst();
 
-                for (int i = 0; i < answers.size(); i++) {
-                    if (!button1.getText().equals(answers.getObject())) {
-                        button1.setText("");
+                    for (int i = 0; i < answer.size(); i++) {
+                        if (button1.getText().equals(answer.getObject())) {
+                            button1.setText(" ");
+                        }
+                        if (button2.getText().equals(answer.getObject())) {
+                            button2.setText(" ");
+                        }
+                        if (button3.getText().equals(answer.getObject())) {
+                            button3.setText(" ");
+                        }
+                        if (button4.getText().equals(answer.getObject())) {
+                            button4.setText(" ");
+                        }
+                        answer.next();
                     }
-                    else if (!button2.getText().equals(answers.getObject())) {
-                        button2.setText("");
-                    }
-                    else if (!button3.getText().equals(answers.getObject())) {
-                        button3.setText("");
-                    }
-                    else if (!button4.getText().equals(answers.getObject())) {
-                        button4.setText("");
-                    }
+                    telefonjokerButton.setBackground(Color.GRAY);
                 }
             }
         });
