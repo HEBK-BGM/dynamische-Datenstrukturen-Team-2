@@ -13,7 +13,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MultiplayerQuestionGui {
+public class MultiplayerNormalGui {
     private JPanel panel1;
     private JButton button1;
     private JButton button2;
@@ -24,7 +24,7 @@ public class MultiplayerQuestionGui {
     private JButton publikumsJokerButton;
     private JButton a5050JokerButton;
 
-    public MultiplayerQuestionGui(StartGui gui, Client client, Question question, Joker[] joker) {
+    public MultiplayerNormalGui(StartGui gui, Client client, Question question, Joker[] joker) {
         questionLabel.setText(question.getBody());
         button1.setText(question.getAnswers()[0]);
         button2.setText(question.getAnswers()[1]);

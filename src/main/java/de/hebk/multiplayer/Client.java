@@ -10,6 +10,7 @@ import de.hebk.utils.JokerType;
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class Client extends Thread {
     private Socket socket;
@@ -53,17 +54,25 @@ public class Client extends Thread {
             Thread.sleep(1000);
 
             socket = new Socket(ip, port);
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
 
             Packet packet = new Packet(PacketType.JOIN, username);
             send(packet);
             System.out.println("[Client] Connected to server");
 
-            Packet packet2 = read();
-            if (packet2.getPacketType().equals(PacketType.ALL_PLAYERS)) {
-                lobbyGui.setMitspielerLabel(lobbyGui.getMitspielerLabel().getText() + packet2.getContent());
+            Packet allPlayers = read();
+            if (allPlayers.getPacketType().equals(PacketType.ALL_PLAYERS)) {
+                lobbyGui.setMitspielerLabel(lobbyGui.getMitspielerLabel().getText() + allPlayers.getContent());
             }
+
+            String gamemode = "";
+            Packet gamemodePacket = read();
+            if (gamemodePacket.getPacketType().equals(PacketType.GAMEMODE)) {
+                gamemode = gamemodePacket.getContent();
+            }
+
+            System.out.println(gamemode);
 
             while (true) {
                 Packet p = read();
@@ -94,7 +103,15 @@ public class Client extends Thread {
                         new MultiplayerQuestionIsSelectedGui(frame, p.getContent());
                         break;
                     case ASK_QUESTION:
-                        new MultiplayerQuestionGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
+                        if (gamemode.equals("Normal")) {
+                            new MultiplayerNormalGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
+                        }
+                        else if (gamemode.equals("Hardcore")) {
+
+                        }
+                        else if (gamemode.equals("True or Not")) {
+                            new MultiplayerTrueOrNotGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class));
+                        }
                         break;
                     case WRONG_ANSWER:
                         new MultiplayerInfoGui(frame, "Deine Antwort war leider Falsch!");

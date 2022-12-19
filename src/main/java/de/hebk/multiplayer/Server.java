@@ -71,6 +71,9 @@ public class Server extends Thread {
             Packet allPlayers = new Packet(PacketType.ALL_PLAYERS, players);
             conn.send(allPlayers);
 
+            Packet gamemodePacket = new Packet(PacketType.GAMEMODE, gamemode);
+            conn.send(gamemodePacket);
+
             if (!players.equals(" ")) {
                 username = "," + username;
             }

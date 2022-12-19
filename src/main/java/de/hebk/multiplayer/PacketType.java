@@ -14,4 +14,5 @@ public enum PacketType {
     ASK_QUESTION,
     RIGHT_ANSWER,
     WRONG_ANSWER,
+    GAMEMODE,
 }
