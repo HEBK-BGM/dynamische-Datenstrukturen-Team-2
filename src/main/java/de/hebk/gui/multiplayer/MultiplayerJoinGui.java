@@ -1,4 +1,7 @@
-package de.hebk.gui;
+package de.hebk.gui.multiplayer;
+
+import de.hebk.gui.StartGui;
+import de.hebk.multiplayer.Client;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,16 +43,15 @@ public class MultiplayerJoinGui {
             return;
         }
 
-        String ipregex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
-        if (!ip.matches(ipregex)) {
-            System.out.println("Keine gültige IP");
-            return;
-        }
-
         String portRegex = "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$";
         if (!port.matches(portRegex)) {
             System.out.println("Kein gültiger Port!");
             return;
         }
+
+        frame.remove(panel1);
+        MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame);
+        Client client = new Client(frame, lobbyGui, ip, Integer.parseInt(port), username);
+        client.start();
     }
 }

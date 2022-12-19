@@ -7,22 +7,37 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientConnection {
-    private SSLSocket socket;
+    private Socket socket;
     private String username;
     private Gson gson;
     private BufferedReader reader;
     private BufferedWriter writer;
+    private boolean failed = false;
 
-    public ClientConnection(SSLSocket socket) {
+
+    /**
+     * Contructor for a connection to the client
+     * @param socket Socket with the connection to the client
+     */
+    public ClientConnection(Socket socket) {
         this.socket = socket;
+    }
+
+    /**
+     * Connects the server with the client
+     * @return Username of the client
+     */
+    public String connect() {
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             gson = new Gson();
 
-            Packet p = gson.fromJson(read(), Packet.class);
+            String content = reader.readLine();
+            Packet p = gson.fromJson(content, Packet.class);
             if (p.getPacketType().equals(PacketType.JOIN)) {
                 username = p.getContent();
+                return username;
             }
             else {
                 closeConnection();
@@ -30,26 +45,46 @@ public class ClientConnection {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
-    public void send(String msg) {
+    /**
+     * Get the username
+     * @return The username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Sends a packet to the client
+     * @param packet The packet that's going to be send
+     */
+    public void send(Packet packet) {
         try {
-            writer.write(msg);
-            writer.flush();
+            writer.write(gson.toJson(packet));
             writer.newLine();
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String read() {
+    /**
+     * Reads incoming packages
+     * @return The packet that was received
+     */
+    public Packet read() {
         try {
-            return reader.readLine();
+            return gson.fromJson(reader.readLine(), Packet.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Closes the connection to the client
+     */
     public void closeConnection() {
         try {
             reader.close();
@@ -58,5 +93,21 @@ public class ClientConnection {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Returns if the client has failed
+     * @return boolean if the client has failed
+     */
+    public boolean hasFailed() {
+        return failed;
+    }
+
+    /**
+     * Sets if the client has failed
+     * @param failed boolean
+     */
+    public void setFailed(boolean failed) {
+        this.failed = failed;
     }
 }
