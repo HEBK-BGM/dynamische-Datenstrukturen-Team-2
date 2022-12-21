@@ -1,7 +1,7 @@
 package de.hebk.gamemodes.mutliplayer;
 
 import com.google.gson.Gson;
-import de.hebk.Question;
+import de.hebk.game.Question;
 import de.hebk.SQLManager;
 import de.hebk.model.list.List;
 import de.hebk.multiplayer.ClientConnection;
@@ -9,7 +9,6 @@ import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
 
 import java.util.HashMap;
-import java.util.Map;
 
 abstract class MultiplayerGamemode {
     protected List<ClientConnection> connections;
@@ -89,7 +88,7 @@ abstract class MultiplayerGamemode {
     }
 
     /**
-     * Asks a question to every player and checks if the answers are right or wrong
+     * Asks a question to every player
      * @param question  The question that is going to be asked to every player
      */
     protected void askQuestion(Question question) {
@@ -99,29 +98,25 @@ abstract class MultiplayerGamemode {
             connections.getObject().send(packet);
             connections.next();
         }
+    }
 
-        HashMap<ClientConnection, Integer> answers = new HashMap<>();
+    /**
+     * Returns the answers of the players
+     * @return  HashMap with the ClientConnection and answer
+     */
+    protected HashMap<ClientConnection, String> getAnswers() {
+        HashMap<ClientConnection, String> answers = new HashMap<>();
 
         connections.toFirst();
         for (int i = 0; i < connections.size(); i++) {
             Packet p = connections.getObject().read();
             if (p.getPacketType().equals(PacketType.ANSWER)) {
-                answers.put(connections.getObject(), Integer.parseInt(p.getContent()));
+                answers.put(connections.getObject(), p.getContent());
                 System.out.println(p.getContent());
             }
             connections.next();
         }
 
-        Packet rightPacket = new Packet(PacketType.RIGHT_ANSWER, "");
-        Packet wrongPacket = new Packet(PacketType.WRONG_ANSWER, "");
-        for (Map.Entry<ClientConnection, Integer> entry : answers.entrySet()) {
-            if (entry.getValue().equals(question.getCorrect())) {
-                entry.getKey().send(rightPacket);
-            }
-            else {
-                entry.getKey().send(wrongPacket);
-                entry.getKey().setFailed(true);
-            }
-        }
+        return answers;
     }
 }

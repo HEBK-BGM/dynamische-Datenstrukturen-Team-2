@@ -1,8 +1,8 @@
 package de.hebk.multiplayer;
 
 import com.google.gson.Gson;
-import de.hebk.Config;
-import de.hebk.Question;
+import de.hebk.game.Config;
+import de.hebk.game.Question;
 import de.hebk.SQLManager;
 import de.hebk.gamemodes.mutliplayer.MultiplayerHardcore;
 import de.hebk.gamemodes.mutliplayer.MultiplayerNormal;

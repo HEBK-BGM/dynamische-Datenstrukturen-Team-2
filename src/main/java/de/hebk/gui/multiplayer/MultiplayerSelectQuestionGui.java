@@ -1,6 +1,5 @@
 package de.hebk.gui.multiplayer;
 
-import de.hebk.Question;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;

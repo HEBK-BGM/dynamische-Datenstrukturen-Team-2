@@ -1,11 +1,11 @@
 package de.hebk.multiplayer;
 
 import com.google.gson.Gson;
-import de.hebk.Question;
+import de.hebk.game.Question;
 import de.hebk.gui.multiplayer.*;
 import de.hebk.gui.StartGui;
-import de.hebk.utils.Joker;
-import de.hebk.utils.JokerType;
+import de.hebk.game.Joker;
+import de.hebk.game.JokerType;
 
 import javax.swing.*;
 import java.io.*;

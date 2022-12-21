@@ -1,15 +1,11 @@
 package de.hebk.gamemodes.mutliplayer;
 
-import com.google.gson.Gson;
-import de.hebk.Question;
+import de.hebk.game.Question;
 import de.hebk.SQLManager;
 import de.hebk.model.list.List;
 import de.hebk.multiplayer.ClientConnection;
 import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MultiplayerNormal extends MultiplayerGamemode {
     /**
@@ -36,6 +32,7 @@ public class MultiplayerNormal extends MultiplayerGamemode {
             }
 
             askQuestion(question);
+            getAnswers();
         }
     }
 }

@@ -1,12 +1,12 @@
 package de.hebk.gui.multiplayer;
 
-import de.hebk.Question;
+import de.hebk.game.Question;
 import de.hebk.gui.StartGui;
 import de.hebk.model.list.List;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
-import de.hebk.utils.Joker;
+import de.hebk.game.Joker;
 
 import javax.swing.*;
 import java.awt.Color;
