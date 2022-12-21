@@ -1,6 +1,5 @@
-package de.hebk.utils;
+package de.hebk.game;
 
-import de.hebk.Question;
 import de.hebk.model.list.List;
 
 import java.util.Random;

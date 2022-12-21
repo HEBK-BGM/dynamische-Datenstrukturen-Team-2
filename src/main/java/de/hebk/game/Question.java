@@ -1,4 +1,4 @@
-package de.hebk;
+package de.hebk.game;
 
 public class Question {
     private String body;

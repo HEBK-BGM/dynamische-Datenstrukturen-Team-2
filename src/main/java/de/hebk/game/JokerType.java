@@ -1,4 +1,4 @@
-package de.hebk.utils;
+package de.hebk.game;
 
 public enum JokerType {
     TELEPHONE_JOKER,

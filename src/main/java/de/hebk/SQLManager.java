@@ -1,5 +1,6 @@
 package de.hebk;
 
+import de.hebk.game.Question;
 import de.hebk.model.list.List;
 import de.hebk.model.queue.Queue;
 import java.sql.*;

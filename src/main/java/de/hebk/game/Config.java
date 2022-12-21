@@ -1,4 +1,4 @@
-package de.hebk;
+package de.hebk.game;
 
 public class Config {
     private static String databaseURL = Config.class.getResource("german.db").getFile();
