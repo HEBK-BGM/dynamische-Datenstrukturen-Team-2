@@ -50,11 +50,7 @@ public class MultiplayerLobbyGui {
 
     public MultiplayerLobbyGui(StartGui gui) {
         this.frame = gui;
-
         startenButton.setVisible(false);
-        frame.add(panel1);
-        frame.repaint();
-        frame.setVisible(true);
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
@@ -63,6 +59,12 @@ public class MultiplayerLobbyGui {
                 new MultiplayerJoinGui(frame);
             }
         });
+    }
+
+    public void show() {
+        frame.setContentPane(panel1);
+        frame.revalidate();
+        frame.repaint();
     }
 
     private void createUIComponents() {
