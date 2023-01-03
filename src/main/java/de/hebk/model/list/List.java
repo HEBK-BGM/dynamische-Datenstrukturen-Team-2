@@ -192,6 +192,7 @@ public class List<T> {
 
         if (isEmpty()) {
             first = pList.first;
+            return;
         }
 
         Node<T> tmp = first;
