@@ -96,8 +96,7 @@ public class Client extends Thread {
                         writer.close();
                         reader.close();
                         socket.close();
-                        // TODO: Display a new window
-                        break;
+                        return;
                     case SELECT_QUESTION:
                         System.out.println("Select question");
                         new MultiplayerSelectQuestionGui(frame, Client.this, gson.fromJson(p.getContent(), String[].class));
@@ -121,6 +120,12 @@ public class Client extends Thread {
                         new MultiplayerInfoGui(frame, "Deine Antwort war leider Falsch!");
                         break;
                     case RIGHT_ANSWER:
+                        break;
+                    case LAST_ALIVE:
+                        new MultiplayerLastAliveGui(frame, this);
+                        break;
+                    case END:
+                        new MultiplayerEndGui(frame, "Das Spiel ist vorbei, ihr habt es bis zum Level " + p.getContent() + " geschafft!");
                         break;
                 }
             }

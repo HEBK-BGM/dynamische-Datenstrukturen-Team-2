@@ -6,7 +6,6 @@ public class Question {
     private String[] answers;
     private int correct;
 
-
     public Question(String pBody, int pLevel, String[] pAnswers, int pCorrect) {
         this.body = pBody;
         this.level = pLevel;
@@ -30,4 +29,7 @@ public class Question {
         return correct;
     }
 
+    public String getCorrectAnswer() {
+        return getAnswers()[getCorrect()-1];
+    }
 }

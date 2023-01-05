@@ -104,15 +104,15 @@ public class Server extends Thread {
             @Override
             public void run() {
                 if (gamemode.equals("Normal")) {
-                    MultiplayerNormal multiplayerNormal = new MultiplayerNormal(connections, sqlManager);
+                    MultiplayerNormal multiplayerNormal = new MultiplayerNormal(connections, sqlManager, Server.this);
                     multiplayerNormal.startGame();
                 }
                 else if (gamemode.equals("Hardcore")) {
-                    MultiplayerHardcore multiplayerHardcore = new MultiplayerHardcore(connections, sqlManager);
+                    MultiplayerHardcore multiplayerHardcore = new MultiplayerHardcore(connections, sqlManager, Server.this);
                     multiplayerHardcore.startGame();
                 }
                 else if (gamemode.equals("True or Not")) {
-                    MultiplayerTrueOrNot multiplayerTrueOrNot = new MultiplayerTrueOrNot(connections, sqlManager);
+                    MultiplayerTrueOrNot multiplayerTrueOrNot = new MultiplayerTrueOrNot(connections, sqlManager, Server.this);
                     multiplayerTrueOrNot.startGame();
                 }
             }

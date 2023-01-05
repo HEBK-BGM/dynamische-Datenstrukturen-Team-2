@@ -19,8 +19,9 @@ public class MultiplayerTrueOrNotGui {
     private JLabel statementLabel;
 
     public MultiplayerTrueOrNotGui(StartGui gui, Client client, Question question) {
+        String statement = getStatement(question);
         questionLabel.setText("Frage: " + question.getBody());
-        statementLabel.setText("Antwort: " + getStatement(question));
+        statementLabel.setText("Antwort: " + statement);
         gui.setContentPane(panel1);
         gui.revalidate();
         gui.repaint();
@@ -30,8 +31,7 @@ public class MultiplayerTrueOrNotGui {
         wahrButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Packet packet = new Packet(PacketType.ANSWER, "true");
-                client.send(packet);
+                sendAnswer(question, statement, client, true);
                 new MultiplayerInfoGui(gui, info);
             }
         });
@@ -39,8 +39,7 @@ public class MultiplayerTrueOrNotGui {
         falschButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Packet packet = new Packet(PacketType.ANSWER, "false");
-                client.send(packet);
+                sendAnswer(question, statement, client, false);
                 new MultiplayerInfoGui(gui, info);
             }
         });
@@ -64,5 +63,29 @@ public class MultiplayerTrueOrNotGui {
         }
 
         return question.getAnswers()[random];
+    }
+
+    private void sendAnswer(Question question, String statement, Client client, boolean bool) {
+        String rightAnswer = question.getCorrectAnswer();
+
+        Packet packet = null;
+        if (rightAnswer.equals(statement)) {
+            if (bool) {
+                packet = new Packet(PacketType.ANSWER, "true");
+            }
+            else {
+                packet = new Packet(PacketType.ANSWER, "false");
+            }
+        }
+        else {
+            if (bool) {
+                packet = new Packet(PacketType.ANSWER, "false");
+            }
+            else {
+                packet = new Packet(PacketType.ANSWER, "true");
+            }
+        }
+
+        client.send(packet);
     }
 }

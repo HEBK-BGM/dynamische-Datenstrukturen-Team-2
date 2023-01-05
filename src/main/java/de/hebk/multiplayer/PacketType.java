@@ -15,5 +15,9 @@ public enum PacketType {
     RIGHT_ANSWER,
     WRONG_ANSWER,
     GAMEMODE,
-    HARDCORE_TIME_UP
+    HARDCORE_TIME_UP,
+    LAST_ALIVE,
+    KEEP_PLAYING,
+    STOP_PLAYING,
+    END
 }

@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MultiplayerNormalGui {
+    private Client client;
+    private StartGui gui;
+
     private JPanel panel1;
     private JButton button1;
     private JButton button2;
@@ -25,12 +28,65 @@ public class MultiplayerNormalGui {
     private JButton a5050JokerButton;
 
     public MultiplayerNormalGui(StartGui gui, Client client, Question question, Joker[] joker) {
+        this.client = client;
+        this.gui = gui;
+
         questionLabel.setText(question.getBody());
         button1.setText(question.getAnswers()[0]);
         button2.setText(question.getAnswers()[1]);
         button3.setText(question.getAnswers()[2]);
         button4.setText(question.getAnswers()[3]);
 
+        gui.setContentPane(panel1);
+        gui.revalidate();
+        gui.repaint();
+
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!button1.getText().equals(" ")) {
+                    sendAnswer("1");
+                }
+            }
+        });
+
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!button2.getText().equals(" ")) {
+                    sendAnswer("2");
+                }
+            }
+        });
+
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!button3.getText().equals(" ")) {
+                    sendAnswer("3");
+                }
+            }
+        });
+
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!button4.getText().equals(" ")) {
+                    sendAnswer("4");
+                }
+            }
+        });
+
+        loadJoker(joker, question);
+    }
+
+    private void sendAnswer(String answer) {
+        Packet packet = new Packet(PacketType.ANSWER, answer);
+        client.send(packet);
+        new MultiplayerInfoGui(gui, "Bitte warte während die anderen Spieler deren Antworten abgeben...");
+    }
+
+    private void loadJoker(Joker[] joker, Question question) {
         if (joker[0].isUsed()) {
             telefonjokerButton.setBackground(Color.GRAY);
         }
@@ -40,55 +96,6 @@ public class MultiplayerNormalGui {
         if (joker[2].isUsed()) {
             a5050JokerButton.setBackground(Color.GRAY);
         }
-
-        gui.setContentPane(panel1);
-        gui.revalidate();
-        gui.repaint();
-
-        String info = "Bitte warte während die anderen Spieler deren Antworten abgeben...";
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!button1.getText().equals(" ")) {
-                    Packet packet = new Packet(PacketType.ANSWER, "1");
-                    client.send(packet);
-                    new MultiplayerInfoGui(gui, info);
-                }
-            }
-        });
-
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!button2.getText().equals(" ")) {
-                    Packet packet = new Packet(PacketType.ANSWER, "2");
-                    client.send(packet);
-                    new MultiplayerInfoGui(gui, info);
-                }
-            }
-        });
-
-        button3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!button3.getText().equals(" ")) {
-                    Packet packet = new Packet(PacketType.ANSWER, "3");
-                    client.send(packet);
-                    new MultiplayerInfoGui(gui, info);
-                }
-            }
-        });
-
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!button4.getText().equals(" ")) {
-                    Packet packet = new Packet(PacketType.ANSWER, "4");
-                    client.send(packet);
-                    new MultiplayerInfoGui(gui, info);
-                }
-            }
-        });
 
         telefonjokerButton.addActionListener(new ActionListener() {
             @Override
@@ -133,7 +140,7 @@ public class MultiplayerNormalGui {
                     if (button4.getText().equals(answer.getObject())) {
                         button4.setBackground(Color.GREEN);
                     }
-                    telefonjokerButton.setBackground(Color.GRAY);
+                    publikumsJokerButton.setBackground(Color.GRAY);
                 }
             }
         });
@@ -160,7 +167,7 @@ public class MultiplayerNormalGui {
                         }
                         answer.next();
                     }
-                    telefonjokerButton.setBackground(Color.GRAY);
+                    a5050JokerButton.setBackground(Color.GRAY);
                 }
             }
         });
