@@ -5,7 +5,7 @@ import javax.swing.*;
 public class HighscoreGui {
     private JPanel rootPanel;
     private JLabel Headline;
-    private JTable table1;
+    private JTable highscoretable;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("HighscoreGui");
