@@ -1,5 +1,6 @@
 package de.hebk;
 
+import de.hebk.game.Question;
 import de.hebk.model.list.List;
 import de.hebk.model.queue.Queue;
 import java.sql.*;
@@ -124,11 +125,12 @@ public class SQLManager {
 
                 list.insert(question);
             }
-
-            return list;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
+        return list;
     }
 
     public void addQuestion(Question question) {

@@ -192,6 +192,7 @@ public class List<T> {
 
         if (isEmpty()) {
             first = pList.first;
+            return;
         }
 
         Node<T> tmp = first;
@@ -228,6 +229,10 @@ public class List<T> {
         aktuelleNode = aktuelleNode.getNext();
     }
 
+    /**
+     * Returns the size of the list
+     * @return  Size of the list
+     */
     public int size() {
         int counter = 1;
         if (first == null) {

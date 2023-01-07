@@ -1,8 +1,8 @@
 package de.hebk.multiplayer;
 
 import com.google.gson.Gson;
-import de.hebk.Config;
-import de.hebk.Question;
+import de.hebk.game.Config;
+import de.hebk.game.Question;
 import de.hebk.SQLManager;
 import de.hebk.gamemodes.mutliplayer.MultiplayerHardcore;
 import de.hebk.gamemodes.mutliplayer.MultiplayerNormal;
@@ -71,6 +71,9 @@ public class Server extends Thread {
             Packet allPlayers = new Packet(PacketType.ALL_PLAYERS, players);
             conn.send(allPlayers);
 
+            Packet gamemodePacket = new Packet(PacketType.GAMEMODE, gamemode);
+            conn.send(gamemodePacket);
+
             if (!players.equals(" ")) {
                 username = "," + username;
             }
@@ -101,15 +104,15 @@ public class Server extends Thread {
             @Override
             public void run() {
                 if (gamemode.equals("Normal")) {
-                    MultiplayerNormal multiplayerNormal = new MultiplayerNormal(connections, sqlManager);
+                    MultiplayerNormal multiplayerNormal = new MultiplayerNormal(connections, sqlManager, Server.this);
                     multiplayerNormal.startGame();
                 }
                 else if (gamemode.equals("Hardcore")) {
-                    MultiplayerHardcore multiplayerHardcore = new MultiplayerHardcore(connections, sqlManager);
+                    MultiplayerHardcore multiplayerHardcore = new MultiplayerHardcore(connections, sqlManager, Server.this);
                     multiplayerHardcore.startGame();
                 }
                 else if (gamemode.equals("True or Not")) {
-                    MultiplayerTrueOrNot multiplayerTrueOrNot = new MultiplayerTrueOrNot(connections, sqlManager);
+                    MultiplayerTrueOrNot multiplayerTrueOrNot = new MultiplayerTrueOrNot(connections, sqlManager, Server.this);
                     multiplayerTrueOrNot.startGame();
                 }
             }
