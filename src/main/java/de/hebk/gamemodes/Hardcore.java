@@ -4,15 +4,23 @@ import de.hebk.Config;
 import de.hebk.Question;
 import de.hebk.SQLManager;
 //import de.hebk.media.sound.SoundManager;
+import de.hebk.game.Joker;
+import de.hebk.game.JokerType;
+import de.hebk.gui.EndGui;
+import de.hebk.gui.HardcoreGui;
+import de.hebk.gui.StartGui;
 import de.hebk.model.stack.Stack;
 import de.hebk.model.list.List;
 
 public class Hardcore {
     //SoundManager soundManager = new SoundManager();
 
-    Stack<Question> questions = new Stack<>();
+    private StartGui frame;
+    private Joker[] joker = new Joker[3];
 
-    SQLManager sqlm = new SQLManager(Config.getDatabaseURL());
+    private Stack<Question> questions = new Stack<>();
+
+    private SQLManager sqlm = new SQLManager(Config.getDatabaseURL());
 
     private void getHardcoreQuestions(){
         List<Question> tmp;
@@ -25,18 +33,25 @@ public class Hardcore {
         }
     }
 
-    public void Hardcore(){
+    public Hardcore(StartGui gui){
+        this.frame = gui;
+
+        joker[0] = new Joker(JokerType.TELEPHONE_JOKER);
+        joker[1] = new Joker(JokerType.AUDIENCE_JOKER);
+        joker[2] = new Joker(JokerType.HALF_JOKER);
+
         getHardcoreQuestions();
     }
 
-    private String fillQuestion(){
-        Question tmp = questions.pop();
-        return tmp.getBody();
-    }
+    public void nextQuestion(){
+        if (!questions.isEmpty()) {
+            Question q = questions.pop();
 
-    private String fillCorrectAnswer(Question tmp){
-        String[] answers = tmp.getAnswers();
-        return answers[tmp.getCorrect()-1];
+            new HardcoreGui(frame, this, q, joker);
+        }
+        else {
+            stopGame();
+        }
     }
 
 
