@@ -1,5 +1,6 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
@@ -7,6 +8,7 @@ import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -43,6 +45,15 @@ public class MultiplayerTrueOrNotGui {
                 new MultiplayerInfoGui(gui, info);
             }
         });
+
+        if (Config.cheatsEnabled()) {
+            if (statement.equals(question.getCorrectAnswer())) {
+                wahrButton.setBackground(Color.GREEN);
+            }
+            else {
+                falschButton.setBackground(Color.GREEN);
+            }
+        }
     }
 
     private void createUIComponents() {
