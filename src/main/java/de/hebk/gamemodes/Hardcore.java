@@ -41,6 +41,7 @@ public class Hardcore {
         joker[2] = new Joker(JokerType.HALF_JOKER);
 
         getHardcoreQuestions();
+        nextQuestion();
     }
 
     public void nextQuestion(){
@@ -54,6 +55,7 @@ public class Hardcore {
         }
     }
 
-
-
+    public void stopGame() {
+        new EndGui(frame, "Dies ist ein Test");
+    }
 }

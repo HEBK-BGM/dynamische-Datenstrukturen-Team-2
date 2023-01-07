@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HardcoreGui {
+    private Hardcore hardcore;
+
     private JPanel panel1;
     private JPanel answeres;
     private JPanel joker;
