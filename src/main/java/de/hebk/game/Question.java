@@ -1,5 +1,7 @@
 package de.hebk.game;
 
+import java.util.Random;
+
 public class Question {
     private String body;
     private int level;
@@ -31,5 +33,24 @@ public class Question {
 
     public String getCorrectAnswer() {
         return getAnswers()[getCorrect()-1];
+    }
+
+    public void shuffleAnswers() {
+        String correntAnswer = getCorrectAnswer();
+
+        Random rand = new Random();
+        for (int i = 0; i < answers.length; i++) {
+            int randomIndexToSwap = rand.nextInt(answers.length);
+            String tmp = answers[randomIndexToSwap];
+            answers[randomIndexToSwap] = answers[i];
+            answers[i] = tmp;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (answers[i].equals(correntAnswer)) {
+                this.correct = i+1;
+                break;
+            }
+        }
     }
 }

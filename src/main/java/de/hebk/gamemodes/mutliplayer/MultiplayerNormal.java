@@ -42,6 +42,7 @@ public class MultiplayerNormal extends MultiplayerGamemode {
             }
 
             Question question = selectPlayerQuestion(q);
+            question.shuffleAnswers();
             askQuestion(question);
 
             // gets every answer from the players and decides if they failed

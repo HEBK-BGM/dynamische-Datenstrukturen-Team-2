@@ -41,13 +41,7 @@ public class MultiplayerHardcore extends MultiplayerGamemode {
             }
 
             Question question = selectPlayerQuestion(q);
-
-            getConnections().toFirst();
-            Packet packet = new Packet(PacketType.CLEAR, "");
-            for (int j = 0; j < getConnections().size(); j++) {
-                getConnections().getObject().send(packet);
-                getConnections().next();
-            }
+            question.shuffleAnswers();
 
             askQuestion(question);
             HashMap<ClientConnection, String> answers = getAnswers();
