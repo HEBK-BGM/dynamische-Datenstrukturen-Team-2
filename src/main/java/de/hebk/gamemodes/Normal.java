@@ -3,50 +3,105 @@ package de.hebk.gamemodes;
 import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.SQLManager;
+import de.hebk.model.list.List;
 
 import java.util.Scanner;
 
 public class Normal {
-    private Config config = new Config();
+    private final Config config = new Config();
     private SQLManager manager = new SQLManager(Config.getDatabaseURL());
 
     private int stufe = 1;
-    private int money = 0;
 
     public int getMoney() {
-        if (stufe == 1) {
-            return 50;
-        }
-        if (stufe == 2) {
-            return 50;
+        switch (stufe) {
+            case 1:
+                return 50;
+            case 2:
+                return 100;
+            case 3:
+                return 200;
+            case 4:
+                return 300;
+            case 5:
+                return 500;
+            case 6:
+                return 1000;
+            case 7:
+                return 2000;
+            case 8:
+                return 4000;
+            case 9:
+                return 8000;
+            case 10:
+                return 16000;
+            case 11:
+                return 32000;
+            case 12:
+                return 64000;
+            case 13:
+                return 125000;
+            case 14:
+                return 500000;
+            case 15:
+                return 1000000;
         }
         return 0;
     }
 
     public Normal(){
+        System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
         game();
+    }
+
+    private void verloren() {
+        if (stufe < 5) {
+            System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so garnichts verdient");
+        }
+        if (stufe >= 5 && stufe < 10) {
+            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die erste Sicherheitsstufe erreicht. Dein Gewinn beträgt " + getMoney() + " Euros");
+        }
+        if (stufe >= 10) {
+            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die zweite Sicherheitsstufe erreicht. Dein Gewinn beträgt " + getMoney() + " Euros");
+        }
+    }
+
+    private void gewonnen() {
+        System.out.println("Du hast auf Stufe " + stufe + " gewonnen und hast so " + getMoney() + " Euros verdient");
     }
 
     private void game(){
 
-        while (true && stufe <= 15) {
-            stelleFrage();
+        while (stufe <= 15) {
+            Boolean result = stelleFrage();
+
+            if (result == false) {
+                verloren();
+                break;
+            }
+            if (stufe == 15) {
+                gewonnen();
+            }
         }
+
     }
 
     private boolean stelleFrage(){
         Scanner sc = new Scanner(System.in);
-        Question frage = manager.getRandomQuestions();
+        List<Question> fragenliste = manager.getRandomQuestionsFromLevel(1,1);
+        fragenliste.toFirst();
+        Question frage = fragenliste.getObject();
         String[] answers = frage.getAnswers();
 
-        System.out.println(frage.getBody()+ "\n" + answers[0] + "\n" + answers[1] + "\n" + answers[2] + "\n" + answers[3]);
+        System.out.println("Du bist auf Stufe " + stufe + "und bekommst eine Frage auf Level " + frage.getLevel() + "\n" + frage.getBody()+ "\n" + answers[0] + "\n" + answers[1] + "\n" + answers[2] + "\n" + answers[3]);
         int userAntwort = sc.nextInt();
 
         if (userAntwort == frage.getCorrect()) {
             System.out.println("Richtig");
+            stufe ++;
             return true;
         }
-        System.out.println("Falsch");
+        System.out.println("Falsch. Die richtige Antowort lautet " + frage.getCorrect());
         return false;
     }
 }
