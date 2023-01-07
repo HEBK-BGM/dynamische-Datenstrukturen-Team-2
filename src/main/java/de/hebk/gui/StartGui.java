@@ -45,6 +45,13 @@ public class StartGui extends JFrame {
                 new MultiplayerGui(StartGui.this);
             }
         });
+
+        spielenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PlayGui(StartGui.this);
+            }
+        });
     }
 
     public JPanel getPanel() {
