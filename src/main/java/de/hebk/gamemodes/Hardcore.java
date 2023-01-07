@@ -2,19 +2,16 @@ package de.hebk.gamemodes;
 
 import de.hebk.Config;
 import de.hebk.Question;
+import de.hebk.model.stack.Stack;
 import de.hebk.SQLManager;
-//import de.hebk.media.sound.SoundManager;
 import de.hebk.game.Joker;
 import de.hebk.game.JokerType;
 import de.hebk.gui.EndGui;
 import de.hebk.gui.HardcoreGui;
 import de.hebk.gui.StartGui;
-import de.hebk.model.stack.Stack;
 import de.hebk.model.list.List;
 
 public class Hardcore {
-    //SoundManager soundManager = new SoundManager();
-
     private StartGui frame;
     private Joker[] joker = new Joker[3];
 

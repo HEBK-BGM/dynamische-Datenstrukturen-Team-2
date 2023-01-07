@@ -1,30 +1,27 @@
 package de.hebk.gamemodes.mutliplayer;
 
-import com.google.gson.Gson;
-import de.hebk.Question;
+import de.hebk.game.Question;
 import de.hebk.SQLManager;
 import de.hebk.model.list.List;
 import de.hebk.multiplayer.ClientConnection;
 import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
+import de.hebk.multiplayer.Server;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MultiplayerNormal {
-    private List<ClientConnection> connections;
-    private Gson gson;
-    private SQLManager sqlManager;
+public class MultiplayerNormal extends MultiplayerGamemode {
+    private List<Question> questions = new List<>();
 
     /**
      * Contructor for a normal multiplayer game
      * @param connections   Every connection to the clients
      * @param sqlManager    SQLManager
+     * @param server        The server the game is running on
      */
-    public MultiplayerNormal(List<ClientConnection> connections, SQLManager sqlManager) {
-        this.connections = connections;
-        this.gson = new Gson();
-        this.sqlManager = sqlManager;
+    public MultiplayerNormal(List<ClientConnection> connections, SQLManager sqlManager, Server server) {
+        super(connections, sqlManager, server);
     }
 
     /**
@@ -32,112 +29,61 @@ public class MultiplayerNormal {
      */
     public void startGame() {
         for (int i = 1; i < 16; i++) {
-            Question question = selectPlayerQuestion(i);
+            questions.concat(sqlManager.getRandomQuestionsFromLevel(i, 4));
+        }
 
-            connections.toFirst();
-            Packet packet = new Packet(PacketType.CLEAR, "");
-            for (int j = 0; j < connections.size(); j++) {
-                connections.getObject().send(packet);
-                connections.next();
+        for (int i = 1; i < 16; i++) {
+            // asks a question to every player
+            questions.toFirst();
+            Question[] q = new Question[4];
+            for (int j = 0; j < 4; j++) {
+                q[j] = questions.getObject();
+                questions.remove();
             }
 
+            Question question = selectPlayerQuestion(q);
+            question.shuffleAnswers();
             askQuestion(question);
+
+            // gets every answer from the players and decides if they failed
+            HashMap<ClientConnection, String> answers = getAnswers();
+            Packet failPacket = new Packet(PacketType.WRONG_ANSWER, "");
+            for (Map.Entry<ClientConnection, String> entry : answers.entrySet()) {
+                if (!entry.getValue().equals(question.getCorrect() + "")) {
+                    entry.getKey().setFailed(true);
+                    entry.getKey().send(failPacket);
+
+                    System.out.println(entry.getKey().getUsername() + " has failed");
+                }
+            }
+
+            checkGameStatus(i, 15);
         }
     }
 
-    /**
-     * Picks a random player and the player picks a question
-     * @param level Question level
-     * @return      Question the player has selected
-     */
-    private Question selectPlayerQuestion(int level) {
-        Question[] questions = new Question[4];
-        List<Question> questionList = sqlManager.getRandomQuestionsFromLevel(level, 4);
-        questionList.toFirst();
+    @Override
+    public String convertLevelToMoney(int level) {
+        String money = "";
 
-        for (int i = 0; i < questionList.size(); i++) {
-            questions[i] = questionList.getObject();
-            questionList.next();;
+        switch (level) {
+            case 1 -> money = "50";
+            case 2 -> money = "100";
+            case 3 -> money = "200";
+            case 4 -> money = "300";
+            case 5 -> money = "500";
+            case 6 -> money = "1.000";
+            case 7 -> money = "2.000";
+            case 8 -> money = "4.000";
+            case 9 -> money = "8.000";
+            case 10 -> money = "16.000";
+            case 11 -> money = "32.000";
+            case 12 -> money = "64.000";
+            case 13 -> money = "125.000";
+            case 14 -> money = "500.000";
+            case 15 -> money = "1.000.000";
+            default -> money = "0";
         }
 
-        String[] questionString = new String[4];
-        for (int i = 0; i < questions.length; i++) {
-            questionString[i] = questions[i].getBody();
-        }
-
-        int random = (int) (Math.random() * connections.size());
-
-        ClientConnection choosen = null;
-        connections.toFirst();
-        for (int i = 0; i < connections.size(); i++) {
-            if (i != random) {
-                connections.next();
-            }
-            else {
-                choosen = connections.getObject();
-                break;
-            }
-        }
-
-        Packet packet1 = new Packet(PacketType.QUESTION_IS_SELECTED, choosen.getUsername());
-        Packet packet2 = new Packet(PacketType.SELECT_QUESTION, gson.toJson(questionString));
-
-        connections.toFirst();
-        for (int i = 0; i < connections.size(); i++) {
-            if (i != random) {
-                connections.getObject().send(packet1);
-            }
-            else {
-                connections.getObject().send(packet2);
-                choosen = connections.getObject();
-            }
-
-            connections.next();
-        }
-
-        Packet p = choosen.read();
-        for (int i = 0; i < questions.length; i++) {
-            if (questions[i].getBody().equals(p.getContent())) {
-                return questions[i];
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Asks a question to every player and checks if the answers are right or wrong
-     * @param question  The question that is going to be asked to every player
-     */
-    private void askQuestion(Question question) {
-        Packet packet = new Packet(PacketType.ASK_QUESTION, gson.toJson(question));
-        connections.toFirst();
-        for (int i = 0; i < connections.size(); i++) {
-            connections.getObject().send(packet);
-            connections.next();
-        }
-
-        HashMap<ClientConnection, Integer> answers = new HashMap<>();
-
-        connections.toFirst();
-        for (int i = 0; i < connections.size(); i++) {
-            Packet p = connections.getObject().read();
-            if (p.getPacketType().equals(PacketType.ANSWER)) {
-                answers.put(connections.getObject(), Integer.parseInt(p.getContent()));
-                System.out.println(p.getContent());
-            }
-            connections.next();
-        }
-
-        Packet rightPacket = new Packet(PacketType.RIGHT_ANSWER, "");
-        Packet wrongPacket = new Packet(PacketType.WRONG_ANSWER, "");
-        for (Map.Entry<ClientConnection, Integer> entry : answers.entrySet()) {
-            if (entry.getValue().equals(question.getCorrect())) {
-                entry.getKey().send(rightPacket);
-            }
-            else {
-                entry.getKey().send(wrongPacket);
-                entry.getKey().setFailed(true);
-            }
-        }
+        return money;
     }
 }

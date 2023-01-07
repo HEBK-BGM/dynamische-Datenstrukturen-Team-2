@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import javax.net.ssl.SSLSocket;
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class ClientConnection {
     private Socket socket;
@@ -29,8 +30,8 @@ public class ClientConnection {
      */
     public String connect() {
         try {
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
             gson = new Gson();
 
             String content = reader.readLine();
