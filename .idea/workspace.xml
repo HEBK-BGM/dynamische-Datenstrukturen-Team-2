@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [FIX] Queue und List" />
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [ADD] True or Not Spielmodus" />
     <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
     <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="Changes by niklas.schoe" />
     <list id="6877c9ce-fa7f-4bb9-8281-999c1e84a751" name="Changes by timo.kruse" comment="Changes by timo.kruse" />
@@ -39,16 +39,17 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Object&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultPlantUmlFileTemplate": "UML Object",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "C:/Users/Anwender/IdeaProjects/maxdynamische-Datenstrukturen-Team-2/src/main/java/de/hebk/gui",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.hebk.Main" />
@@ -171,7 +172,8 @@
     <MESSAGE value="Changes by timo.kruse" />
     <MESSAGE value=" [ADD] Vermutlich Stack u. Queue" />
     <MESSAGE value=" [FIX] Queue und List" />
-    <option name="LAST_COMMIT_MESSAGE" value=" [FIX] Queue und List" />
+    <MESSAGE value=" [ADD] True or Not Spielmodus" />
+    <option name="LAST_COMMIT_MESSAGE" value=" [ADD] True or Not Spielmodus" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
