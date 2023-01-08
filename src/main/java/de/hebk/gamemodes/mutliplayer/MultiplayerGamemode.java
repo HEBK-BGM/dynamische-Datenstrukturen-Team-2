@@ -46,25 +46,27 @@ abstract class MultiplayerGamemode {
 
         ClientConnection choosen = getRandomPlayer();
 
-        Packet packet1 = new Packet(PacketType.QUESTION_IS_SELECTED, choosen.getUsername());
-        Packet packet2 = new Packet(PacketType.SELECT_QUESTION, gson.toJson(questionString));
+        if (choosen != null) {
+            Packet packet1 = new Packet(PacketType.QUESTION_IS_SELECTED, choosen.getUsername());
+            Packet packet2 = new Packet(PacketType.SELECT_QUESTION, gson.toJson(questionString));
 
-        connections.toFirst();
-        for (int i = 0; i < connections.size(); i++) {
-            if (connections.getObject().equals(choosen)) {
-                connections.getObject().send(packet2);
+            connections.toFirst();
+            for (int i = 0; i < connections.size(); i++) {
+                if (connections.getObject().equals(choosen)) {
+                    connections.getObject().send(packet2);
+                }
+                else if (!connections.getObject().hasFailed()) {
+                    connections.getObject().send(packet1);
+                }
+
+                connections.next();
             }
-            else if (!connections.getObject().hasFailed()) {
-                connections.getObject().send(packet1);
-            }
 
-            connections.next();
-        }
-
-        Packet p = choosen.read();
-        for (int i = 0; i < questions.length; i++) {
-            if (questions[i].getBody().equals(p.getContent())) {
-                return questions[i];
+            Packet p = choosen.read();
+            for (int i = 0; i < questions.length; i++) {
+                if (questions[i].getBody().equals(p.getContent())) {
+                    return questions[i];
+                }
             }
         }
         return null;

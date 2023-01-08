@@ -42,18 +42,21 @@ public class MultiplayerNormal extends MultiplayerGamemode {
             }
 
             Question question = selectPlayerQuestion(q);
-            question.shuffleAnswers();
-            askQuestion(question);
 
-            // gets every answer from the players and decides if they failed
-            HashMap<ClientConnection, String> answers = getAnswers();
-            Packet failPacket = new Packet(PacketType.WRONG_ANSWER, "");
-            for (Map.Entry<ClientConnection, String> entry : answers.entrySet()) {
-                if (!entry.getValue().equals(question.getCorrect() + "")) {
-                    entry.getKey().setFailed(true);
-                    entry.getKey().send(failPacket);
+            if (question != null) {
+                question.shuffleAnswers();
+                askQuestion(question);
 
-                    System.out.println(entry.getKey().getUsername() + " has failed");
+                // gets every answer from the players and decides if they failed
+                HashMap<ClientConnection, String> answers = getAnswers();
+                Packet failPacket = new Packet(PacketType.WRONG_ANSWER, "");
+                for (Map.Entry<ClientConnection, String> entry : answers.entrySet()) {
+                    if (!entry.getValue().equals(question.getCorrect() + "")) {
+                        entry.getKey().setFailed(true);
+                        entry.getKey().send(failPacket);
+
+                        System.out.println(entry.getKey().getUsername() + " has failed");
+                    }
                 }
             }
 
