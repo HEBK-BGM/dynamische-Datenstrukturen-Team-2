@@ -56,4 +56,23 @@ public class Stack<T> {
         }
         return first.getContext();
     }
+
+    /**
+     * Returns the size of the stack
+     * @return  Size of the stack
+     */
+    public int size() {
+        int counter = 1;
+        if (first == null) {
+            return 0;
+        }
+
+        Node tmp = first;
+        while (tmp.getNext() != null) {
+            counter++;
+            tmp = tmp.getNext();
+        }
+
+        return counter;
+    }
 }

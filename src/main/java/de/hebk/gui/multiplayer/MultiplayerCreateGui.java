@@ -60,8 +60,7 @@ public class MultiplayerCreateGui {
 
         frame.remove(panel1);
         MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame, server);
-
-        Client client = new Client(frame, lobbyGui, "127.0.0.1", Integer.parseInt(port), username);
+        Client client = new Client(frame, lobbyGui, null, "127.0.0.1", Integer.parseInt(port), username);
         client.start();
     }
 }

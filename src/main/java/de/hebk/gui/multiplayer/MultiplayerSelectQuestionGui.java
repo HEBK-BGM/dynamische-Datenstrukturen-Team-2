@@ -1,6 +1,5 @@
 package de.hebk.gui.multiplayer;
 
-import de.hebk.Question;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;
@@ -61,7 +60,6 @@ public class MultiplayerSelectQuestionGui {
     }
 
     private void sendQuestion(String question) {
-        frame.remove(panel1);
         Packet packet = new Packet(PacketType.QUESTION_IS_SELECTED, question);
         client.send(packet);
     }

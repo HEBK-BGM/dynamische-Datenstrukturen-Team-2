@@ -49,11 +49,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="de.hebk.gamemodes" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.hebk.Main" />
@@ -94,8 +89,6 @@
       <workItem from="1669016980400" duration="1433000" />
       <workItem from="1669964770633" duration="4745000" />
       <workItem from="1670223985798" duration="748000" />
-      <workItem from="1673211443693" duration="149000" />
-      <workItem from="1673211627348" duration="39000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
