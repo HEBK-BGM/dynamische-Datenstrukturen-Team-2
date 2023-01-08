@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [FIX] Queue und List">
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="[ADD]Queue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/model/list/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Hardcore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Hardcore.java" afterDir="false" />
     </list>
-    <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
-    <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="Changes by niklas.schoe" />
-    <list id="6877c9ce-fa7f-4bb9-8281-999c1e84a751" name="Changes by timo.kruse" comment="Changes by timo.kruse" />
+    <list id="26799237-da5f-41ff-bbde-89c005c0e841" name="Changes by night" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Hardcore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Hardcore.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,11 +29,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Hardcore.java">
+      <ranges>
+        <range start1="4" end1="4" start2="4" end2="5" changelist="409f656e-b6de-44ad-bf8f-bfd1307540be" />
+        <range start1="5" end1="6" start2="6" end2="6" changelist="26799237-da5f-41ff-bbde-89c005c0e841" />
+        <range start1="11" end1="12" start2="11" end2="11" changelist="26799237-da5f-41ff-bbde-89c005c0e841" />
+        <range start1="15" end1="17" start2="14" end2="14" changelist="26799237-da5f-41ff-bbde-89c005c0e841" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2HBYoget7g6hULhRWUFk73OXd0C" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -49,11 +57,24 @@
     &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Object&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;false&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;404&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/niklas.schoe/IdeaProjects/dynamische-Datenstrukturen-Team-2prvt/src/main/java/de/hebk/gui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\niklas.schoe\IdeaProjects\dynamische-Datenstrukturen-Team-2prvt\src\main\java\de\hebk\gui" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="de.hebk.Main" />
@@ -64,17 +85,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -105,7 +115,7 @@
       <workItem from="1669016980400" duration="1433000" />
       <workItem from="1669964770633" duration="4745000" />
       <workItem from="1670223985798" duration="748000" />
-      <workItem from="1672847788235" duration="5293000" />
+      <workItem from="1671707837335" duration="7413000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -188,7 +198,9 @@
     <MESSAGE value="Changes by timo.kruse" />
     <MESSAGE value=" [ADD] Vermutlich Stack u. Queue" />
     <MESSAGE value=" [FIX] Queue und List" />
-    <option name="LAST_COMMIT_MESSAGE" value=" [FIX] Queue und List" />
+    <MESSAGE value="[ADD]Queue" />
+    <MESSAGE value="Changes by night" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by night" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
