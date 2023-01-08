@@ -2,7 +2,7 @@ package de.hebk.gamemodes.mutliplayer;
 
 import com.google.gson.Gson;
 import de.hebk.game.Question;
-import de.hebk.SQLManager;
+import de.hebk.game.SQLManager;
 import de.hebk.model.list.List;
 import de.hebk.multiplayer.ClientConnection;
 import de.hebk.multiplayer.Packet;
@@ -198,6 +198,4 @@ abstract class MultiplayerGamemode {
             endGame(level);
         }
     }
-
-    public abstract String convertLevelToMoney(int level);
 }
