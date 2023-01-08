@@ -2,7 +2,7 @@ package de.hebk.gamemodes;
 
 import de.hebk.game.Config;
 import de.hebk.game.Question;
-import de.hebk.SQLManager;
+import de.hebk.game.SQLManager;
 import de.hebk.model.queue.Queue;
 
 import java.util.Random;
