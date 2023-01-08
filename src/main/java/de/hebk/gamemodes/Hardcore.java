@@ -3,7 +3,7 @@ package de.hebk.gamemodes;
 import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.model.stack.Stack;
-import de.hebk.SQLManager;
+import de.hebk.game.SQLManager;
 import de.hebk.game.Joker;
 import de.hebk.game.JokerType;
 import de.hebk.gui.EndGui;
