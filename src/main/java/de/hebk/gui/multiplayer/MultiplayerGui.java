@@ -15,23 +15,22 @@ public class MultiplayerGui {
 
     public MultiplayerGui(StartGui gui) {
         this.frame = gui;
-        frame.add(panel1);
-        frame.setVisible(true);
+        gui.setContentPane(panel1);
+        gui.revalidate();
+        gui.repaint();
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
-                frame.add(frame.getPanel());
-                frame.repaint();
-                frame.setVisible(true);
+                gui.setContentPane(gui.getPanel());
+                gui.revalidate();
+                gui.repaint();
             }
         });
 
         spielBeitretenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerJoinGui(frame);
             }
         });
@@ -39,7 +38,6 @@ public class MultiplayerGui {
         spielErstellenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerCreateGui(frame);
             }
         });
