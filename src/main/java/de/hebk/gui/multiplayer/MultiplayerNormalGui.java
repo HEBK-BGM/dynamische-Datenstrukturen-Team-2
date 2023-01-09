@@ -9,6 +9,8 @@ import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
 import de.hebk.game.Joker;
+import de.hebk.sound.SoundManager;
+import de.hebk.sound.SoundType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ import java.awt.event.ActionListener;
 public class MultiplayerNormalGui {
     private Client client;
     private StartGui gui;
+    private SoundManager soundManager;
 
     private JPanel panel1;
     private JButton button1;
@@ -29,9 +32,10 @@ public class MultiplayerNormalGui {
     private JButton publikumsJokerButton;
     private JButton a5050JokerButton;
 
-    public MultiplayerNormalGui(StartGui gui, Client client, Question question, Joker[] joker) {
+    public MultiplayerNormalGui(StartGui gui, SoundManager soundManager, Client client, Question question, Joker[] joker) {
         this.client = client;
         this.gui = gui;
+        this.soundManager = soundManager;
 
         questionLabel.setText(question.getBody());
         button1.setText(question.getAnswers()[0]);
@@ -115,6 +119,8 @@ public class MultiplayerNormalGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!telefonjokerButton.getBackground().equals(Color.GRAY)) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.TELEPHONE_JOKER, true);
                     List<String> answer = joker[0].use(question);
                     answer.toFirst();
 
@@ -139,6 +145,8 @@ public class MultiplayerNormalGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!publikumsJokerButton.getBackground().equals(Color.GRAY)) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.AUDIENCE_JOKER, true);
                     List<String> answer = joker[0].use(question);
                     answer.toFirst();
 
@@ -163,6 +171,9 @@ public class MultiplayerNormalGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!a5050JokerButton.getBackground().equals(Color.GRAY)) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.HALF_JOKER, false);
+                    soundManager.playNext(SoundType.QUESTION, true);
                     List<String> answer = joker[2].use(question);
                     answer.toFirst();
 
