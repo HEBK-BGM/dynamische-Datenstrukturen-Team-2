@@ -2,6 +2,7 @@ package de.hebk.gui.multiplayer;
 
 import de.hebk.game.Config;
 import de.hebk.game.Question;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;
@@ -24,7 +25,11 @@ public class MultiplayerTrueOrNotGui {
         String statement = getStatement(question);
         questionLabel.setText("Frage: " + question.getBody());
         statementLabel.setText("Antwort: " + statement);
-        gui.setContentPane(panel1);
+
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+
+        gui.setContentPane(p);
         gui.revalidate();
         gui.repaint();
 

@@ -1,9 +1,12 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +22,12 @@ public class MultiplayerJoinGui {
 
     public MultiplayerJoinGui(StartGui frame) {
         this.frame = frame;
-        frame.setContentPane(panel1);
+
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+        frame.pack();
+
+        frame.setContentPane(p);
         frame.revalidate();
         frame.repaint();
         errorLabel.setText("");

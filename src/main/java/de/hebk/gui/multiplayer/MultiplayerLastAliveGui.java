@@ -1,11 +1,14 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +18,13 @@ public class MultiplayerLastAliveGui {
     private JButton aufhoerenButton;
 
     public MultiplayerLastAliveGui(StartGui gui, Client client) {
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+
+        gui.setContentPane(p);
+        gui.revalidate();
+        gui.repaint();
+
         weiterSpielenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,9 +40,5 @@ public class MultiplayerLastAliveGui {
                 client.send(packet);
             }
         });
-
-        gui.setContentPane(panel1);
-        gui.revalidate();
-        gui.repaint();
     }
 }

@@ -1,8 +1,10 @@
 package de.hebk.gui;
 
+import de.hebk.game.Config;
 import de.hebk.gamemodes.Hardcore;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +16,11 @@ public class PlayGui {
     private JButton zurueckButton;
 
     public PlayGui(StartGui gui) {
-        gui.setContentPane(panel1);
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+        gui.pack();
+
+        gui.setContentPane(p);
         gui.revalidate();
         gui.repaint();
 

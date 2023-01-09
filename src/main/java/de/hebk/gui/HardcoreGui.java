@@ -1,5 +1,6 @@
 package de.hebk.gui;
 
+import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.Joker;
 
@@ -37,7 +38,10 @@ public class HardcoreGui {
         button3.setText(question.getAnswers()[2]);
         button4.setText(question.getAnswers()[3]);
 
-        gui.setContentPane(panel1);
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+
+        gui.setContentPane(p);
         gui.revalidate();
         gui.repaint();
 

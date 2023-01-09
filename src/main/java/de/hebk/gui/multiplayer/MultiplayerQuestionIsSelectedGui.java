@@ -1,8 +1,11 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MultiplayerQuestionIsSelectedGui {
     private JPanel panel1;
@@ -10,7 +13,11 @@ public class MultiplayerQuestionIsSelectedGui {
 
     public MultiplayerQuestionIsSelectedGui(StartGui gui, String name) {
         label.setText("Bitte warte während " + name + " eine Frage auswählt...");
-        gui.setContentPane(panel1);
+
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+
+        gui.setContentPane(p);
         gui.revalidate();
         gui.repaint();
     }

@@ -2,6 +2,7 @@ package de.hebk.gui.multiplayer;
 
 import de.hebk.game.Config;
 import de.hebk.game.Question;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.model.list.List;
 import de.hebk.multiplayer.Client;
@@ -10,7 +11,7 @@ import de.hebk.multiplayer.PacketType;
 import de.hebk.game.Joker;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,7 +39,10 @@ public class MultiplayerNormalGui {
         button3.setText(question.getAnswers()[2]);
         button4.setText(question.getAnswers()[3]);
 
-        gui.setContentPane(panel1);
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+
+        gui.setContentPane(p);
         gui.revalidate();
         gui.repaint();
 
