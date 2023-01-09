@@ -3,6 +3,7 @@ package de.hebk.gui.multiplayer;
 import de.hebk.game.Config;
 import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
+import de.hebk.sound.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,7 @@ public class MultiplayerEndGui {
     private JButton backToMainMenuButton;
     private JLabel infoLabel;
 
-    public MultiplayerEndGui(StartGui gui, String info) {
+    public MultiplayerEndGui(StartGui gui, SoundManager soundManager, String info) {
         infoLabel.setText(info);
 
         JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
@@ -28,6 +29,7 @@ public class MultiplayerEndGui {
         backToMainMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                soundManager.stopSound();
                 gui.setContentPane(gui.getPanel());
                 gui.revalidate();
                 gui.repaint();

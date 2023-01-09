@@ -266,6 +266,6 @@ public class Client extends Thread {
         Highscore highscore = new Highscore(username, gamemode, Integer.parseInt(p.getContent()), money, date);
         sqlManager.addHighscore(highscore);
 
-        new MultiplayerEndGui(frame, "Das Spiel ist vorbei, ihr habt es bis zum Level " + p.getContent() + " geschafft!");
+        new MultiplayerEndGui(frame, soundManager, "Das Spiel ist vorbei, ihr habt es bis zum Level " + p.getContent() + " geschafft!");
     }
 }

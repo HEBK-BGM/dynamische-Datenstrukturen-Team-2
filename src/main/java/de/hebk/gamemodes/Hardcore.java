@@ -10,6 +10,8 @@ import de.hebk.gui.EndGui;
 import de.hebk.gui.HardcoreGui;
 import de.hebk.gui.StartGui;
 import de.hebk.model.list.List;
+import de.hebk.sound.SoundManager;
+import de.hebk.sound.SoundType;
 
 public class Hardcore {
     private StartGui frame;
@@ -18,6 +20,7 @@ public class Hardcore {
     private Stack<Question> questions = new Stack<>();
 
     private SQLManager sqlm = new SQLManager(Config.getDatabaseURL());
+    private SoundManager soundManager;
 
     private void getHardcoreQuestions(){
         List<Question> tmp;
@@ -32,22 +35,24 @@ public class Hardcore {
 
     public Hardcore(StartGui gui){
         this.frame = gui;
+        this.soundManager = new SoundManager();
 
         joker[0] = new Joker(JokerType.TELEPHONE_JOKER);
         joker[1] = new Joker(JokerType.AUDIENCE_JOKER);
         joker[2] = new Joker(JokerType.HALF_JOKER);
 
         getHardcoreQuestions();
+        soundManager.playSound(SoundType.QUESTION, true);
         nextQuestion();
     }
 
     public void nextQuestion(){
         if (!questions.isEmpty()) {
             Question q = questions.pop();
-
-            new HardcoreGui(frame, this, q, joker);
+            new HardcoreGui(frame, soundManager, this, q, joker);
         }
         else {
+            soundManager.playSound(SoundType.WIN, false);
             stopGame();
         }
     }
