@@ -1,16 +1,15 @@
 package de.hebk.multiplayer;
 
 import com.google.gson.Gson;
-import de.hebk.game.Question;
+import de.hebk.game.*;
 import de.hebk.gui.multiplayer.*;
 import de.hebk.gui.StartGui;
-import de.hebk.game.Joker;
-import de.hebk.game.JokerType;
 
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
 
 public class Client extends Thread {
     private Socket socket;
@@ -83,38 +82,22 @@ public class Client extends Thread {
 
                 switch (p.getPacketType()) {
                     case PLAYER_JOIN:
-                        lobbyGui.setMitspielerLabel(lobbyGui.getMitspielerLabel().getText() + p.getContent());
-                        System.out.println("Join " + p.getContent());
+                        playerJoin(p);
                         break;
                     case CLEAR:
-                        JPanel panel = new JPanel();
-                        frame.setContentPane(panel);
-                        frame.revalidate();
-                        frame.repaint();
+                        clearPanel();
                         break;
                     case CONNECTION_CLOSE:
-                        writer.close();
-                        reader.close();
-                        socket.close();
+                        closeConnection();
                         return;
                     case SELECT_QUESTION:
-                        System.out.println("Select question");
-                        new MultiplayerSelectQuestionGui(frame, Client.this, gson.fromJson(p.getContent(), String[].class));
+                        selectQuestion(p);
                         break;
                     case QUESTION_IS_SELECTED:
-                        System.out.println("Question is being selected");
-                        new MultiplayerQuestionIsSelectedGui(frame, p.getContent());
+                        questionIsSelected(p);
                         break;
                     case ASK_QUESTION:
-                        if (gamemode.equals("Normal")) {
-                            new MultiplayerNormalGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
-                        }
-                        else if (gamemode.equals("Hardcore")) {
-                            new MultiplayerHardcoreGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
-                        }
-                        else if (gamemode.equals("True or Not")) {
-                            new MultiplayerTrueOrNotGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class));
-                        }
+                        askQuestion(gamemode, p);
                         break;
                     case WRONG_ANSWER:
                         new MultiplayerInfoGui(frame, "Deine Antwort war leider Falsch!");
@@ -125,7 +108,7 @@ public class Client extends Thread {
                         new MultiplayerLastAliveGui(frame, this);
                         break;
                     case END:
-                        new MultiplayerEndGui(frame, "Das Spiel ist vorbei, ihr habt es bis zum Level " + p.getContent() + " geschafft!");
+                        endGame(gamemode, p);
                         break;
                 }
             }
@@ -192,5 +175,59 @@ public class Client extends Thread {
 
             throw new RuntimeException(e);
         }
+    }
+
+    private void playerJoin(Packet p) {
+        lobbyGui.setMitspielerLabel(lobbyGui.getMitspielerLabel().getText() + p.getContent());
+        System.out.println("Join " + p.getContent());
+    }
+
+    private void clearPanel() {
+        JPanel panel = new JPanel();
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    private void selectQuestion(Packet p) {
+        System.out.println("Select question");
+        new MultiplayerSelectQuestionGui(frame, Client.this, gson.fromJson(p.getContent(), String[].class));
+    }
+
+    private void questionIsSelected(Packet p) {
+        System.out.println("Question is being selected");
+        new MultiplayerQuestionIsSelectedGui(frame, p.getContent());
+    }
+
+    private void askQuestion(String gamemode, Packet p) {
+        if (gamemode.equals("Normal")) {
+            new MultiplayerNormalGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
+        }
+        else if (gamemode.equals("Hardcore")) {
+            new MultiplayerHardcoreGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
+        }
+        else if (gamemode.equals("True or Not")) {
+            new MultiplayerTrueOrNotGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class));
+        }
+    }
+
+    private void endGame(String gamemode, Packet p) {
+        SQLManager sqlManager = new SQLManager(Config.getDatabaseURL());
+        Calendar cal = Calendar.getInstance();
+        int level = Integer.parseInt(p.getContent());
+        String date = cal.get(Calendar.DAY_OF_MONTH) + "." + (cal.getTime().getMonth()+1) + "." + cal.get(Calendar.YEAR) + " - " + cal.getTime().getHours() + ":" + cal.getTime().getMinutes();
+
+        int money;
+        switch (gamemode) {
+            case "Normal" -> money = Config.normalLevelToMoney(level);
+            case "Hardcore" -> money =  Config.hardcoreLevelToMoney(level);
+            case "True or Not" -> money = Config.trueOrNotLevelToMoney(level);
+            default -> money = 0;
+        }
+
+        Highscore highscore = new Highscore(username, gamemode, Integer.parseInt(p.getContent()), money, date);
+        sqlManager.addHighscore(highscore);
+
+        new MultiplayerEndGui(frame, "Das Spiel ist vorbei, ihr habt es bis zum Level " + p.getContent() + " geschafft!");
     }
 }

@@ -21,12 +21,14 @@ public class MultiplayerLobbyGui {
         this.frame = gui;
         this.server = server;
         server.start();
-        frame.add(panel1);
+
+        frame.setContentPane(panel1);
+        frame.revalidate();
+        frame.repaint();
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 server.stopServer();
                 new MultiplayerCreateGui(frame);
             }
@@ -36,7 +38,6 @@ public class MultiplayerLobbyGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!(server.getConnections().size() < 2)) {
-                    frame.remove(panel1);
                     server.startGame();
                 }
                 else {
@@ -55,7 +56,6 @@ public class MultiplayerLobbyGui {
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerJoinGui(frame);
             }
         });
@@ -74,7 +74,6 @@ public class MultiplayerLobbyGui {
 
     public void setMitspielerLabel(String label) {
         this.mitspielerLabel.setText(label);
-        frame.setVisible(true);
     }
 
     public JLabel getMitspielerLabel() {

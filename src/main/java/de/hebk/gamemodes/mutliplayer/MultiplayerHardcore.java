@@ -1,7 +1,7 @@
 package de.hebk.gamemodes.mutliplayer;
 
 import de.hebk.game.Question;
-import de.hebk.SQLManager;
+import de.hebk.game.SQLManager;
 import de.hebk.model.list.List;
 import de.hebk.model.stack.Stack;
 import de.hebk.multiplayer.ClientConnection;
@@ -57,31 +57,5 @@ public class MultiplayerHardcore extends MultiplayerGamemode {
 
             checkGameStatus(i, 15);
         }
-    }
-
-    @Override
-    public String convertLevelToMoney(int level) {
-        String money = "";
-
-        switch (level) {
-            case 1 -> money = "150";
-            case 2 -> money = "300";
-            case 3 -> money = "600";
-            case 4 -> money = "900";
-            case 5 -> money = "1500";
-            case 6 -> money = "3.000";
-            case 7 -> money = "6.000";
-            case 8 -> money = "12.000";
-            case 9 -> money = "24.000";
-            case 10 -> money = "48.000";
-            case 11 -> money = "96.000";
-            case 12 -> money = "192.000";
-            case 13 -> money = "375.000";
-            case 14 -> money = "1.500.000";
-            case 15 -> money = "3.000.000";
-            default -> money = "0";
-        }
-
-        return money;
     }
 }

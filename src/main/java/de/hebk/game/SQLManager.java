@@ -1,17 +1,34 @@
-package de.hebk;
+package de.hebk.game;
 
 import de.hebk.game.Question;
 import de.hebk.model.list.List;
 import de.hebk.model.queue.Queue;
+import de.hebk.model.stack.Stack;
+
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 
 public class SQLManager {
 
-    private Connection conn;
+    private Connection questionConn;
+    private Connection highscoreConn;
 
     public SQLManager(String database) {
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:" + database);
+            File file = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\Wer wird Millionär\\");
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+
+            questionConn = DriverManager.getConnection("jdbc:sqlite:" + database);
+            highscoreConn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\Wer wird Millionär\\wwm.db");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try (PreparedStatement stmt = highscoreConn.prepareStatement("CREATE TABLE IF NOT EXISTS highscores (name TEXT, gamemode TEXT, level int, money int, date TEXT)")) {
+            stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -20,7 +37,7 @@ public class SQLManager {
     public List<Question> getQuestions() {
         List<Question> list = new List<>();
 
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM questions ORDER BY level ASC;")) {
+        try (PreparedStatement stmt = questionConn.prepareStatement("SELECT * FROM questions ORDER BY level ASC;")) {
             ResultSet rs = stmt.executeQuery();
 
             Question question = null;
@@ -42,7 +59,7 @@ public class SQLManager {
     }
 
     public Question getRandomQuestions() {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1;")) {
+        try (PreparedStatement stmt = questionConn.prepareStatement("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1;")) {
             ResultSet rs = stmt.executeQuery();
 
             String[] answers = new String[4];
@@ -60,7 +77,7 @@ public class SQLManager {
     public Queue<Question> getQueueQuestions() {
         Queue<Question> queue = new Queue<>();
 
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM questions ORDER BY level ASC;")) {
+        try (PreparedStatement stmt = questionConn.prepareStatement("SELECT * FROM questions ORDER BY level ASC;")) {
             ResultSet rs = stmt.executeQuery();
 
             Question question = null;
@@ -84,7 +101,7 @@ public class SQLManager {
     public List<Question> getQuestionsFromLevel(int level) {
         List<Question> list = new List<>();
 
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM questions WHERE level = ?;")) {
+        try (PreparedStatement stmt = questionConn.prepareStatement("SELECT * FROM questions WHERE level = ?;")) {
             stmt.setInt(1, level);
             ResultSet rs = stmt.executeQuery();
 
@@ -109,7 +126,7 @@ public class SQLManager {
     public List<Question> getRandomQuestionsFromLevel(int level, int limit) {
         List<Question> list = new List<>();
 
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM questions WHERE level = ? ORDER BY RANDOM() LIMIT ?;")) {
+        try (PreparedStatement stmt = questionConn.prepareStatement("SELECT * FROM questions WHERE level = ? ORDER BY RANDOM() LIMIT ?;")) {
             stmt.setInt(1, level);
             stmt.setInt(2, limit);
             ResultSet rs = stmt.executeQuery();
@@ -134,7 +151,7 @@ public class SQLManager {
     }
 
     public void addQuestion(Question question) {
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO question (body, a, b, c, d, correct, level) VALUES (?, ?, ?, ?, ?, ?, ?);")) {
+        try (PreparedStatement stmt = questionConn.prepareStatement("INSERT INTO question (body, a, b, c, d, correct, level) VALUES (?, ?, ?, ?, ?, ?, ?);")) {
             stmt.setString(1, question.getBody());
             stmt.setString(2, question.getAnswers()[0]);
             stmt.setString(3, question.getAnswers()[1]);
@@ -142,6 +159,42 @@ public class SQLManager {
             stmt.setString(5, question.getAnswers()[3]);
             stmt.setInt(6, question.getCorrect());
             stmt.setInt(7, question.getLevel());
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Stack<Highscore> getHighscores() {
+        try (PreparedStatement stmt = highscoreConn.prepareStatement("SELECT * FROM highscores ORDER BY money ASC;")) {
+            ResultSet rs = stmt.executeQuery();
+
+            Stack<Highscore> highscores = new Stack<>();
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String gamemode = rs.getString("gamemode");
+                int level = rs.getInt("level");
+                int money = rs.getInt("money");
+                String date = rs.getString("date");
+
+                Highscore h = new Highscore(name, gamemode, level, money, date);
+                highscores.push(h);
+            }
+
+            return highscores;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addHighscore(Highscore highscore) {
+        try (PreparedStatement stmt = highscoreConn.prepareStatement("INSERT INTO highscores (name, gamemode, level, money, date) VALUES (?, ?, ?, ?, ?)")) {
+            stmt.setString(1, highscore.getName());
+            stmt.setString(2, highscore.getGamemode());
+            stmt.setInt(3, highscore.getLevel());
+            stmt.setInt(4, highscore.getMoney());
+            stmt.setString(5, highscore.getDate());
             stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

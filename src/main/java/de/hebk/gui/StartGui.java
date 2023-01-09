@@ -22,14 +22,12 @@ public class StartGui extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
-        /*highscoreButton.addActionListener(new ActionListener() {
+        highscoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                remove(panel1);
-                add(new HighscoreGui().getPanel());
-                setVisible(true);
+                new HighscoreGui(StartGui.this);
             }
-        });*/
+        });
 
         beendenButton.addActionListener(new ActionListener() {
             @Override
