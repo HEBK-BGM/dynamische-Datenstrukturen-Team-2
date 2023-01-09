@@ -1,5 +1,6 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.gui.StartGui;
 import de.hebk.model.list.List;
@@ -76,6 +77,15 @@ public class MultiplayerNormalGui {
                 }
             }
         });
+
+        if (Config.cheatsEnabled()) {
+            switch (question.getCorrect()) {
+                case 1 -> button1.setBackground(Color.GREEN);
+                case 2 -> button2.setBackground(Color.GREEN);
+                case 3 -> button3.setBackground(Color.GREEN);
+                case 4 -> button4.setBackground(Color.GREEN);
+            }
+        }
 
         loadJoker(joker, question);
     }

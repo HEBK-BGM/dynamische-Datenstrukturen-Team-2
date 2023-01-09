@@ -1,6 +1,6 @@
 package de.hebk.gui;
 
-import de.hebk.Question;
+import de.hebk.game.Question;
 import de.hebk.game.Joker;
 
 import de.hebk.gamemodes.Hardcore;

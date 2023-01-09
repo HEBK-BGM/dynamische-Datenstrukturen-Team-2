@@ -19,13 +19,14 @@ public class MultiplayerCreateGui {
 
     public MultiplayerCreateGui(StartGui gui) {
         this.frame = gui;
-        frame.add(panel1);
-        frame.setVisible(true);
+
+        frame.setContentPane(panel1);
+        gui.revalidate();
+        gui.repaint();
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerGui(frame);
             }
         });
@@ -58,7 +59,6 @@ public class MultiplayerCreateGui {
         String gamemode = list1.getSelectedValue().toString();
         Server server = new Server(Integer.parseInt(port), gamemode);
 
-        frame.remove(panel1);
         MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame, server);
         Client client = new Client(frame, lobbyGui, null, "127.0.0.1", Integer.parseInt(port), username);
         client.start();

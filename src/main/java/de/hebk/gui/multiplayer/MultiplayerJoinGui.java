@@ -27,7 +27,6 @@ public class MultiplayerJoinGui {
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerGui(frame);
             }
         });
