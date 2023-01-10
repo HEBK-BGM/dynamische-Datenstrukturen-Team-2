@@ -35,7 +35,7 @@ public class StartGui extends JFrame {
         this.imagePanel = p;
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(960, 540);
+        this.setSize(1038, 537);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
