@@ -1,5 +1,7 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Server;
 
@@ -9,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MultiplayerLobbyGui {
+    private JImagePanel imagePanel;
+
     private StartGui frame;
     private Server server;
     private JPanel panel1;
@@ -22,7 +26,10 @@ public class MultiplayerLobbyGui {
         this.server = server;
         server.start();
 
-        frame.setContentPane(panel1);
+        imagePanel = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        imagePanel.add(panel1);
+
+        frame.setContentPane(imagePanel);
         frame.revalidate();
         frame.repaint();
 
@@ -53,6 +60,9 @@ public class MultiplayerLobbyGui {
         this.frame = gui;
         startenButton.setVisible(false);
 
+        imagePanel = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        imagePanel.add(panel1);
+
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +72,7 @@ public class MultiplayerLobbyGui {
     }
 
     public void show() {
-        frame.setContentPane(panel1);
+        frame.setContentPane(imagePanel);
         frame.revalidate();
         frame.repaint();
     }

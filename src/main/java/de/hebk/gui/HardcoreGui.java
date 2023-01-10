@@ -1,10 +1,14 @@
 package de.hebk.gui;
 
+import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.Joker;
 
 import de.hebk.gamemodes.Hardcore;
 import de.hebk.model.list.List;
+import de.hebk.sound.SoundManager;
+import de.hebk.sound.SoundType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +16,7 @@ import java.awt.event.ActionListener;
 
 public class HardcoreGui {
     private Hardcore hardcore;
+    private SoundManager soundManager;
 
     private JPanel panel1;
     private JPanel answeres;
@@ -28,8 +33,9 @@ public class HardcoreGui {
     private JLabel frage;
     private JLabel geld;
 
-    public HardcoreGui(StartGui gui, Hardcore hardcore, Question question, Joker[] joker) {
+    public HardcoreGui(StartGui gui, SoundManager soundManager, Hardcore hardcore, Question question, Joker[] joker) {
         this.hardcore = hardcore;
+        this.soundManager = soundManager;
 
         frage.setText(question.getBody());
         button1.setText(question.getAnswers()[0]);
@@ -37,7 +43,10 @@ public class HardcoreGui {
         button3.setText(question.getAnswers()[2]);
         button4.setText(question.getAnswers()[3]);
 
-        gui.setContentPane(panel1);
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+
+        gui.setContentPane(p);
         gui.revalidate();
         gui.repaint();
 
@@ -55,6 +64,8 @@ public class HardcoreGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!telefon.getBackground().equals(Color.GRAY)) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.TELEPHONE_JOKER, true);
                     List<String> answer = joker[0].use(question);
                     answer.toFirst();
 
@@ -79,6 +90,8 @@ public class HardcoreGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!publikum.getBackground().equals(Color.GRAY)) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.AUDIENCE_JOKER, true);
                     List<String> answer = joker[0].use(question);
                     answer.toFirst();
 
@@ -103,6 +116,9 @@ public class HardcoreGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!fiftyfifty.getBackground().equals(Color.GRAY)) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.HALF_JOKER, false);
+                    soundManager.playNext(SoundType.QUESTION, true);
                     List<String> answer = joker[2].use(question);
                     answer.toFirst();
 
@@ -166,9 +182,14 @@ public class HardcoreGui {
 
     private void checkAnswer(Question question, String answer) {
         if (question.getCorrectAnswer().equals(question.getAnswers()[0])) {
+            soundManager.stopSound();
+            soundManager.playSound(SoundType.RIGHT_ANSWER, false);
+            soundManager.playNext(SoundType.QUESTION, true);
             hardcore.nextQuestion();
         }
         else {
+            soundManager.stopSound();
+            soundManager.playSound(SoundType.WRONG_ANSWER, false);
             hardcore.stopGame();
         }
     }

@@ -1,12 +1,20 @@
 package de.hebk.gui;
 
+import de.hebk.game.Config;
 import de.hebk.gui.multiplayer.MultiplayerGui;
+import javafx.scene.layout.GridPane;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 public class StartGui extends JFrame {
+    private JImagePanel imagePanel;
     private JPanel panel1;
     private JButton highscoreButton;
     private JButton multiplayerButton;
@@ -16,11 +24,21 @@ public class StartGui extends JFrame {
     public StartGui() {
         super("Wer wird Millionär");
 
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+        setContentPane(p);
+        pack();
+
+        ImageIcon icon = new ImageIcon(Config.getAppIcon());
+        this.setIconImage(icon.getImage());
+
+        this.imagePanel = p;
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(panel1);
-        this.setSize(960, 540);
+        this.setSize(1038, 537);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setResizable(false);
 
         highscoreButton.addActionListener(new ActionListener() {
             @Override
@@ -39,7 +57,6 @@ public class StartGui extends JFrame {
         multiplayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                remove(panel1);
                 new MultiplayerGui(StartGui.this);
             }
         });
@@ -53,6 +70,6 @@ public class StartGui extends JFrame {
     }
 
     public JPanel getPanel() {
-        return panel1;
+        return this.imagePanel;
     }
 }

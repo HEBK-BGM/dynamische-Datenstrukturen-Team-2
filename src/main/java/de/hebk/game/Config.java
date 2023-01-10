@@ -1,5 +1,7 @@
 package de.hebk.game;
 
+import java.net.URL;
+
 public class Config {
     private static String databaseURL = Config.class.getResource("german.db").getFile();
     private static boolean cheats = false;
@@ -14,6 +16,14 @@ public class Config {
 
     public static void setCheating(boolean bool) {
         cheats = bool;
+    }
+
+    public static URL getBackground() {
+        return Config.class.getResource("images/background.png");
+    }
+
+    public static URL getAppIcon() {
+        return Config.class.getResource("images/icon.png");
     }
 
     public static int hardcoreLevelToMoney(int level) {

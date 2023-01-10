@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import de.hebk.game.*;
 import de.hebk.gui.multiplayer.*;
 import de.hebk.gui.StartGui;
+import de.hebk.sound.SoundManager;
+import de.hebk.sound.SoundType;
 
 import javax.swing.*;
 import java.io.*;
@@ -23,6 +25,7 @@ public class Client extends Thread {
     private int port;
     private String username;
     private Joker[] joker = new Joker[3];
+    private SoundManager soundManager;
 
     /**
      * Contructor for the client
@@ -41,6 +44,7 @@ public class Client extends Thread {
         this.username = username;
         this.lobbyGui = lobbyGui;
         this.joinGui = joinGui;
+        this.soundManager = new SoundManager();
 
         joker[0] = new Joker(JokerType.TELEPHONE_JOKER);
         joker[1] = new Joker(JokerType.AUDIENCE_JOKER);
@@ -53,6 +57,7 @@ public class Client extends Thread {
     public void run() {
         System.out.println("[Client] Connecting to Server");
         try {
+            // Sleeps for 1 seconds because the Surface is too slow to be able to connect faster
             Thread.sleep(1000);
 
             socket = new Socket(ip, port);
@@ -97,12 +102,18 @@ public class Client extends Thread {
                         questionIsSelected(p);
                         break;
                     case ASK_QUESTION:
+                        soundManager.stopSound();
+                        soundManager.playSound(SoundType.QUESTION, true);
                         askQuestion(gamemode, p);
                         break;
                     case WRONG_ANSWER:
+                        soundManager.stopSound();
+                        soundManager.playSound(SoundType.WRONG_ANSWER, false);
                         new MultiplayerInfoGui(frame, "Deine Antwort war leider Falsch!");
                         break;
                     case RIGHT_ANSWER:
+                        soundManager.stopSound();
+                        soundManager.playSound(SoundType.RIGHT_ANSWER, false);
                         break;
                     case LAST_ALIVE:
                         new MultiplayerLastAliveGui(frame, this);
@@ -201,10 +212,10 @@ public class Client extends Thread {
 
     private void askQuestion(String gamemode, Packet p) {
         if (gamemode.equals("Normal")) {
-            new MultiplayerNormalGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
+            new MultiplayerNormalGui(frame, soundManager,Client.this, gson.fromJson(p.getContent(), Question.class), joker);
         }
         else if (gamemode.equals("Hardcore")) {
-            new MultiplayerHardcoreGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class), joker);
+            new MultiplayerHardcoreGui(frame, soundManager,Client.this, gson.fromJson(p.getContent(), Question.class), joker);
         }
         else if (gamemode.equals("True or Not")) {
             new MultiplayerTrueOrNotGui(frame, Client.this, gson.fromJson(p.getContent(), Question.class));
@@ -219,15 +230,42 @@ public class Client extends Thread {
 
         int money;
         switch (gamemode) {
-            case "Normal" -> money = Config.normalLevelToMoney(level);
-            case "Hardcore" -> money =  Config.hardcoreLevelToMoney(level);
-            case "True or Not" -> money = Config.trueOrNotLevelToMoney(level);
-            default -> money = 0;
+            case "Normal": {
+                money = Config.normalLevelToMoney(level);
+
+                if (level == 15) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.WIN, false);
+                }
+                break;
+            }
+            case "Hardcore": {
+                money =  Config.hardcoreLevelToMoney(level);
+
+                if (level == 15) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.WIN, false);
+                }
+                break;
+            }
+            case "True or Not": {
+                money = Config.trueOrNotLevelToMoney(level);
+
+                if (level == 30) {
+                    soundManager.stopSound();
+                    soundManager.playSound(SoundType.WIN, false);
+                }
+                break;
+            }
+            default: {
+                money = 0;
+                break;
+            }
         }
 
         Highscore highscore = new Highscore(username, gamemode, Integer.parseInt(p.getContent()), money, date);
         sqlManager.addHighscore(highscore);
 
-        new MultiplayerEndGui(frame, "Das Spiel ist vorbei, ihr habt es bis zum Level " + p.getContent() + " geschafft!");
+        new MultiplayerEndGui(frame, soundManager, "Das Spiel ist vorbei, ihr habt es bis zum Level " + p.getContent() + " geschafft!");
     }
 }
