@@ -34,9 +34,11 @@ public class HardcoreGui {
     private JLabel geld;
     private JLabel timer;
 
-    public HardcoreGui(StartGui gui, SoundManager soundManager, Hardcore hardcore, Question question, Joker[] joker) {
+    public HardcoreGui(StartGui gui, SoundManager soundManager, Hardcore hardcore, Question question, Joker[] joker, int lvl) {
         this.hardcore = hardcore;
         this.soundManager = soundManager;
+
+        geld.setText(Config.hardcoreLevelToMoney(lvl) + " €");
 
         thread = new Thread(new Runnable() {
             @Override
@@ -200,6 +202,7 @@ public class HardcoreGui {
         button4 = new JButton();
 
         frage = new JLabel();
+        geld = new JLabel();
 
         timer = new JLabel();
     }

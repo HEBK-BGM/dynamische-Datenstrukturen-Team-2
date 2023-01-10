@@ -16,7 +16,7 @@ import de.hebk.sound.SoundType;
 public class Hardcore {
 
     public String gamemode = "Hardcore";
-    public int lvl = 1;
+    public int lvl = 0;
     private StartGui frame;
     private Joker[] joker = new Joker[3];
 
@@ -52,8 +52,7 @@ public class Hardcore {
     public void nextQuestion(){
         if (!questions.isEmpty()) {
             Question q = questions.pop();
-            new HardcoreGui(frame, soundManager, this, q, joker);
-
+            new HardcoreGui(frame, soundManager, this, q, joker, lvl);
             lvl++;
         }
         else {
@@ -63,6 +62,6 @@ public class Hardcore {
     }
 
     public void stopGame() {
-        new EndGui(frame, "Du hast den Hardcore Spielmodus verloren!", gamemode, lvl);
+        new EndGui(frame, "Du hast den Hardcore Spielmodus verloren!", gamemode, lvl, sqlm);
     }
 }
