@@ -3,13 +3,17 @@ package de.hebk.gamemodes;
 import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.SQLManager;
+import de.hebk.gui.StartGui;
+import de.hebk.gui.normal.NormalQuestionGUI;
 import de.hebk.model.list.List;
+import de.hebk.sound.SoundManager;
 
 import java.util.Scanner;
 
 public class Normal {
     private final Config config = new Config();
     private SQLManager manager = new SQLManager(Config.getDatabaseURL());
+    private SoundManager soundManager = new SoundManager();
 
     private int stufe = 1;
     private int cash = 0;
@@ -52,7 +56,8 @@ public class Normal {
         return 0;
     }
 
-    public Normal(){
+    public Normal(StartGui startGui){
+        NormalQuestionGUI nqgui = new NormalQuestionGUI(startGui, soundManager);
         System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
         game();
     }

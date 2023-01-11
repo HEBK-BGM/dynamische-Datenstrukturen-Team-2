@@ -1,3 +1,4 @@
+
 package de.hebk.gui.trueOrNot;
 
 import de.hebk.gamemodes.TrueOrNot;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TrueOrNotStart {
+
 
     TrueOrNot trueOrNot;
     private boolean trueOrFalse;
@@ -26,9 +28,9 @@ public class TrueOrNotStart {
     public TrueOrNotStart(StartGui gui, TrueOrNot statement) {
         startGui=gui;
         trueOrNot=statement;
-        question.setText(statement.createQuestion());
-        money.setText(String.valueOf(trueOrNot.getMoney()));
-
+        //question.setText(statement.createQuestion());
+        //money.setText(String.valueOf(trueOrNot.getMoney()));
+        /*
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,6 +39,7 @@ public class TrueOrNotStart {
                 winOrLose();
             }
         });
+        
 
         button2.addActionListener(new ActionListener() {
             @Override
@@ -46,6 +49,8 @@ public class TrueOrNotStart {
                 winOrLose();
             }
         });
+
+         */
 
         gui.setContentPane(panel1);
         gui.revalidate();
@@ -58,27 +63,31 @@ public class TrueOrNotStart {
         money = new JLabel();
     }
 
-
-    public void winOrLose(){
-        if(trueOrFalse){
-            win();
-        }
-        if(!trueOrFalse){
-            lose();
-        }
-    }
-    public void win(){
-        trueOrNot.setMoney(trueOrNot.getMoney());
-        trueOrNot.createQuestion();
-        if(trueOrNot.getMoney()==1000000){
-            finalwin();
+    /*
+        public void winOrLose(){
+            if(trueOrFalse){
+                win();
+            }
+            if(!trueOrFalse){
+                lose();
+            }
         }
 
-    }
-    public void lose(){
-        new Lose(startGui, trueOrNot.getMoney());
-    }
 
+        public void win(){
+            trueOrNot.setMoney(trueOrNot.getMoney());
+            trueOrNot.createQuestion();
+            if(trueOrNot.getMoney()==1000000){
+                finalwin();
+            }
+        }
+
+
+
+        public void lose(){
+            new Lose(startGui, trueOrNot.getMoney());
+        }
+        */
     public void setAnswer(boolean answer) {
         this.answer = answer;
     }

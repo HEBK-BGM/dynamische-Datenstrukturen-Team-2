@@ -2,6 +2,7 @@ package de.hebk.gui;
 
 import de.hebk.game.Config;
 import de.hebk.gamemodes.Hardcore;
+import de.hebk.gamemodes.Normal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +24,14 @@ public class PlayGui {
         gui.setContentPane(p);
         gui.revalidate();
         gui.repaint();
+
+
+        normalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Normal(gui);
+            }
+        });
 
         hardcoreButton.addActionListener(new ActionListener() {
             @Override
