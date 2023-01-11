@@ -1,0 +1,20 @@
+Index: src/main/java/de/hebk/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package de.hebk;\r\n\r\nimport de.hebk.gamemodes.Normal;\r\nimport de.hebk.gui.StartGui;\r\n\r\nimport java.awt.*;\r\nimport java.awt.event.InputEvent;\r\nimport java.util.Scanner;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        StartGui gui = new StartGui();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/de/hebk/Main.java b/src/main/java/de/hebk/Main.java
+--- a/src/main/java/de/hebk/Main.java	
++++ b/src/main/java/de/hebk/Main.java	
+@@ -9,6 +9,7 @@
+ 
+ public class Main {
+     public static void main(String[] args) {
+-        StartGui gui = new StartGui();
++        //StartGui gui = new StartGui();
++        Normal norm = new Normal();
+     }
+ }
+\ No newline at end of file
