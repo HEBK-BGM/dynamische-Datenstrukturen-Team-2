@@ -1,11 +1,9 @@
 package de.hebk.gamemodes;
 
-import de.hebk.Config;
-import de.hebk.Question;
-import de.hebk.SQLManager;
+import de.hebk.game.Config;
+import de.hebk.game.Question;
+import de.hebk.game.SQLManager;
 import de.hebk.model.list.List;
-
-import java.util.Scanner;
 
 import java.util.Scanner;
 

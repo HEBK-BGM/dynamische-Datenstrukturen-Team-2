@@ -1,9 +1,8 @@
 @startuml
 class de.hebk.gamemodes.mutliplayer.MultiplayerHardcore {
-- List<ClientConnection> connections
-- Gson gson
-- SQLManager sqlManager
+- Stack<Question> questions
 + void startGame()
++ String convertLevelToMoney(int)
 }
 class de.hebk.model.node.Node {
 - T context
@@ -29,7 +28,10 @@ class de.hebk.gui.multiplayer.MultiplayerJoinGui {
 - JTextField usernameField
 - JTextField serveripField
 - JTextField portField
+- JLabel errorLabel
 - void joinGame(String,String,String)
++ void setErrorMessage(String)
+- void createUIComponents()
 }
 class de.hebk.gamemodes.Hardcore {
 - Stack<Question> question
@@ -41,16 +43,6 @@ class de.hebk.gui.multiplayer.MultiplayerQuestionIsSelectedGui {
 - JPanel panel1
 - JLabel label
 - void createUIComponents()
-}
-class de.hebk.Question {
-- String body
-- int level
-- String[] answers
-- int correct
-+ String getBody()
-+ int getLevel()
-+ String[] getAnswers()
-+ int getCorrect()
 }
 class de.hebk.model.list.List {
 - Node<T> first
@@ -90,13 +82,29 @@ class de.hebk.gamemodes.TrueOrNot {
 + void createQuestion()
 + String getStatement()
 }
-class de.hebk.gamemodes.mutliplayer.MultiplayerNormal {
+abstract class de.hebk.gamemodes.mutliplayer.MultiplayerGamemode {
 - List<ClientConnection> connections
-- Gson gson
-- SQLManager sqlManager
+- Server server
+# Gson gson
+# SQLManager sqlManager
+- boolean keepPlaying
++ {abstract}void startGame()
+# Question selectPlayerQuestion(Question[])
+# ClientConnection getRandomPlayer()
+# void askQuestion(Question)
+# HashMap<ClientConnection,String> getAnswers()
+# int countAlivePlayers()
+# List<ClientConnection> getConnections()
+# void endGame(int)
+# boolean isKeepPlaying()
+# void setKeepPlaying(boolean)
+# void checkGameStatus(int,int)
++ {abstract}String convertLevelToMoney(int)
+}
+class de.hebk.gamemodes.mutliplayer.MultiplayerNormal {
+- List<Question> questions
 + void startGame()
-- Question selectPlayerQuestion(int)
-- void askQuestion(Question)
++ String convertLevelToMoney(int)
 }
 class de.hebk.multiplayer.ClientConnection {
 - Socket socket
@@ -114,10 +122,9 @@ class de.hebk.multiplayer.ClientConnection {
 + void setFailed(boolean)
 }
 class de.hebk.gamemodes.mutliplayer.MultiplayerTrueOrNot {
-- List<ClientConnection> connections
-- Gson gson
-- SQLManager sqlManager
+- Queue<Question> questions
 + void startGame()
++ String convertLevelToMoney(int)
 }
 class de.hebk.Main {
 + {static} void main(String[])
@@ -148,6 +155,10 @@ class de.hebk.gui.multiplayer.MultiplayerSelectQuestionGui {
 - JButton button2
 - void sendQuestion(String)
 }
+class de.hebk.game.Config {
+- {static} String databaseURL
++ {static} String getDatabaseURL()
+}
 class de.hebk.gamemodes.Normal {
 - Config config
 - SQLManager manager
@@ -171,6 +182,12 @@ enum de.hebk.multiplayer.PacketType {
 +  ASK_QUESTION
 +  RIGHT_ANSWER
 +  WRONG_ANSWER
++  GAMEMODE
++  HARDCORE_TIME_UP
++  LAST_ALIVE
++  KEEP_PLAYING
++  STOP_PLAYING
++  END
 }
 class de.hebk.gui.multiplayer.MultiplayerLobbyGui {
 - StartGui frame
@@ -180,9 +197,26 @@ class de.hebk.gui.multiplayer.MultiplayerLobbyGui {
 - JButton zurueckButton
 - JLabel mitspielerLabel
 - JLabel errorLabel
++ void show()
 - void createUIComponents()
 + void setMitspielerLabel(String)
 + JLabel getMitspielerLabel()
+}
+class de.hebk.game.Question {
+- String body
+- int level
+- String[] answers
+- int correct
++ String getBody()
++ int getLevel()
++ String[] getAnswers()
++ int getCorrect()
++ String getCorrectAnswer()
+}
+enum de.hebk.game.JokerType {
++  TELEPHONE_JOKER
++  AUDIENCE_JOKER
++  HALF_JOKER
 }
 class de.hebk.Person {
 ~ String vorname
@@ -190,26 +224,65 @@ class de.hebk.Person {
 ~ String passwort
 ~ int alter
 }
-class de.hebk.gui.multiplayer.MultiplayerQuestionGui {
-- JPanel panel1
-- JButton button1
-- JButton button2
-- JButton button3
-- JButton button4
-- JLabel questionLabel
-- void createUIComponents()
-}
 class de.hebk.multiplayer.Packet {
 - PacketType type
 - String content
 + PacketType getPacketType()
 + String getContent()
 }
-class de.hebk.Config {
-- {static} String databaseURL
-+ {static} String getDatabaseURL()
+class de.hebk.gui.multiplayer.MultiplayerNormalGui {
+- Client client
+- StartGui gui
+- JPanel panel1
+- JButton button1
+- JButton button2
+- JButton button3
+- JButton button4
+- JLabel questionLabel
+- JButton telefonjokerButton
+- JButton publikumsJokerButton
+- JButton a5050JokerButton
+- void sendAnswer(String)
+- void loadJoker(Joker[],Question)
+- void createUIComponents()
+}
+class de.hebk.gui.multiplayer.MultiplayerEndGui {
+- JPanel panel1
+- JButton backToMainMenuButton
+- JLabel infoLabel
+- void createUIComponents()
 }
 class de.hebk.Game {
+}
+class de.hebk.gui.multiplayer.MultiplayerTrueOrNotGui {
+- JPanel panel1
+- JButton wahrButton
+- JButton falschButton
+- JLabel questionLabel
+- JLabel statementLabel
+- void createUIComponents()
+- String getStatement(Question)
+- void sendAnswer(Question,String,Client,boolean)
+}
+class de.hebk.gui.multiplayer.MultiplayerHardcoreGui {
+- Client client
+- StartGui gui
+- JPanel panel1
+- JButton button1
+- JButton button2
+- JButton button3
+- JButton button4
+- JButton a5050JokerButton
+- JButton publikumsjokerButton
+- JButton telefonjokerButton
+- JLabel timerLabel
+- JLabel questionLabel
+- Thread thread
+- void loadJoker(Joker[],Question)
+- void createUIComponents()
+- void startTimer()
+- void sendAnswer(String)
+- void stopTimer()
 }
 class de.hebk.gui.multiplayer.MultiplayerGui {
 - StartGui frame
@@ -226,10 +299,23 @@ class de.hebk.model.stack.Stack {
 + T pop()
 + T top()
 }
+class de.hebk.game.Joker {
+- JokerType type
+- boolean used
++ JokerType getType()
++ boolean isUsed()
++ void setUsed(boolean)
++ List<String> use(Question)
+}
 class de.hebk.gui.multiplayer.MultiplayerInfoGui {
 - JPanel panel1
 - JLabel infoLabel
 - void createUIComponents()
+}
+class de.hebk.gui.multiplayer.MultiplayerLastAliveGui {
+- JPanel panel1
+- JButton weiterSpielenButton
+- JButton aufhoerenButton
 }
 class de.hebk.gui.multiplayer.MultiplayerCreateGui {
 - StartGui frame
@@ -257,9 +343,11 @@ class de.hebk.multiplayer.Client {
 - Gson gson
 - StartGui frame
 - MultiplayerLobbyGui lobbyGui
+- MultiplayerJoinGui joinGui
 - String ip
 - int port
 - String username
+- Joker[] joker
 + void run()
 + void closeConnection()
 + void send(Packet)
@@ -267,7 +355,10 @@ class de.hebk.multiplayer.Client {
 }
 
 
+de.hebk.gamemodes.mutliplayer.MultiplayerGamemode <|-- de.hebk.gamemodes.mutliplayer.MultiplayerHardcore
 de.hebk.multiplayer.Thread <|-- de.hebk.multiplayer.Server
+de.hebk.gamemodes.mutliplayer.MultiplayerGamemode <|-- de.hebk.gamemodes.mutliplayer.MultiplayerNormal
+de.hebk.gamemodes.mutliplayer.MultiplayerGamemode <|-- de.hebk.gamemodes.mutliplayer.MultiplayerTrueOrNot
 de.hebk.gui.JFrame <|-- de.hebk.gui.StartGui
 de.hebk.multiplayer.Thread <|-- de.hebk.multiplayer.Client
 @enduml

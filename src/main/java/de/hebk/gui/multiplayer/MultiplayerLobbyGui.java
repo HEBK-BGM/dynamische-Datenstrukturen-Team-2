@@ -1,5 +1,7 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Server;
 
@@ -9,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MultiplayerLobbyGui {
+    private JImagePanel imagePanel;
+
     private StartGui frame;
     private Server server;
     private JPanel panel1;
@@ -21,12 +25,17 @@ public class MultiplayerLobbyGui {
         this.frame = gui;
         this.server = server;
         server.start();
-        frame.add(panel1);
+
+        imagePanel = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        imagePanel.add(panel1);
+
+        frame.setContentPane(imagePanel);
+        frame.revalidate();
+        frame.repaint();
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 server.stopServer();
                 new MultiplayerCreateGui(frame);
             }
@@ -36,7 +45,6 @@ public class MultiplayerLobbyGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!(server.getConnections().size() < 2)) {
-                    frame.remove(panel1);
                     server.startGame();
                 }
                 else {
@@ -50,19 +58,23 @@ public class MultiplayerLobbyGui {
 
     public MultiplayerLobbyGui(StartGui gui) {
         this.frame = gui;
-
         startenButton.setVisible(false);
-        frame.add(panel1);
-        frame.repaint();
-        frame.setVisible(true);
+
+        imagePanel = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        imagePanel.add(panel1);
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerJoinGui(frame);
             }
         });
+    }
+
+    public void show() {
+        frame.setContentPane(imagePanel);
+        frame.revalidate();
+        frame.repaint();
     }
 
     private void createUIComponents() {
@@ -72,7 +84,6 @@ public class MultiplayerLobbyGui {
 
     public void setMitspielerLabel(String label) {
         this.mitspielerLabel.setText(label);
-        frame.setVisible(true);
     }
 
     public JLabel getMitspielerLabel() {

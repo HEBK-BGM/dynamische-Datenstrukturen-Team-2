@@ -1,12 +1,14 @@
 package de.hebk.gui.multiplayer;
 
-import de.hebk.Question;
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Packet;
 import de.hebk.multiplayer.PacketType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +24,11 @@ public class MultiplayerSelectQuestionGui {
     public MultiplayerSelectQuestionGui(StartGui gui, Client client, String[] questions) {
         this.frame = gui;
         this.client = client;
-        frame.setContentPane(panel1);
+
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+
+        frame.setContentPane(p);
         frame.revalidate();
         frame.repaint();
 
@@ -61,7 +67,6 @@ public class MultiplayerSelectQuestionGui {
     }
 
     private void sendQuestion(String question) {
-        frame.remove(panel1);
         Packet packet = new Packet(PacketType.QUESTION_IS_SELECTED, question);
         client.send(packet);
     }

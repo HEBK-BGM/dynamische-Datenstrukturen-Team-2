@@ -1,9 +1,12 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,16 +18,23 @@ public class MultiplayerJoinGui {
     private JTextField usernameField;
     private JTextField serveripField;
     private JTextField portField;
+    private JLabel errorLabel;
 
     public MultiplayerJoinGui(StartGui frame) {
         this.frame = frame;
-        frame.add(panel1);
-        frame.setVisible(true);
+
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+        frame.pack();
+
+        frame.setContentPane(p);
+        frame.revalidate();
+        frame.repaint();
+        errorLabel.setText("");
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerGui(frame);
             }
         });
@@ -49,9 +59,20 @@ public class MultiplayerJoinGui {
             return;
         }
 
-        frame.remove(panel1);
         MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame);
-        Client client = new Client(frame, lobbyGui, ip, Integer.parseInt(port), username);
+        Client client = new Client(frame, lobbyGui, this, ip, Integer.parseInt(port), username);
         client.start();
+    }
+
+    /**
+     * To set the error message if the join fails
+     * @param errorMessage   The error message
+     */
+    public void setErrorMessage(String errorMessage) {
+        errorLabel.setText(errorMessage);
+    }
+
+    private void createUIComponents() {
+        errorLabel = new JLabel();
     }
 }

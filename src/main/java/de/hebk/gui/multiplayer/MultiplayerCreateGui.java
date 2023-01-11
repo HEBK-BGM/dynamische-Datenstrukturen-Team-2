@@ -1,10 +1,13 @@
 package de.hebk.gui.multiplayer;
 
+import de.hebk.game.Config;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.multiplayer.Client;
 import de.hebk.multiplayer.Server;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,13 +22,18 @@ public class MultiplayerCreateGui {
 
     public MultiplayerCreateGui(StartGui gui) {
         this.frame = gui;
-        frame.add(panel1);
-        frame.setVisible(true);
+
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+        gui.pack();
+
+        gui.setContentPane(p);
+        gui.revalidate();
+        gui.repaint();
 
         zurueckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1);
                 new MultiplayerGui(frame);
             }
         });
@@ -58,10 +66,8 @@ public class MultiplayerCreateGui {
         String gamemode = list1.getSelectedValue().toString();
         Server server = new Server(Integer.parseInt(port), gamemode);
 
-        frame.remove(panel1);
         MultiplayerLobbyGui lobbyGui = new MultiplayerLobbyGui(frame, server);
-
-        Client client = new Client(frame, lobbyGui, "127.0.0.1", Integer.parseInt(port), username);
+        Client client = new Client(frame, lobbyGui, null, "127.0.0.1", Integer.parseInt(port), username);
         client.start();
     }
 }
