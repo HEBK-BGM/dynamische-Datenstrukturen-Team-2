@@ -14,9 +14,12 @@ public class Normal {
     private SQLManager manager = new SQLManager(Config.getDatabaseURL());
 
     private int stufe = 1;
+    private int cash = 0;
 
     public int getMoney() {
         switch (stufe) {
+            case 0:
+                return 0;
             case 1:
                 return 50;
             case 2:
@@ -59,48 +62,69 @@ public class Normal {
     private void verloren() {
         if (stufe < 5) {
             System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so garnichts verdient");
+            cash = 0;
         }
         if (stufe >= 5 && stufe < 10) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die erste Sicherheitsstufe erreicht. Dein Gewinn beträgt " + getMoney() + " Euros");
+            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die erste Sicherheitsstufe erreicht. Dein Gewinn beträgt 500 Euros");
+            cash = 500;
         }
         if (stufe >= 10) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die zweite Sicherheitsstufe erreicht. Dein Gewinn beträgt " + getMoney() + " Euros");
+            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die zweite Sicherheitsstufe erreicht. Dein Gewinn beträgt 16.000 Euros");
+            cash = 16000;
         }
     }
 
     private void gewonnen() {
-        System.out.println("Du hast auf Stufe " + stufe + " gewonnen und hast so " + getMoney() + " Euros verdient");
+        if (stufe == 3) {
+            System.out.println("Herzlichen Glüchwunsch, du hasst alle Fragen geschafft und dir so die " + cash + " Euro verdient");
+        }else {
+            cash = getMoney();
+            System.out.println("Du hast Stufe " + stufe + " erreicht und hast so " + cash + " Euros verdient");
+        }
     }
 
     private void game(){
 
-        while (stufe <= 15) {
+        while (stufe <= 3) {
             Boolean result = stelleFrage();
 
             if (result == false) {
                 verloren();
                 break;
             }
-            if (stufe == 15) {
-                gewonnen();
+            if (result == true) {
+                //überprüft, ob der
+                if (stufe == 3) {
+                    gewonnen();
+                    return;
+                }
+
+                Scanner sc = new Scanner(System.in);
+
+                System.out.println("Willst du weiterspielen?");
+                //bei 0 entscheidet der Spieler nicht weiterzuspielen und gewinnt
+                if (sc.nextInt() == 0) {
+                    gewonnen();
+                    return;
+                }
+                stufe ++;
             }
         }
-
     }
 
     private boolean stelleFrage(){
         Scanner sc = new Scanner(System.in);
-        List<Question> fragenliste = manager.getRandomQuestionsFromLevel(1,1);
+        List<Question> fragenliste = manager.getRandomQuestionsFromLevel(stufe,1);
         fragenliste.toFirst();
         Question frage = fragenliste.getObject();
         String[] answers = frage.getAnswers();
 
-        System.out.println("Du bist auf Stufe " + stufe + "und bekommst eine Frage auf Level " + frage.getLevel() + "\n" + frage.getBody()+ "\n" + answers[0] + "\n" + answers[1] + "\n" + answers[2] + "\n" + answers[3]);
+        System.out.println("Du bist auf Stufe " + stufe + " und bekommst eine Frage auf Level " + frage.getLevel() + " Cash: " + cash + "\n" + frage.getBody()+ "\n" + answers[0] + "\n" + answers[1] + "\n" + answers[2] + "\n" + answers[3]);
         int userAntwort = sc.nextInt();
 
         if (userAntwort == frage.getCorrect()) {
             System.out.println("Richtig");
-            stufe ++;
+            cash = getMoney();
             return true;
         }
         System.out.println("Falsch. Die richtige Antowort lautet " + frage.getCorrect());
