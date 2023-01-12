@@ -13,7 +13,7 @@ public class Lose {
     private JLabel losetext;
 
     public Lose(StartGui gui, int money){
-        losetext.setText("Du hast eine Frage falsch beantwortet und " + money + " Euro verloren");
+        losetext.setText("Du hast verloren und " + money + " Euro verdient");
 
         gui.setContentPane(panel1);
         gui.revalidate();
