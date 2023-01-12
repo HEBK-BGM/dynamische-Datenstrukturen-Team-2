@@ -4,16 +4,17 @@ import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.SQLManager;
 import de.hebk.gui.StartGui;
+import de.hebk.gui.normal.Lose.Lose;
 import de.hebk.gui.normal.NormalQuestionGUI;
 import de.hebk.model.list.List;
 import de.hebk.sound.SoundManager;
-
-import java.util.Scanner;
 
 public class Normal {
     private final Config config = new Config();
     private SQLManager manager = new SQLManager(Config.getDatabaseURL());
     private SoundManager soundManager = new SoundManager();
+    private StartGui startGui;
+    private Question frage;
 
     private int stufe = 1;
     private int cash = 0;
@@ -56,15 +57,16 @@ public class Normal {
         return 0;
     }
 
+
     public Normal(StartGui startGui){
-        NormalQuestionGUI nqgui = new NormalQuestionGUI(startGui, soundManager);
         System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
+        this.startGui = startGui;
         game();
     }
 
     private void verloren() {
         if (stufe < 5) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so garnichts verdient");
+            System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so gar nichts verdient");
             cash = 0;
         }
         if (stufe >= 5 && stufe < 10) {
@@ -79,58 +81,50 @@ public class Normal {
 
     private void gewonnen() {
         if (stufe == 3) {
-            System.out.println("Herzlichen Glüchwunsch, du hasst alle Fragen geschafft und dir so die " + cash + " Euro verdient");
+            System.out.println("Herzlichen Glückwunsch, du hasst alle Fragen geschafft und dir so die " + cash + " Euro verdient");
         }else {
             cash = getMoney();
             System.out.println("Du hast Stufe " + stufe + " erreicht und hast so " + cash + " Euros verdient");
         }
     }
 
+
     private void game(){
+        if (stufe == 15) {
+            gewonnen();
+            return;
+        }
 
-        while (stufe <= 3) {
-            Boolean result = stelleFrage();
+        newQuestion();
+        NormalQuestionGUI nqgui = new NormalQuestionGUI(startGui, this, soundManager);
+    }
 
-            if (result == false) {
-                verloren();
-                break;
-            }
-            if (result == true) {
-                //überprüft, ob der
-                if (stufe == 3) {
-                    gewonnen();
-                    return;
-                }
 
-                Scanner sc = new Scanner(System.in);
+    public void newQuestion() {
+        List<Question> fragenliste = manager.getRandomQuestionsFromLevel(stufe,1);
+        fragenliste.toFirst();
+        Question question = fragenliste.getObject();
 
-                System.out.println("Willst du weiterspielen?");
-                //bei 0 entscheidet der Spieler nicht weiterzuspielen und gewinnt
-                if (sc.nextInt() == 0) {
-                    gewonnen();
-                    return;
-                }
-                stufe ++;
-            }
+        frage = question;
+    }
+
+    public void checkanswer(int pAnswer){
+        if (pAnswer == frage.getCorrect()) {
+            System.out.println("Richtig");
+            cash = getMoney();
+
+            stufe ++;
+            game();
+        }else {
+            System.out.println("Richtige Antwort: " + frage.getCorrect() + "\n" + "pAnswer: " + pAnswer);
+            System.out.println("Falsch. Die richtige Antwort lautet " + frage.getCorrect());
+
+            verloren();
+            Lose lose = new Lose(startGui, cash);
         }
     }
 
-    private boolean stelleFrage(){
-        Scanner sc = new Scanner(System.in);
-        List<Question> fragenliste = manager.getRandomQuestionsFromLevel(stufe,1);
-        fragenliste.toFirst();
-        Question frage = fragenliste.getObject();
-        String[] answers = frage.getAnswers();
-
-        System.out.println("Du bist auf Stufe " + stufe + " und bekommst eine Frage auf Level " + frage.getLevel() + " Cash: " + cash + "\n" + frage.getBody()+ "\n" + answers[0] + "\n" + answers[1] + "\n" + answers[2] + "\n" + answers[3]);
-        int userAntwort = sc.nextInt();
-
-        if (userAntwort == frage.getCorrect()) {
-            System.out.println("Richtig");
-            cash = getMoney();
-            return true;
-        }
-        System.out.println("Falsch. Die richtige Antowort lautet " + frage.getCorrect());
-        return false;
+    public Question getQuestion() {
+        return frage;
     }
 }

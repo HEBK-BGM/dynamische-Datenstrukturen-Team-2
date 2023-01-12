@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="update gamemode Normal">
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="gui">
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/Lose/Lose.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/Lose/Lose.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/PlayGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/PlayGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.java" afterDir="false" />
     </list>
     <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
     <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="Changes by niklas.schoe" />
@@ -53,6 +51,8 @@
     "DefaultPlantUmlFileTemplate": "UML Object",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "202",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "473",
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "last_opened_file_path": "C:/Users/Jonas/IdeaProjects/dynamische-Datenstrukturen-Team-2NEU/src/main/java/de/hebk/gui/normal",
@@ -104,7 +104,10 @@
       <workItem from="1669016980400" duration="1433000" />
       <workItem from="1669964770633" duration="4745000" />
       <workItem from="1670223985798" duration="748000" />
-      <workItem from="1673463067578" duration="2281000" />
+      <workItem from="1673463067578" duration="2325000" />
+      <workItem from="1673532477270" duration="891000" />
+      <workItem from="1673534437840" duration="5900000" />
+      <workItem from="1673542875032" duration="1095000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -169,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673212612498</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="gui">
+      <created>1673465398117</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1673465398117</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,7 +205,8 @@
     <MESSAGE value=" [ADD] Vermutlich Stack u. Queue" />
     <MESSAGE value=" [FIX] Queue und List" />
     <MESSAGE value=" [ADD] True or Not Spielmodus" />
-    <option name="LAST_COMMIT_MESSAGE" value=" [ADD] True or Not Spielmodus" />
+    <MESSAGE value="gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="gui" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
