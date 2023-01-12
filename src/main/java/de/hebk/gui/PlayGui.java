@@ -2,6 +2,8 @@ package de.hebk.gui;
 
 import de.hebk.game.Config;
 import de.hebk.gamemodes.Hardcore;
+import de.hebk.gamemodes.TrueOrNot;
+import de.hebk.gui.trueOrNot.TrueOrNotStart;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +30,16 @@ public class PlayGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Hardcore(gui);
+            }
+        });
+
+        trueOrNotButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TrueOrNotStart tOnS = new TrueOrNotStart(gui);
+                TrueOrNot tOn;
+                tOn=tOnS.getTrueOrNotClone();
+                tOn.setStart(tOnS);
             }
         });
 

@@ -16,6 +16,7 @@ public class Lose {
         gui.setContentPane(panel1);
         gui.revalidate();
         gui.repaint();
+        losetext.setText("Du hast eine Frage falsch beantwortet und "+ money +"€ verloren!");
 
         beendenButton.addActionListener(new ActionListener() {
             @Override

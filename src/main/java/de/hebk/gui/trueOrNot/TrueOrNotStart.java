@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 
 public class TrueOrNotStart {
 
-    TrueOrNot trueOrNot;
-    private boolean trueOrFalse;
+    TrueOrNot trueOrNotClone;
+    private boolean trueOrFalse = true;
     private boolean answer;
     private JPanel panel1;
     private JButton button1;
@@ -23,17 +23,18 @@ public class TrueOrNotStart {
 
 
 
-    public TrueOrNotStart(StartGui gui, TrueOrNot statement) {
+    public TrueOrNotStart(StartGui gui) {
         startGui=gui;
-        trueOrNot=statement;
-        question.setText(statement.createQuestion());
-        money.setText(String.valueOf(trueOrNot.getMoney()));
+        TrueOrNot trueOrNot = new TrueOrNot();
+        this.trueOrNotClone=trueOrNot;
+        question.setText(trueOrNotClone.createQuestion());
+        money.setText(String.valueOf(trueOrNotClone.getMoney()));
 
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setAnswer(true);
-                trueOrFalse = statement.checkCorrect();
+                trueOrFalse = trueOrNotClone.checkCorrect();
                 winOrLose();
             }
         });
@@ -42,7 +43,7 @@ public class TrueOrNotStart {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setAnswer(false);
-                trueOrFalse = statement.checkCorrect();
+                trueOrFalse = trueOrNotClone.checkCorrect();
                 winOrLose();
             }
         });
@@ -68,15 +69,19 @@ public class TrueOrNotStart {
         }
     }
     public void win(){
-        trueOrNot.setMoney(trueOrNot.getMoney());
-        trueOrNot.createQuestion();
-        if(trueOrNot.getMoney()==1000000){
+        trueOrNotClone.setMoney(trueOrNotClone.getMoney());
+        trueOrNotClone.deletequestion();
+        trueOrNotClone.createQuestion();
+        startGui.revalidate();
+        startGui.repaint();
+
+        if(trueOrNotClone.getMoney()==1000000){
             finalwin();
         }
 
     }
     public void lose(){
-        new Lose(startGui, trueOrNot.getMoney());
+        new Lose(startGui, trueOrNotClone.getMoney());
     }
 
     public void setAnswer(boolean answer) {
@@ -91,6 +96,9 @@ public class TrueOrNotStart {
         new Win(startGui);
     }
 
+    public TrueOrNot getTrueOrNotClone() {
+        return trueOrNotClone;
     }
+}
 
 

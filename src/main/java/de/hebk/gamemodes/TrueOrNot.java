@@ -13,6 +13,7 @@ public class TrueOrNot {
     private Question currentQuestion;
     private Queue<Question> questions;
 
+
     private boolean correct;
 
     private boolean rightAnswer;
@@ -22,13 +23,20 @@ public class TrueOrNot {
     TrueOrNotStart start;
 
 
+
+
     public void startTrueOrNot(){
         createQuestion();
     }
 
-    public void setCurrentQuestion(){
+    public TrueOrNot(){
         SQLManager sqlManager = new SQLManager(Config.getDatabaseURL());
         questions = sqlManager.getQueueQuestions();
+    }
+
+    public void setCurrentQuestion(){
+       // SQLManager sqlManager = new SQLManager(Config.getDatabaseURL());
+        //questions = sqlManager.getQueueQuestions();
         currentQuestion=questions.front();
     }
     public String createQuestion(){
@@ -37,18 +45,19 @@ public class TrueOrNot {
         currentQuestion.getBody();
 
 
-        finalQuestion = "Die Antwort auf die Frage: "+currentQuestion+", ist: "+getStatement();
-        questions.dequeue();
+        finalQuestion = "Die Antwort auf die Frage: "+currentQuestion.getBody()+", ist: "+getStatement();
+
         return finalQuestion;
     }
     public String getStatement(){
         String[] choice = new String[2];
         String[] answers = new String[4];
+        String wrongAnswer;
         answers=currentQuestion.getAnswers();
-        String[] sortedAnswers = new String[3];
+        //String[] sortedAnswers = new String[3];
         String correctAnswer = answers[currentQuestion.getCorrect()];
-        answers[currentQuestion.getCorrect()]=null;
-        for(int i = 0; i < 4; i++){
+        //answers[currentQuestion.getCorrect()]=null;
+        /*for(int i = 0; i < 4; i++){
             if (answers[i]==null){
                 i++;
             }
@@ -57,11 +66,19 @@ public class TrueOrNot {
                     sortedAnswers[y] = answers[i];
                 }
             }
+        }*/
+        if(currentQuestion.getCorrect()==1){
+            wrongAnswer=answers[2];
+
+        }
+        else{
+            wrongAnswer=answers[1];
         }
         Random rand = new Random();
-        int upperbound1 = 2;
-        int random = rand.nextInt(upperbound1);
-        choice[0] = sortedAnswers[random];
+        /*int upperbound1 = 2;
+        int random = rand.nextInt(upperbound1);*/
+        //choice[0] = sortedAnswers[random];
+        choice[0]=wrongAnswer;
         choice[1] = correctAnswer;
         int upperbound2 = 1;
         int finalRandom = rand.nextInt(upperbound2);
@@ -136,5 +153,13 @@ public class TrueOrNot {
         }
         this.money = money;
 
+    }
+
+    public void setStart(TrueOrNotStart start) {
+        this.start = start;
+    }
+
+    public void deletequestion(){
+        questions.dequeue();
     }
 }
