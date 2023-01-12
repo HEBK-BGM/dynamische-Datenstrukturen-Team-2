@@ -5,6 +5,7 @@ import de.hebk.gamemodes.Normal;
 import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 import de.hebk.sound.SoundManager;
+import de.hebk.sound.SoundType;
 
 import javax.swing.*;
 import java.awt.*;

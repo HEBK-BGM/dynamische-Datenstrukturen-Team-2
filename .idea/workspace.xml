@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="gui">
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="stabile Version ohne joker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/Lose/Lose.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/Lose/Lose.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/normal/NormalQuestionGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Win.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Win.form" afterDir="false" />
     </list>
     <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
     <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="Changes by niklas.schoe" />
@@ -48,20 +43,20 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultPlantUmlFileTemplate": "UML Object",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "202",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "520",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "last_opened_file_path": "C:/Users/Jonas/IdeaProjects/dynamische-Datenstrukturen-Team-2NEU/src/main/java/de/hebk/gui/normal",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Object&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;202&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;520&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jonas/IdeaProjects/dynamische-Datenstrukturen-Team-2NEU/src/main/java/de/hebk/gui/normal&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jonas\IdeaProjects\dynamische-Datenstrukturen-Team-2NEU\src\main\java\de\hebk\gui\normal" />
@@ -110,7 +105,8 @@
       <workItem from="1673463067578" duration="2325000" />
       <workItem from="1673532477270" duration="891000" />
       <workItem from="1673534437840" duration="5900000" />
-      <workItem from="1673542875032" duration="2744000" />
+      <workItem from="1673542875032" duration="3012000" />
+      <workItem from="1673549694150" duration="1120000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -189,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673544052009</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="stabile Version ohne joker">
+      <created>1673545905420</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1673545905420</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +219,8 @@
     <MESSAGE value=" [FIX] Queue und List" />
     <MESSAGE value=" [ADD] True or Not Spielmodus" />
     <MESSAGE value="gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="gui" />
+    <MESSAGE value="stabile Version ohne joker" />
+    <option name="LAST_COMMIT_MESSAGE" value="stabile Version ohne joker" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

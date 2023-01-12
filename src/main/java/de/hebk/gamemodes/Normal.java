@@ -9,6 +9,7 @@ import de.hebk.gui.trueOrNot.Win;
 import de.hebk.model.list.List;
 import de.hebk.sound.SoundManager;
 import de.hebk.gui.trueOrNot.*;
+import de.hebk.sound.SoundType;
 
 public class Normal {
     private final Config config = new Config();
@@ -62,6 +63,7 @@ public class Normal {
     public Normal(StartGui startGui){
         System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
         this.startGui = startGui;
+        soundManager.playSound(SoundType.QUESTION, false);
         game();
     }
 
@@ -93,6 +95,8 @@ public class Normal {
         */
 
         Win win = new Win(startGui);
+        soundManager.stopSound();
+        soundManager.playSound(SoundType.WIN, false);
     }
 
 
@@ -117,12 +121,19 @@ public class Normal {
 
     public void checkanswer(int pAnswer){
         if (pAnswer == frage.getCorrect()) {
+            soundManager.stopSound();
+            soundManager.playSound(SoundType.RIGHT_ANSWER, false);
+            soundManager.playNext(SoundType.QUESTION, true);
+
             System.out.println("Richtig");
             cash = getMoney();
 
             stufe ++;
             game();
         }else {
+            soundManager.stopSound();
+            soundManager.playSound(SoundType.WRONG_ANSWER, false);
+
             System.out.println("Richtige Antwort: " + frage.getCorrect() + "\n" + "pAnswer: " + pAnswer);
             System.out.println("Falsch. Die richtige Antwort lautet " + frage.getCorrect());
 
