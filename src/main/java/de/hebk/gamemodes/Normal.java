@@ -4,10 +4,11 @@ import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.SQLManager;
 import de.hebk.gui.StartGui;
-import de.hebk.gui.normal.Lose.Lose;
 import de.hebk.gui.normal.NormalQuestionGUI;
+import de.hebk.gui.trueOrNot.Win;
 import de.hebk.model.list.List;
 import de.hebk.sound.SoundManager;
+import de.hebk.gui.trueOrNot.*;
 
 public class Normal {
     private final Config config = new Config();
@@ -64,6 +65,7 @@ public class Normal {
         game();
     }
 
+    /*
     private void verloren() {
         if (stufe < 5) {
             System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so gar nichts verdient");
@@ -78,14 +80,19 @@ public class Normal {
             cash = 16000;
         }
     }
+    */
 
     private void gewonnen() {
+        /*
         if (stufe == 3) {
             System.out.println("Herzlichen Glückwunsch, du hasst alle Fragen geschafft und dir so die " + cash + " Euro verdient");
         }else {
             cash = getMoney();
             System.out.println("Du hast Stufe " + stufe + " erreicht und hast so " + cash + " Euros verdient");
         }
+        */
+
+        Win win = new Win(startGui);
     }
 
 
@@ -119,12 +126,17 @@ public class Normal {
             System.out.println("Richtige Antwort: " + frage.getCorrect() + "\n" + "pAnswer: " + pAnswer);
             System.out.println("Falsch. Die richtige Antwort lautet " + frage.getCorrect());
 
-            verloren();
+            //verloren();
+            //Lose lose = new Lose(startGui, cash);
             Lose lose = new Lose(startGui, cash);
         }
     }
 
     public Question getQuestion() {
         return frage;
+    }
+
+    public int getStufe() {
+        return stufe;
     }
 }

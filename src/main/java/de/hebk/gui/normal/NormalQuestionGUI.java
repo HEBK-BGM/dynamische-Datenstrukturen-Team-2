@@ -1,8 +1,6 @@
 package de.hebk.gui.normal;
 
 import de.hebk.game.Config;
-import de.hebk.game.Joker;
-import de.hebk.game.Question;
 import de.hebk.gamemodes.Normal;
 import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
@@ -27,6 +25,8 @@ public class NormalQuestionGUI {
     private JButton telefonjokerButton;
     private JButton publikumsJokerButton;
     private JButton a5050JokerButton;
+    private JTextField moneyTextField;
+    private JTextField stepTextField;
 
     //, Question question, Joker[] joker, Normal normal//
     public NormalQuestionGUI(StartGui startGui,Normal normal, SoundManager soundManager) {
@@ -40,6 +40,8 @@ public class NormalQuestionGUI {
 
         //beschriften
         questionLabel.setText(normal.getQuestion().getBody());
+        moneyTextField.setText(String.valueOf(normal.getMoney()));
+        stepTextField.setText(String.valueOf(normal.getStufe()));
         button1.setText(normal.getQuestion().getAnswers()[0]);
         button2.setText(normal.getQuestion().getAnswers()[1]);
         button3.setText(normal.getQuestion().getAnswers()[2]);
