@@ -15,9 +15,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HardcoreGui {
+    private Thread thread;
     private Hardcore hardcore;
     private SoundManager soundManager;
-
     private JPanel panel1;
     private JPanel answeres;
     private JPanel joker;
@@ -32,10 +32,34 @@ public class HardcoreGui {
     private JButton button4;
     private JLabel frage;
     private JLabel geld;
+    private JLabel timer;
 
-    public HardcoreGui(StartGui gui, SoundManager soundManager, Hardcore hardcore, Question question, Joker[] joker) {
+    public HardcoreGui(StartGui gui, SoundManager soundManager, Hardcore hardcore, Question question, Joker[] joker, int lvl) {
         this.hardcore = hardcore;
         this.soundManager = soundManager;
+
+        geld.setText(Config.hardcoreLevelToMoney(lvl) + " €");
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i =60; i>=0; i--){
+                    try {
+                        timer.setText("Zeit: " + i + " Sekunden");
+
+                        Thread.sleep(1000);
+
+                        if(i==0){
+                            hardcore.stopGame();
+                        }
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+
+        thread.start();
 
         frage.setText(question.getBody());
         button1.setText(question.getAnswers()[0]);
@@ -178,9 +202,14 @@ public class HardcoreGui {
         button4 = new JButton();
 
         frage = new JLabel();
+        geld = new JLabel();
+
+        timer = new JLabel();
     }
 
     private void checkAnswer(Question question, String answer) {
+        thread.stop();
+
         if (question.getCorrectAnswer().equals(question.getAnswers()[0])) {
             soundManager.stopSound();
             soundManager.playSound(SoundType.RIGHT_ANSWER, false);
