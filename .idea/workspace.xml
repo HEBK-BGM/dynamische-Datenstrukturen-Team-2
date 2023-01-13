@@ -7,9 +7,11 @@
     <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [FIX] True or Not Spielmodus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/TrueOrNot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/TrueOrNot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/PlayGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/PlayGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Win.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Win.java" beforeDir="false" />
     </list>
     <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
     <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="Changes by niklas.schoe" />
@@ -104,6 +106,7 @@
       <workItem from="1673287938082" duration="116000" />
       <workItem from="1673386915456" duration="509000" />
       <workItem from="1673546224851" duration="4163000" />
+      <workItem from="1673594424565" duration="2650000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>

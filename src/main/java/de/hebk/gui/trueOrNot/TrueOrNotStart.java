@@ -1,6 +1,7 @@
 package de.hebk.gui.trueOrNot;
 
 import de.hebk.gamemodes.TrueOrNot;
+import de.hebk.gui.EndGui;
 import de.hebk.gui.StartGui;
 
 import javax.swing.*;
@@ -10,8 +11,7 @@ import java.awt.event.ActionListener;
 public class TrueOrNotStart {
 
     TrueOrNot trueOrNotClone;
-    private boolean trueOrFalse = true;
-    private boolean answer;
+    private boolean trueOrFalse ;
     private JPanel panel1;
     private JButton button1;
     private JButton button2;
@@ -19,6 +19,7 @@ public class TrueOrNotStart {
     private JLabel money;
 
     private StartGui startGui;
+    private int lvl = 0;
 
 
 
@@ -33,8 +34,7 @@ public class TrueOrNotStart {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setAnswer(true);
-                trueOrFalse = trueOrNotClone.checkCorrect();
+                trueOrFalse = trueOrNotClone.checkCorrect(true);
                 winOrLose();
             }
         });
@@ -42,8 +42,7 @@ public class TrueOrNotStart {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setAnswer(false);
-                trueOrFalse = trueOrNotClone.checkCorrect();
+                trueOrFalse = trueOrNotClone.checkCorrect(false);
                 winOrLose();
             }
         });
@@ -72,8 +71,11 @@ public class TrueOrNotStart {
         trueOrNotClone.setMoney(trueOrNotClone.getMoney());
         trueOrNotClone.deletequestion();
         trueOrNotClone.createQuestion();
+        question.setText(trueOrNotClone.createQuestion());
+        money.setText(String.valueOf(trueOrNotClone.getMoney()));
         startGui.revalidate();
         startGui.repaint();
+        lvl++;
 
         if(trueOrNotClone.getMoney()==1000000){
             finalwin();
@@ -81,19 +83,13 @@ public class TrueOrNotStart {
 
     }
     public void lose(){
-        new Lose(startGui, trueOrNotClone.getMoney());
-    }
-
-    public void setAnswer(boolean answer) {
-        this.answer = answer;
-    }
-
-    public boolean getAnswer() {
-        return answer;
+        String info = "Du hast verloren!";
+        new EndGui(startGui,info,"True Or Not",lvl,trueOrNotClone.getSql1());
     }
 
     public void finalwin(){
-        new Win(startGui);
+        String info="Du hast den Modus True Or Not besiegt und 1.000.000€ gewonnen!";
+        new EndGui(startGui,info,"True Or Not",30,trueOrNotClone.getSql1());
     }
 
     public TrueOrNot getTrueOrNotClone() {

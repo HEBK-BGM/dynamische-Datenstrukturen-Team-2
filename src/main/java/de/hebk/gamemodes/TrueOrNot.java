@@ -22,6 +22,8 @@ public class TrueOrNot {
 
     TrueOrNotStart start;
 
+    SQLManager sql1;
+
 
 
 
@@ -31,6 +33,7 @@ public class TrueOrNot {
 
     public TrueOrNot(){
         SQLManager sqlManager = new SQLManager(Config.getDatabaseURL());
+        sql1=sqlManager;
         questions = sqlManager.getQueueQuestions();
     }
 
@@ -55,7 +58,7 @@ public class TrueOrNot {
         String wrongAnswer;
         answers=currentQuestion.getAnswers();
         //String[] sortedAnswers = new String[3];
-        String correctAnswer = answers[currentQuestion.getCorrect()];
+        String correctAnswer = currentQuestion.getCorrectAnswer();
         //answers[currentQuestion.getCorrect()]=null;
         /*for(int i = 0; i < 4; i++){
             if (answers[i]==null){
@@ -85,7 +88,7 @@ public class TrueOrNot {
         if(finalRandom==0){
             correct = false;
         }
-        else{
+        else if(finalRandom==1){
             correct = true;
         }
         statement = choice[finalRandom];
@@ -94,15 +97,15 @@ public class TrueOrNot {
         return statement;
     }
 
-    public boolean checkCorrect(){
-        if(start.getAnswer()&&getCorrect()){
-            rightAnswer=true;
+    public boolean checkCorrect(boolean bool){
+        if(bool && !getCorrect()){
+            rightAnswer=false;
         }
-        else if(!start.getAnswer()&&!getCorrect()){
-            rightAnswer=true;
+        else if(!bool && getCorrect()){
+            rightAnswer=false;
         }
         else{
-            rightAnswer=false;
+            rightAnswer=true;
         }
 
         return rightAnswer;
@@ -161,5 +164,9 @@ public class TrueOrNot {
 
     public void deletequestion(){
         questions.dequeue();
+    }
+
+    public SQLManager getSql1() {
+        return sql1;
     }
 }
