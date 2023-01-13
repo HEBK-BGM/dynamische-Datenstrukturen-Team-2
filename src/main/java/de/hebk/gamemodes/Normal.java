@@ -3,6 +3,7 @@ package de.hebk.gamemodes;
 import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.SQLManager;
+import de.hebk.gui.EndGui;
 import de.hebk.gui.StartGui;
 import de.hebk.gui.normal.NormalQuestionGUI;
 import de.hebk.gui.trueOrNot.Win;
@@ -22,7 +23,7 @@ public class Normal {
     private int cash = 0;
 
     public int getMoney() {
-        switch (stufe) {
+        switch (stufe-1) {
             case 0:
                 return 0;
             case 1:
@@ -99,6 +100,22 @@ public class Normal {
         soundManager.playSound(SoundType.WIN, false);
     }
 
+    private String verlorentext() {
+        if (stufe < 5) {
+            cash = 0;
+            return "Du hast auf Stufe " + stufe + " verloren und hast so gar nichts verdient";
+        }
+        if (stufe >= 5 && stufe < 10) {
+            cash = 500;
+            return "Du hast auf Stufe " + stufe + " verloren und somit die erste Sicherheitsstufe erreicht. Dein Gewinn beträgt 500 Euros";
+        }
+        if (stufe >= 10) {
+            cash = 16000;
+            return "Du hast auf Stufe " + stufe + " verloren und somit die zweite Sicherheitsstufe erreicht. Dein Gewinn beträgt 16.000 Euros";
+        }
+        return "Fehler bei verlorentext()";
+    }
+
 
     private void game(){
         if (stufe == 15) {
@@ -139,7 +156,7 @@ public class Normal {
 
             //verloren();
             //Lose lose = new Lose(startGui, cash);
-            Lose lose = new Lose(startGui, cash);
+            EndGui end = new EndGui(startGui, verlorentext());
         }
     }
 
