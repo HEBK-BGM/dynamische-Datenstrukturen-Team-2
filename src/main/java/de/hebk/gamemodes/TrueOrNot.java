@@ -4,6 +4,7 @@ import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.SQLManager;
 import de.hebk.gui.trueOrNot.TrueOrNotStart;
+import de.hebk.model.list.List;
 import de.hebk.model.queue.Queue;
 
 import java.util.Random;
@@ -32,9 +33,23 @@ public class TrueOrNot {
     }
 
     public TrueOrNot(){
-        SQLManager sqlManager = new SQLManager(Config.getDatabaseURL());
-        sql1=sqlManager;
-        questions = sqlManager.getQueueQuestions();
+        sql1 = new SQLManager(Config.getDatabaseURL());
+        questions = new Queue<>();
+
+        for (int i = 1; i < 30; i++) {
+            int num = i/2;
+            if (num == 0) {
+                num = 1;
+            }
+
+            List<Question> q = sql1.getRandomQuestionsFromLevel(num, 4);
+
+            q.toFirst();
+            for (int j = 0; j < 4; j++) {
+                questions.enqueue(q.getObject());
+                q.next();
+            }
+        }
     }
 
     public void setCurrentQuestion(){
@@ -83,7 +98,7 @@ public class TrueOrNot {
         //choice[0] = sortedAnswers[random];
         choice[0]=wrongAnswer;
         choice[1] = correctAnswer;
-        int upperbound2 = 1;
+        int upperbound2 = 2;
         int finalRandom = rand.nextInt(upperbound2);
         if(finalRandom==0){
             correct = false;

@@ -1,10 +1,13 @@
 package de.hebk.gui.trueOrNot;
 
+import de.hebk.game.Config;
 import de.hebk.gamemodes.TrueOrNot;
 import de.hebk.gui.EndGui;
+import de.hebk.gui.JImagePanel;
 import de.hebk.gui.StartGui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,6 +29,15 @@ public class TrueOrNotStart {
 
     public TrueOrNotStart(StartGui gui) {
         startGui=gui;
+
+        JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
+        p.add(panel1);
+        gui.pack();
+
+        gui.setContentPane(p);
+        gui.revalidate();
+        gui.repaint();
+
         TrueOrNot trueOrNot = new TrueOrNot();
         this.trueOrNotClone=trueOrNot;
         question.setText(trueOrNotClone.createQuestion());
@@ -46,10 +58,6 @@ public class TrueOrNotStart {
                 winOrLose();
             }
         });
-
-        gui.setContentPane(panel1);
-        gui.revalidate();
-        gui.repaint();
 
     }
 
