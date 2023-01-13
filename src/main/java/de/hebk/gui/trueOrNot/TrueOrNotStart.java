@@ -91,7 +91,7 @@ public class TrueOrNotStart {
 
     }
     public void lose(){
-        String info = "Du hast verloren!";
+        String info = "Du hast verloren! Du bist bei Level "+lvl+" ausgeschieden!";
         new EndGui(startGui,info,"True Or Not",lvl,trueOrNotClone.getSql1());
     }
 

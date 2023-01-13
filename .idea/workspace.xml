@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [FIX] End Gui und Fragen werden aktualisiert">
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [FIX] True or Not Spielmodus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/TrueOrNot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/TrueOrNot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" afterDir="false" />
     </list>
     <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
@@ -103,10 +102,6 @@
       <workItem from="1673287938082" duration="116000" />
       <workItem from="1673386915456" duration="509000" />
       <workItem from="1673546224851" duration="4163000" />
-      <workItem from="1673594424565" duration="2858000" />
-      <workItem from="1673597782767" duration="411000" />
-      <workItem from="1673603160684" duration="164000" />
-      <workItem from="1673609618519" duration="943000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -185,14 +180,7 @@
       <option name="project" value="LOCAL" />
       <updated>1673387412443</updated>
     </task>
-    <task id="LOCAL-00012" summary=" [FIX] End Gui und Fragen werden aktualisiert">
-      <created>1673597188299</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1673597188299</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,8 +207,7 @@
     <MESSAGE value=" [FIX] Queue und List" />
     <MESSAGE value=" [ADD] True or Not Spielmodus" />
     <MESSAGE value=" [FIX] True or Not Spielmodus" />
-    <MESSAGE value=" [FIX] End Gui und Fragen werden aktualisiert" />
-    <option name="LAST_COMMIT_MESSAGE" value=" [FIX] End Gui und Fragen werden aktualisiert" />
+    <option name="LAST_COMMIT_MESSAGE" value=" [FIX] True or Not Spielmodus" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -86,11 +86,12 @@ public class TrueOrNot {
             }
         }*/
         if(currentQuestion.getCorrect()==1){
-            wrongAnswer=answers[2];
+            wrongAnswer=answers[1];
 
         }
         else{
-            wrongAnswer=answers[1];
+
+            wrongAnswer=answers[0];
         }
         Random rand = new Random();
         /*int upperbound1 = 2;
