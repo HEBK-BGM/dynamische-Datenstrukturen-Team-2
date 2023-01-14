@@ -58,7 +58,6 @@ public class NormalQuestionGUI {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //normal.checkanswer(normal.getQuestion().getAnswers()[0]);
                 normal.checkanswer(1);
             }
         });
@@ -66,7 +65,6 @@ public class NormalQuestionGUI {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //normal.checkanswer(normal.getQuestion().getAnswers()[1]);
                 normal.checkanswer(2);
             }
         });
@@ -74,7 +72,6 @@ public class NormalQuestionGUI {
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //normal.checkanswer(normal.getQuestion().getAnswers()[2]);
                 normal.checkanswer(3);
             }
         });
@@ -82,7 +79,6 @@ public class NormalQuestionGUI {
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //normal.checkanswer(normal.getQuestion().getAnswers()[3]);
                 normal.checkanswer(4);
             }
         });

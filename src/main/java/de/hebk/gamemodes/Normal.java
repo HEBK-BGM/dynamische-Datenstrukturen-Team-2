@@ -68,34 +68,8 @@ public class Normal {
         game();
     }
 
-    /*
-    private void verloren() {
-        if (stufe < 5) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so gar nichts verdient");
-            cash = 0;
-        }
-        if (stufe >= 5 && stufe < 10) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die erste Sicherheitsstufe erreicht. Dein Gewinn beträgt 500 Euros");
-            cash = 500;
-        }
-        if (stufe >= 10) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die zweite Sicherheitsstufe erreicht. Dein Gewinn beträgt 16.000 Euros");
-            cash = 16000;
-        }
-    }
-    */
-
     private void gewonnen() {
-        /*
-        if (stufe == 3) {
-            System.out.println("Herzlichen Glückwunsch, du hasst alle Fragen geschafft und dir so die " + cash + " Euro verdient");
-        }else {
-            cash = getMoney();
-            System.out.println("Du hast Stufe " + stufe + " erreicht und hast so " + cash + " Euros verdient");
-        }
-        */
-
-        Win win = new Win(startGui);
+        new Win(startGui);
         soundManager.stopSound();
         soundManager.playSound(SoundType.WIN, false);
     }
@@ -124,7 +98,7 @@ public class Normal {
         }
 
         newQuestion();
-        NormalQuestionGUI nqgui = new NormalQuestionGUI(startGui, this, soundManager);
+        new NormalQuestionGUI(startGui, this, soundManager);
     }
 
 
@@ -154,9 +128,7 @@ public class Normal {
             System.out.println("Richtige Antwort: " + frage.getCorrect() + "\n" + "pAnswer: " + pAnswer);
             System.out.println("Falsch. Die richtige Antwort lautet " + frage.getCorrect());
 
-            //verloren();
-            //Lose lose = new Lose(startGui, cash);
-            EndGui end = new EndGui(startGui,verlorentext(),"normal",stufe,manager);
+            new EndGui(startGui,verlorentext(),"normal",stufe,manager);
         }
     }
 
