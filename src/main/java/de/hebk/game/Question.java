@@ -8,6 +8,13 @@ public class Question {
     private String[] answers;
     private int correct;
 
+    /**
+     * Der Konstruktor setzt die Frage und die Antworten.
+     * @param pBody
+     * @param pLevel
+     * @param pAnswers
+     * @param pCorrect
+     */
     public Question(String pBody, int pLevel, String[] pAnswers, int pCorrect) {
         this.body = pBody;
         this.level = pLevel;
@@ -15,26 +22,49 @@ public class Question {
         this.correct = pCorrect;
     }
 
+    /**
+     * gibt die Frage zurück.
+     * @return
+     */
     public String getBody() {
         return body;
     }
 
+    /**
+     * gibt den Schwierigkeitsgrad der Frage zurück.
+     * @return
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     * Gibt die Antworten zurück.
+     * @return
+     */
     public String[] getAnswers() {
         return answers;
     }
 
+    /**
+     * Gibt die Position der richtigen Frage zurück.
+     * @return
+     */
     public int getCorrect() {
         return correct;
     }
 
+    /**
+     * Gibt die richtige Antwort zurück.
+     * @return
+     */
     public String getCorrectAnswer() {
         return getAnswers()[getCorrect()-1];
     }
 
+    /**
+     * Die Antworten werden durchgemischt.
+     */
     public void shuffleAnswers() {
         String correntAnswer = getCorrectAnswer();
 

@@ -13,6 +13,10 @@ public class Normal {
 
     private int stufe = 1;
 
+    /**
+     * Setzt die Geldbeträge für die verschiedenen Level fest.
+     * @return
+     */
     public int getMoney() {
         switch (stufe) {
             case 1:
@@ -49,11 +53,17 @@ public class Normal {
         return 0;
     }
 
+    /**
+     * Konstruktor der die Startnachricht ausgibt und den Spielmodus startet.
+     */
     public Normal(){
         System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
         game();
     }
 
+    /**
+     * Gibt, wenn verloren, je nach Level ubd Sicherheitsstufe denn Gewinn aus.
+     */
     private void verloren() {
         if (stufe < 5) {
             System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so garnichts verdient");
@@ -66,10 +76,16 @@ public class Normal {
         }
     }
 
+    /**
+     * Gibt den gewonnenen Betrag aus.
+     */
     private void gewonnen() {
         System.out.println("Du hast auf Stufe " + stufe + " gewonnen und hast so " + getMoney() + " Euros verdient");
     }
 
+    /**
+     * Logik, die das Spiel fortführt und je nach richtiger oder falscher Antwort, die jeweilige Funktion ausführt.
+     */
     private void game(){
 
         while (stufe <= 15) {
@@ -86,6 +102,10 @@ public class Normal {
 
     }
 
+    /**
+     *
+     * @return
+     */
     private boolean stelleFrage(){
         Scanner sc = new Scanner(System.in);
         List<Question> fragenliste = manager.getRandomQuestionsFromLevel(1,1);
