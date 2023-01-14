@@ -2,6 +2,7 @@ package de.hebk.gui;
 
 import de.hebk.game.Config;
 import de.hebk.gamemodes.Hardcore;
+import de.hebk.gamemodes.Normal;
 import de.hebk.gamemodes.TrueOrNot;
 import de.hebk.gui.trueOrNot.TrueOrNotStart;
 
@@ -40,6 +41,13 @@ public class PlayGui {
                 TrueOrNot tOn;
                 tOn=tOnS.getTrueOrNotClone();
                 tOn.setStart(tOnS);
+            }
+        });
+
+        normalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Normal(gui);
             }
         });
 
