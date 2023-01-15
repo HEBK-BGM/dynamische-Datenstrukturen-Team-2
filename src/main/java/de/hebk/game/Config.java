@@ -3,29 +3,56 @@ package de.hebk.game;
 import java.net.URL;
 
 public class Config {
+
     private static String databaseURL = Config.class.getResource("german.db").getFile();
+
     private static boolean cheats = false;
 
+    /**
+     * Die Database wird ausgegeben.
+     * @return
+     */
     public static String getDatabaseURL() {
         return databaseURL;
     }
 
+    /**
+     * Es werden die Cheats zurückgegeben
+     * @return
+     */
     public static boolean cheatsEnabled() {
         return cheats;
     }
 
+    /**
+     * Die Cheats werden gesetzt.
+     * @param bool
+     */
     public static void setCheating(boolean bool) {
         cheats = bool;
     }
 
+    /**
+     * Die Datei des Hintergrunds wird zurückgegeben.
+     * @return
+     */
     public static URL getBackground() {
         return Config.class.getResource("images/background.png");
     }
 
+    /**
+     * Das Wer wird Millionär Icon wird zurückgegeben.
+     * @return
+     */
     public static URL getAppIcon() {
         return Config.class.getResource("images/icon.png");
     }
 
+    /**
+     * Der hardcore Geldbetrag des momentanen Levels wird ausgegeben.
+     * @param level
+     * @return
+     */
     public static int hardcoreLevelToMoney(int level) {
         int money;
 
@@ -51,6 +78,11 @@ public class Config {
         return money;
     }
 
+    /**
+     * Der normale Geldbetrag des momentanen levels wird ausgegeben.
+     * @param level
+     * @return
+     */
     public static int normalLevelToMoney(int level) {
         int money;
 
@@ -76,6 +108,11 @@ public class Config {
         return money;
     }
 
+    /**
+     * Der TrueOrNot Geldbetrag des momentanen Levels wird ausgegeben.
+     * @param level
+     * @return
+     */
     public static int trueOrNotLevelToMoney(int level) {
         int money;
 

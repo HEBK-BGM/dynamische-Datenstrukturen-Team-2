@@ -14,6 +14,10 @@ public class SQLManager {
     private Connection questionConn;
     private Connection highscoreConn;
 
+    /**
+     *
+     * @param database
+     */
     public SQLManager(String database) {
         try {
             File file = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\Wer wird Millionär\\");

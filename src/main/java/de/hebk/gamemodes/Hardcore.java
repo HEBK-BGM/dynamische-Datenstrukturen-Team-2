@@ -25,6 +25,9 @@ public class Hardcore {
     private SQLManager sqlm = new SQLManager(Config.getDatabaseURL());
     private SoundManager soundManager;
 
+    /**
+     * Zieht alle Level 15 Fragen aus der Datenbank.
+     */
     private void getHardcoreQuestions(){
         List<Question> tmp;
         tmp = sqlm.getRandomQuestionsFromLevel(15,15);
@@ -36,6 +39,10 @@ public class Hardcore {
         }
     }
 
+    /**
+     * Konstruktor der die Gui startet, den Soundmanager ausführt, die Joker erzeugt und die Fragen aus der Datenbank zieht.
+     * @param gui
+     */
     public Hardcore(StartGui gui){
         this.frame = gui;
         this.soundManager = new SoundManager();
@@ -45,10 +52,15 @@ public class Hardcore {
         joker[2] = new Joker(JokerType.HALF_JOKER);
 
         getHardcoreQuestions();
+
         soundManager.playSound(SoundType.QUESTION, true);
+
         nextQuestion();
     }
 
+    /**
+     * Gibt die nächste Frage aus dem Stack aus und löscht diese aus den Stack.
+     */
     public void nextQuestion(){
         if (!questions.isEmpty()) {
             Question q = questions.pop();
@@ -61,6 +73,9 @@ public class Hardcore {
         }
     }
 
+    /**
+     * Stoppt das Spiel.
+     */
     public void stopGame() {
         new EndGui(frame, "Du hast den Hardcore Spielmodus verloren!", gamemode, lvl, sqlm);
     }
