@@ -103,7 +103,7 @@ public class Normal {
     }
 
     /**
-     *
+     *Stellt eine Frage mit Antworten
      * @return
      */
     private boolean stelleFrage(){
