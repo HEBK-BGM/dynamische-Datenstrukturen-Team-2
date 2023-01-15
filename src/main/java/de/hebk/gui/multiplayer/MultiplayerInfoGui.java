@@ -11,6 +11,11 @@ public class MultiplayerInfoGui {
     private JPanel panel1;
     private JLabel infoLabel;
 
+    /**
+     * Displays an info
+     * @param gui   The frame
+     * @param info  The info
+     */
     public MultiplayerInfoGui(StartGui gui, String info) {
         infoLabel.setText(info);
 

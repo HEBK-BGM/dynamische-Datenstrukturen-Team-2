@@ -15,6 +15,12 @@ public class MultiplayerEndGui {
     private JButton backToMainMenuButton;
     private JLabel infoLabel;
 
+    /**
+     * Contructor for a gui
+     * @param gui           The frame
+     * @param soundManager  SoundManager to play sound
+     * @param info          Info that should be displayed
+     */
     public MultiplayerEndGui(StartGui gui, SoundManager soundManager, String info) {
         infoLabel.setText(info);
 

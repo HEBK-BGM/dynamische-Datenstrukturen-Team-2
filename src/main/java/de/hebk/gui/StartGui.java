@@ -21,6 +21,9 @@ public class StartGui extends JFrame {
     private JButton spielenButton;
     private JButton beendenButton;
 
+    /**
+     * Constructor for the start gui
+     */
     public StartGui() {
         super("Wer wird Millionär");
 
@@ -69,6 +72,10 @@ public class StartGui extends JFrame {
         });
     }
 
+    /**
+     * Gets the panel
+     * @return  The panel from the start gui
+     */
     public JPanel getPanel() {
         return this.imagePanel;
     }

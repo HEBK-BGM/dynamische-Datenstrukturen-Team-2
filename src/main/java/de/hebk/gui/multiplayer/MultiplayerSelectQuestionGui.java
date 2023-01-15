@@ -21,6 +21,12 @@ public class MultiplayerSelectQuestionGui {
     private JButton button4;
     private JButton button2;
 
+    /**
+     * Creates a gui so the player can choose a question
+     * @param gui       The frame
+     * @param client    The client
+     * @param questions The qeustion
+     */
     public MultiplayerSelectQuestionGui(StartGui gui, Client client, String[] questions) {
         this.frame = gui;
         this.client = client;
@@ -66,6 +72,10 @@ public class MultiplayerSelectQuestionGui {
         });
     }
 
+    /**
+     * Sends the question to the server
+     * @param question
+     */
     private void sendQuestion(String question) {
         Packet packet = new Packet(PacketType.QUESTION_IS_SELECTED, question);
         client.send(packet);

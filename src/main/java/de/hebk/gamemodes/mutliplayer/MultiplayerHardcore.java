@@ -25,6 +25,9 @@ public class MultiplayerHardcore extends MultiplayerGamemode {
         super(connections, sqlManager, server);
     }
 
+    /**
+     * Starts a hardcore multiplayer game
+     */
     public void startGame() {
         for (int i = 1; i < 16; i++) {
             for (int j = 0; j < 4; j++) {

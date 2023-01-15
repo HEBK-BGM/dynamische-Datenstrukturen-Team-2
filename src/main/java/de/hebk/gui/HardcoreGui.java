@@ -34,6 +34,15 @@ public class HardcoreGui {
     private JLabel geld;
     private JLabel timer;
 
+    /**
+     * Construcor for the harcore gui
+     * @param gui           The frame
+     * @param soundManager  The sound manager
+     * @param hardcore      The hardcore controller
+     * @param question      The question
+     * @param joker         The joker
+     * @param lvl           The level
+     */
     public HardcoreGui(StartGui gui, SoundManager soundManager, Hardcore hardcore, Question question, Joker[] joker, int lvl) {
         this.hardcore = hardcore;
         this.soundManager = soundManager;
@@ -207,6 +216,11 @@ public class HardcoreGui {
         timer = new JLabel();
     }
 
+    /**
+     * Checks if the answer is true or not
+     * @param question
+     * @param answer
+     */
     private void checkAnswer(Question question, String answer) {
         thread.stop();
 

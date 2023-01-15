@@ -11,6 +11,11 @@ public class MultiplayerQuestionIsSelectedGui {
     private JPanel panel1;
     private JLabel label;
 
+    /**
+     * Creates a gui so the player can wait until a qeuestion is selected
+     * @param gui   The frame
+     * @param name  The name of the player who chooses a question
+     */
     public MultiplayerQuestionIsSelectedGui(StartGui gui, String name) {
         label.setText("Bitte warte während " + name + " eine Frage auswählt...");
 

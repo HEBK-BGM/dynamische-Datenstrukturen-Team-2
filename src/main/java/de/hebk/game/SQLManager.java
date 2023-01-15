@@ -14,6 +14,10 @@ public class SQLManager {
     private Connection questionConn;
     private Connection highscoreConn;
 
+    /**
+     * Constructor for the SQLManager
+     * @param database File path to the database
+     */
     public SQLManager(String database) {
         try {
             File file = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\Wer wird Millionär\\");
@@ -34,6 +38,10 @@ public class SQLManager {
         }
     }
 
+    /**
+     * Gets every question in a List
+     * @return  Every question in a List
+     */
     public List<Question> getQuestions() {
         List<Question> list = new List<>();
 
@@ -58,6 +66,10 @@ public class SQLManager {
         return list;
     }
 
+    /**
+     * Gets one random question
+     * @return  Random question
+     */
     public Question getRandomQuestions() {
         try (PreparedStatement stmt = questionConn.prepareStatement("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1;")) {
             ResultSet rs = stmt.executeQuery();
@@ -74,6 +86,10 @@ public class SQLManager {
         }
     }
 
+    /**
+     * Gets every question ordered by level ascending in a queue
+     * @return  Every question ascending in a queue
+     */
     public Queue<Question> getQueueQuestions() {
         Queue<Question> queue = new Queue<>();
 
@@ -98,6 +114,11 @@ public class SQLManager {
         return queue;
     }
 
+    /**
+     * Gets every question from a level
+     * @param level The given level
+     * @return      The questions in a list
+     */
     public List<Question> getQuestionsFromLevel(int level) {
         List<Question> list = new List<>();
 
@@ -123,6 +144,12 @@ public class SQLManager {
         return list;
     }
 
+    /**
+     * Gets random questions from a level with a limit
+     * @param level The given level
+     * @param limit The given limit
+     * @return      List with the random questions
+     */
     public List<Question> getRandomQuestionsFromLevel(int level, int limit) {
         List<Question> list = new List<>();
 
@@ -150,6 +177,10 @@ public class SQLManager {
         return list;
     }
 
+    /**
+     * Adds a question
+     * @param question  The given question
+     */
     public void addQuestion(Question question) {
         try (PreparedStatement stmt = questionConn.prepareStatement("INSERT INTO question (body, a, b, c, d, correct, level) VALUES (?, ?, ?, ?, ?, ?, ?);")) {
             stmt.setString(1, question.getBody());
@@ -165,6 +196,10 @@ public class SQLManager {
         }
     }
 
+    /**
+     * Returns every highscore in a stack
+     * @return  Every highscore in a stack
+     */
     public Stack<Highscore> getHighscores() {
         try (PreparedStatement stmt = highscoreConn.prepareStatement("SELECT * FROM highscores ORDER BY money ASC;")) {
             ResultSet rs = stmt.executeQuery();
@@ -188,6 +223,10 @@ public class SQLManager {
         }
     }
 
+    /**
+     * Adds a highscore
+     * @param highscore A highscore
+     */
     public void addHighscore(Highscore highscore) {
         try (PreparedStatement stmt = highscoreConn.prepareStatement("INSERT INTO highscores (name, gamemode, level, money, date) VALUES (?, ?, ?, ?, ?)")) {
             stmt.setString(1, highscore.getName());
