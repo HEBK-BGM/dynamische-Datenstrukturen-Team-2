@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment=" [FIX] True or Not Spielmodus">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/TrueOrNot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gamemodes/TrueOrNot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/PlayGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/PlayGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/Lose.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hebk/gui/trueOrNot/TrueOrNotStart.java" afterDir="false" />
-    </list>
+    <list default="true" id="409f656e-b6de-44ad-bf8f-bfd1307540be" name="Changes" comment="normal Spielmodus zusammenfügen" />
     <list id="b297c7ed-e332-4d9b-86b5-7f56808c4ba9" name="Changes by jonas.schmid" comment="Changes by jonas.schmid" />
     <list id="2f6eb3b9-ef20-421c-82c6-8bef6636af29" name="Changes by niklas.schoe" comment="Changes by niklas.schoe" />
     <list id="6877c9ce-fa7f-4bb9-8281-999c1e84a751" name="Changes by timo.kruse" comment="Changes by timo.kruse" />
@@ -39,23 +33,26 @@
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2HBYoget7g6hULhRWUFk73OXd0C" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Object&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Anwender/IdeaProjects/maxdynamische-Datenstrukturen-Team-2/src/main/java/de/hebk/gui&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultPlantUmlFileTemplate": "UML Object",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "C:/Users/Anwender/IdeaProjects/maxdynamische-Datenstrukturen-Team-2/src/main/java/de/hebk/gui",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="de.hebk.gamemodes" />
@@ -104,6 +101,7 @@
       <workItem from="1673287938082" duration="116000" />
       <workItem from="1673386915456" duration="509000" />
       <workItem from="1673546224851" duration="4163000" />
+      <workItem from="1673699439303" duration="686000" />
     </task>
     <task id="LOCAL-00001" summary="Init Project">
       <created>1667762862125</created>
@@ -182,7 +180,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673387412443</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="normal Spielmodus zusammenfügen">
+      <created>1673699954112</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1673699954112</updated>
+    </task>
+    <task id="LOCAL-00013" summary="normal Spielmodus zusammenfügen">
+      <created>1673700107681</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1673700107681</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,6 +212,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Init Project" />
     <MESSAGE value="[ADD] Alle Klassen&#10;(Alle haben gearbeitet)" />
     <MESSAGE value="Changes by jonas.schmid" />
@@ -209,7 +222,8 @@
     <MESSAGE value=" [FIX] Queue und List" />
     <MESSAGE value=" [ADD] True or Not Spielmodus" />
     <MESSAGE value=" [FIX] True or Not Spielmodus" />
-    <option name="LAST_COMMIT_MESSAGE" value=" [FIX] True or Not Spielmodus" />
+    <MESSAGE value="normal Spielmodus zusammenfügen" />
+    <option name="LAST_COMMIT_MESSAGE" value="normal Spielmodus zusammenfügen" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

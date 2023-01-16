@@ -3,18 +3,29 @@ package de.hebk.gamemodes;
 import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.SQLManager;
+import de.hebk.gui.EndGui;
+import de.hebk.gui.StartGui;
+import de.hebk.gui.normal.NormalQuestionGUI;
+import de.hebk.gui.trueOrNot.Win;
 import de.hebk.model.list.List;
-
-import java.util.Scanner;
+import de.hebk.sound.SoundManager;
+import de.hebk.gui.trueOrNot.*;
+import de.hebk.sound.SoundType;
 
 public class Normal {
     private final Config config = new Config();
     private SQLManager manager = new SQLManager(Config.getDatabaseURL());
+    private SoundManager soundManager = new SoundManager();
+    private StartGui startGui;
+    private Question frage;
 
     private int stufe = 1;
+    private int cash = 0;
 
     public int getMoney() {
-        switch (stufe) {
+        switch (stufe-1) {
+            case 0:
+                return 0;
             case 1:
                 return 50;
             case 2:
@@ -49,59 +60,83 @@ public class Normal {
         return 0;
     }
 
-    public Normal(){
+
+    public Normal(StartGui startGui){
         System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
+        this.startGui = startGui;
+        soundManager.playSound(SoundType.QUESTION, false);
         game();
     }
 
-    private void verloren() {
+    private void gewonnen() {
+        new Win(startGui);
+        soundManager.stopSound();
+        soundManager.playSound(SoundType.WIN, false);
+    }
+
+    private String verlorentext() {
         if (stufe < 5) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und hast so garnichts verdient");
+            cash = 0;
+            return "Du hast auf Stufe " + stufe + " verloren und hast so gar nichts verdient";
         }
         if (stufe >= 5 && stufe < 10) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die erste Sicherheitsstufe erreicht. Dein Gewinn beträgt " + getMoney() + " Euros");
+            cash = 500;
+            return "Du hast auf Stufe " + stufe + " verloren und somit die erste Sicherheitsstufe erreicht. Dein Gewinn beträgt 500 Euros";
         }
         if (stufe >= 10) {
-            System.out.println("Du hast auf Stufe " + stufe + " verloren und somit die zweite Sicherheitsstufe erreicht. Dein Gewinn beträgt " + getMoney() + " Euros");
+            cash = 16000;
+            return "Du hast auf Stufe " + stufe + " verloren und somit die zweite Sicherheitsstufe erreicht. Dein Gewinn beträgt 16.000 Euros";
         }
+        return "Fehler bei verlorentext()";
     }
 
-    private void gewonnen() {
-        System.out.println("Du hast auf Stufe " + stufe + " gewonnen und hast so " + getMoney() + " Euros verdient");
-    }
 
     private void game(){
-
-        while (stufe <= 15) {
-            Boolean result = stelleFrage();
-
-            if (result == false) {
-                verloren();
-                break;
-            }
-            if (stufe == 15) {
-                gewonnen();
-            }
+        if (stufe == 15) {
+            gewonnen();
+            return;
         }
 
+        newQuestion();
+        new NormalQuestionGUI(startGui, this, soundManager);
     }
 
-    private boolean stelleFrage(){
-        Scanner sc = new Scanner(System.in);
-        List<Question> fragenliste = manager.getRandomQuestionsFromLevel(1,1);
+
+    public void newQuestion() {
+        List<Question> fragenliste = manager.getRandomQuestionsFromLevel(stufe,1);
         fragenliste.toFirst();
-        Question frage = fragenliste.getObject();
-        String[] answers = frage.getAnswers();
+        Question question = fragenliste.getObject();
 
-        System.out.println("Du bist auf Stufe " + stufe + "und bekommst eine Frage auf Level " + frage.getLevel() + "\n" + frage.getBody()+ "\n" + answers[0] + "\n" + answers[1] + "\n" + answers[2] + "\n" + answers[3]);
-        int userAntwort = sc.nextInt();
+        frage = question;
+    }
 
-        if (userAntwort == frage.getCorrect()) {
+    public void checkanswer(int pAnswer){
+        if (pAnswer == frage.getCorrect()) {
+            soundManager.stopSound();
+            soundManager.playSound(SoundType.RIGHT_ANSWER, false);
+            soundManager.playNext(SoundType.QUESTION, true);
+
             System.out.println("Richtig");
+            cash = getMoney();
+
             stufe ++;
-            return true;
+            game();
+        }else {
+            soundManager.stopSound();
+            soundManager.playSound(SoundType.WRONG_ANSWER, false);
+
+            System.out.println("Richtige Antwort: " + frage.getCorrect() + "\n" + "pAnswer: " + pAnswer);
+            System.out.println("Falsch. Die richtige Antwort lautet " + frage.getCorrect());
+
+            new EndGui(startGui,verlorentext(),"normal",stufe,manager);
         }
-        System.out.println("Falsch. Die richtige Antowort lautet " + frage.getCorrect());
-        return false;
+    }
+
+    public Question getQuestion() {
+        return frage;
+    }
+
+    public int getStufe() {
+        return stufe;
     }
 }
