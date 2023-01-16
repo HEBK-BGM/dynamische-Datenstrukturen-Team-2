@@ -6,7 +6,7 @@ import de.hebk.game.SQLManager;
 import de.hebk.gui.EndGui;
 import de.hebk.gui.StartGui;
 import de.hebk.gui.normal.NormalQuestionGUI;
-import de.hebk.gui.trueOrNot.Win;
+
 import de.hebk.model.list.List;
 import de.hebk.sound.SoundManager;
 import de.hebk.gui.trueOrNot.*;
@@ -69,7 +69,7 @@ public class Normal {
     }
 
     private void gewonnen() {
-        new Win(startGui);
+        new EndGui(startGui,"Du hast gewonnen!","Normal",stufe,manager);
         soundManager.stopSound();
         soundManager.playSound(SoundType.WIN, false);
     }

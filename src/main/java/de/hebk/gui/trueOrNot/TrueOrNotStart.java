@@ -41,7 +41,7 @@ public class TrueOrNotStart {
         TrueOrNot trueOrNot = new TrueOrNot();
         this.trueOrNotClone=trueOrNot;
         question.setText(trueOrNotClone.createQuestion());
-        money.setText(String.valueOf(trueOrNotClone.getMoney()));
+        money.setText(String.valueOf(trueOrNotClone.getMoney())+"€");
 
         button1.addActionListener(new ActionListener() {
             @Override
@@ -80,7 +80,7 @@ public class TrueOrNotStart {
         trueOrNotClone.deletequestion();
         trueOrNotClone.createQuestion();
         question.setText(trueOrNotClone.createQuestion());
-        money.setText(String.valueOf(trueOrNotClone.getMoney()));
+        money.setText(String.valueOf(trueOrNotClone.getMoney())+"€");
         startGui.revalidate();
         startGui.repaint();
         lvl++;
