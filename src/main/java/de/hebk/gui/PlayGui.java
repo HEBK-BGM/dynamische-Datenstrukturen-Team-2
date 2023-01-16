@@ -17,6 +17,10 @@ public class PlayGui {
     private JButton trueOrNotButton;
     private JButton zurueckButton;
 
+    /**
+     * Constructor for the play gui
+     * @param gui   The frame
+     */
     public PlayGui(StartGui gui) {
         JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
         p.add(panel1);

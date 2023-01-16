@@ -21,6 +21,11 @@ public class MultiplayerLobbyGui {
     private JLabel mitspielerLabel;
     private JLabel errorLabel;
 
+    /**
+     * Creates a multiplayer lobby gui for the host
+     * @param gui       The frame
+     * @param server    The server
+     */
     public MultiplayerLobbyGui(StartGui gui, Server server) {
         this.frame = gui;
         this.server = server;
@@ -56,6 +61,10 @@ public class MultiplayerLobbyGui {
         });
     }
 
+    /**
+     * Creates a multiplayer lobby gui for players
+     * @param gui   The frame
+     */
     public MultiplayerLobbyGui(StartGui gui) {
         this.frame = gui;
         startenButton.setVisible(false);
@@ -71,6 +80,9 @@ public class MultiplayerLobbyGui {
         });
     }
 
+    /**
+     * Shows the panel
+     */
     public void show() {
         frame.setContentPane(imagePanel);
         frame.revalidate();
@@ -82,10 +94,18 @@ public class MultiplayerLobbyGui {
         errorLabel = new JLabel("");
     }
 
+    /**
+     * Sets the player label
+     * @param label
+     */
     public void setMitspielerLabel(String label) {
         this.mitspielerLabel.setText(label);
     }
 
+    /**
+     * Gets the player label
+     * @return  The player label
+     */
     public JLabel getMitspielerLabel() {
         return this.mitspielerLabel;
     }

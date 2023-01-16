@@ -32,6 +32,14 @@ public class MultiplayerNormalGui {
     private JButton publikumsJokerButton;
     private JButton a5050JokerButton;
 
+    /**
+     * Creates a gui for a normal question
+     * @param gui           The frame
+     * @param soundManager  The soundmanager
+     * @param client        The client
+     * @param question      The question
+     * @param joker         The joker
+     */
     public MultiplayerNormalGui(StartGui gui, SoundManager soundManager, Client client, Question question, Joker[] joker) {
         this.client = client;
         this.gui = gui;
@@ -98,12 +106,21 @@ public class MultiplayerNormalGui {
         loadJoker(joker, question);
     }
 
+    /**
+     * Sends an answer to the server
+     * @param answer    The answer
+     */
     private void sendAnswer(String answer) {
         Packet packet = new Packet(PacketType.ANSWER, answer);
         client.send(packet);
         new MultiplayerInfoGui(gui, "Bitte warte während die anderen Spieler deren Antworten abgeben...");
     }
 
+    /**
+     * Loads the joker
+     * @param joker     The joker
+     * @param question  The question
+     */
     private void loadJoker(Joker[] joker, Question question) {
         if (joker[0].isUsed()) {
             telefonjokerButton.setBackground(Color.GRAY);

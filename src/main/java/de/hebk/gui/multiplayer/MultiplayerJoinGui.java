@@ -20,6 +20,10 @@ public class MultiplayerJoinGui {
     private JTextField portField;
     private JLabel errorLabel;
 
+    /**
+     * Contructor for a gui
+     * @param frame The frame
+     */
     public MultiplayerJoinGui(StartGui frame) {
         this.frame = frame;
 
@@ -47,6 +51,12 @@ public class MultiplayerJoinGui {
         });
     }
 
+    /**
+     * Joins a game
+     * @param username  The username
+     * @param ip        The server ip
+     * @param port      The server port
+     */
     private void joinGame(String username, String ip, String port) {
         if (!(username.length() > 0)) {
             System.out.println("Kein gültiger Username!");

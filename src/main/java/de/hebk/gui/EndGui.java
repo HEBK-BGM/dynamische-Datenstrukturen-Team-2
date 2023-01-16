@@ -19,6 +19,14 @@ public class EndGui {
     private JButton acceptButton;
     private JLabel saveLabel;
 
+    /**
+     * Constructor for the End Gui
+     * @param gui           The frame
+     * @param info          The info that's going to be displayed
+     * @param gamemode      The gamemode that has been played
+     * @param lvl           The level the players were able to play to
+     * @param sqlManager    The sql manager
+     */
     public EndGui(StartGui gui, String info, String gamemode, int lvl, SQLManager sqlManager) {
         JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(),new GridLayout());
         p.add(panel1);

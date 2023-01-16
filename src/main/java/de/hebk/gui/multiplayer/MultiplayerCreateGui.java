@@ -20,6 +20,10 @@ public class MultiplayerCreateGui {
     private JButton zurueckButton;
     private JList list1;
 
+    /**
+     * Contructor for a gui
+     * @param gui   The frame
+     */
     public MultiplayerCreateGui(StartGui gui) {
         this.frame = gui;
 
@@ -46,6 +50,11 @@ public class MultiplayerCreateGui {
         });
     }
 
+    /**
+     * Creates a multiplayer game
+     * @param username  The username of the host
+     * @param port      The port the server should start on
+     */
     private void createMultiplayer(String username, String port) {
         if (!(username.length() > 0)) {
             System.out.println("Kein gültiger Username!");

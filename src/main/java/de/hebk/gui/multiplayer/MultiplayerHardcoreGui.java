@@ -33,6 +33,14 @@ public class MultiplayerHardcoreGui {
     private JLabel questionLabel;
     private Thread thread;
 
+    /**
+     * Multiplayer hardcore question gui
+     * @param gui           The frame
+     * @param soundManager  The soundmanager
+     * @param client        The client
+     * @param question      The question
+     * @param joker         The joker
+     */
     public MultiplayerHardcoreGui(StartGui gui, SoundManager soundManager, Client client, Question question, Joker[] joker) {
         this.gui = gui;
         this.client = client;
@@ -204,6 +212,9 @@ public class MultiplayerHardcoreGui {
         questionLabel = new JLabel();
     }
 
+    /**
+     * Starts the timer
+     */
     private void startTimer() {
         thread = new Thread(new Runnable() {
             @Override
@@ -225,6 +236,10 @@ public class MultiplayerHardcoreGui {
         thread.start();
     }
 
+    /**
+     * Sends an answer to the server
+     * @param answer    The answer
+     */
     private void sendAnswer(String answer) {
         Packet packet = new Packet(PacketType.ANSWER, answer);
         client.send(packet);
@@ -237,6 +252,9 @@ public class MultiplayerHardcoreGui {
         }
     }
 
+    /**
+     * Stops the timer
+     */
     private void stopTimer() {
         thread.stop();
     }
