@@ -129,6 +129,10 @@ abstract class MultiplayerGamemode {
         return answers;
     }
 
+    /**
+     * Gets the amount of players who still can play
+     * @return  The amount of players
+     */
     protected int countAlivePlayers() {
         int counter = 0;
 
@@ -143,10 +147,18 @@ abstract class MultiplayerGamemode {
         return counter;
     }
 
+    /**
+     * Gets all connections in a list
+     * @return  All connections
+     */
     protected List<ClientConnection> getConnections() {
         return this.connections;
     }
 
+    /**
+     * Ends the game
+     * @param finallevel    The level the players were able to play to
+     */
     protected void endGame(int finallevel) {
         Packet endPacket = new Packet(PacketType.END, finallevel + "");
 
@@ -159,14 +171,27 @@ abstract class MultiplayerGamemode {
         server.stopServer();
     }
 
+    /**
+     * Returns if the last player wants to keep playing
+     * @return  Boolean
+     */
     protected boolean isKeepPlaying() {
         return this.keepPlaying;
     }
 
+    /**
+     * Sets if the last player wants to keep playing
+     * @param bool Boolean
+     */
     protected void setKeepPlaying(boolean bool) {
         this.keepPlaying = bool;
     }
 
+    /**
+     * Checks how many players still can play and decides to keep playing or stop the game
+     * @param level     The current level
+     * @param maxlevel  The max level possible
+     */
     protected void checkGameStatus(int level, int maxlevel) {
         // checks how many players still can play and decides to keep playing or stop the game
         int alive = countAlivePlayers();

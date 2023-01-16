@@ -17,6 +17,11 @@ public class MultiplayerLastAliveGui {
     private JButton weiterSpielenButton;
     private JButton aufhoerenButton;
 
+    /**
+     * Displays a message that the player is the last alive
+     * @param gui       The frame
+     * @param client    The client
+     */
     public MultiplayerLastAliveGui(StartGui gui, Client client) {
         JImagePanel p = new JImagePanel(new ImageIcon(Config.getBackground()).getImage(), new GridLayout());
         p.add(panel1);

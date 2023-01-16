@@ -18,6 +18,10 @@ public class HighscoreGui {
     private JButton zurueckButton;
     private JScrollBar scrollBar1;
 
+    /**
+     * Constructor for the Highscore gui
+     * @param gui   The frame
+     */
     public HighscoreGui(StartGui gui) {
         zurueckButton.addActionListener(new ActionListener() {
             @Override

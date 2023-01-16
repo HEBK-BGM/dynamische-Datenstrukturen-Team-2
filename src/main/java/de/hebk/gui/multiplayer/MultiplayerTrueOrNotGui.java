@@ -21,6 +21,12 @@ public class MultiplayerTrueOrNotGui {
     private JLabel questionLabel;
     private JLabel statementLabel;
 
+    /**
+     * Creates a gui for the true or not game mode
+     * @param gui       The frame
+     * @param client    The client
+     * @param question  The question
+     */
     public MultiplayerTrueOrNotGui(StartGui gui, Client client, Question question) {
         String statement = getStatement(question);
         questionLabel.setText("Frage: " + question.getBody());
@@ -66,6 +72,11 @@ public class MultiplayerTrueOrNotGui {
         statementLabel = new JLabel("");
     }
 
+    /**
+     * Gets a random statement from a question
+     * @param question  The question
+     * @return          The statement
+     */
     private String getStatement(Question question) {
         Random rand = new Random();
 
@@ -81,6 +92,13 @@ public class MultiplayerTrueOrNotGui {
         return question.getAnswers()[random];
     }
 
+    /**
+     * Sends an answer to the server
+     * @param question  The question
+     * @param statement The statement
+     * @param client    The client
+     * @param bool      Boolen if the player believes the question is true or not
+     */
     private void sendAnswer(Question question, String statement, Client client, boolean bool) {
         String rightAnswer = question.getCorrectAnswer();
 

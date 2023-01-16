@@ -16,6 +16,10 @@ public class MultiplayerGui {
     private JButton spielErstellenButton;
     private JButton zurueckButton;
 
+    /**
+     * Contructor for a gui
+     * @param gui   The frame
+     */
     public MultiplayerGui(StartGui gui) {
         this.frame = gui;
 
@@ -51,6 +55,10 @@ public class MultiplayerGui {
         });
     }
 
+    /**
+     * Gets the panel
+     * @return  The panel
+     */
     private JPanel getPanel() {
         return panel1;
     }
