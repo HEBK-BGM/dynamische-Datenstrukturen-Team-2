@@ -60,20 +60,29 @@ public class Normal {
         return 0;
     }
 
-
+    /**
+     * Constructor for Normal
+     * @param startGui
+     */
     public Normal(StartGui startGui){
-        System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
         this.startGui = startGui;
         soundManager.playSound(SoundType.QUESTION, false);
         game();
     }
 
+    /**
+     * used when the player wins the game
+     */
     private void gewonnen() {
         new Win(startGui);
         soundManager.stopSound();
         soundManager.playSound(SoundType.WIN, false);
     }
 
+    /**
+     * return the correct text when the player has lost
+     * @return
+     */
     private String verlorentext() {
         if (stufe < 5) {
             cash = 0;
@@ -90,7 +99,10 @@ public class Normal {
         return "Fehler bei verlorentext()";
     }
 
-
+    /**
+     * updates the question and the gui
+     * stops the game and let the player win when he has completet level 15
+     */
     private void game(){
         if (stufe == 15) {
             gewonnen();
@@ -101,7 +113,9 @@ public class Normal {
         new NormalQuestionGUI(startGui, this, soundManager);
     }
 
-
+    /**
+     * depending on the level, takes the appropriate question from the database
+     */
     public void newQuestion() {
         List<Question> fragenliste = manager.getRandomQuestionsFromLevel(stufe,1);
         fragenliste.toFirst();
@@ -110,6 +124,10 @@ public class Normal {
         frage = question;
     }
 
+    /**
+     * checks if the answer chosen in the GUI is correct
+     * @param pAnswer
+     */
     public void checkanswer(int pAnswer){
         if (pAnswer == frage.getCorrect()) {
             soundManager.stopSound();
@@ -125,17 +143,22 @@ public class Normal {
             soundManager.stopSound();
             soundManager.playSound(SoundType.WRONG_ANSWER, false);
 
-            System.out.println("Richtige Antwort: " + frage.getCorrect() + "\n" + "pAnswer: " + pAnswer);
-            System.out.println("Falsch. Die richtige Antwort lautet " + frage.getCorrect());
-
             new EndGui(startGui,verlorentext(),"normal",stufe,manager);
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Question getQuestion() {
         return frage;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getStufe() {
         return stufe;
     }

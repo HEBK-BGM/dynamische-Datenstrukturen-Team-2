@@ -32,7 +32,12 @@ public class NormalQuestionGUI {
     private JPanel bottom;
     private JPanel middle;
 
-    //, Question question, Joker[] joker, Normal normal//
+    /**
+     * Constructor for the NormalQuestionGUI
+     * @param startGui
+     * @param normal
+     * @param soundManager
+     */
     public NormalQuestionGUI(StartGui startGui,Normal normal, SoundManager soundManager) {
         this.startGui = startGui;
         this.normal = normal;
@@ -84,7 +89,9 @@ public class NormalQuestionGUI {
         });
     }
 
-
+    /**
+     *
+     */
     private void createUIComponents() {
         questionLabel = new JLabel("test");
         button1 = new JButton();
