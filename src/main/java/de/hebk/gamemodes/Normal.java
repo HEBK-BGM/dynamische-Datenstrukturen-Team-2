@@ -1,8 +1,6 @@
 package de.hebk.gamemodes;
 
-import de.hebk.game.Config;
-import de.hebk.game.Question;
-import de.hebk.game.SQLManager;
+import de.hebk.game.*;
 import de.hebk.gui.EndGui;
 import de.hebk.gui.StartGui;
 import de.hebk.gui.normal.NormalQuestionGUI;
@@ -17,6 +15,7 @@ public class Normal {
     private SQLManager manager = new SQLManager(Config.getDatabaseURL());
     private SoundManager soundManager = new SoundManager();
     private StartGui startGui;
+    private Joker[] joker = new Joker[3];
     private Question frage;
 
     private int stufe = 1;
@@ -67,6 +66,10 @@ public class Normal {
     public Normal(StartGui startGui){
         this.startGui = startGui;
         soundManager.playSound(SoundType.QUESTION, false);
+        joker[0] = new Joker(JokerType.TELEPHONE_JOKER);
+        joker[1] = new Joker(JokerType.AUDIENCE_JOKER);
+        joker[2] = new Joker(JokerType.HALF_JOKER);
+
         game();
     }
 
@@ -110,7 +113,7 @@ public class Normal {
         }
 
         newQuestion();
-        new NormalQuestionGUI(startGui, this, soundManager);
+        new NormalQuestionGUI(startGui, this, soundManager, joker);
     }
 
     /**
