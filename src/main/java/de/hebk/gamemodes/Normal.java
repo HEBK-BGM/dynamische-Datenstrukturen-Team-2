@@ -1,8 +1,6 @@
 package de.hebk.gamemodes;
 
-import de.hebk.game.Config;
-import de.hebk.game.Question;
-import de.hebk.game.SQLManager;
+import de.hebk.game.*;
 import de.hebk.gui.EndGui;
 import de.hebk.gui.StartGui;
 import de.hebk.gui.normal.NormalQuestionGUI;
@@ -17,6 +15,7 @@ public class Normal {
     private SQLManager manager = new SQLManager(Config.getDatabaseURL());
     private SoundManager soundManager = new SoundManager();
     private StartGui startGui;
+    private Joker[] joker = new Joker[3];
     private Question frage;
 
     private int stufe = 1;
@@ -60,20 +59,33 @@ public class Normal {
         return 0;
     }
 
-
+    /**
+     * Constructor for Normal
+     * @param startGui
+     */
     public Normal(StartGui startGui){
-        System.out.println("Du bist im Normalem Spielmodus. Du bekommst 15 Fragen und hast zwei Sicherheitsstufen. Eine bei der 5ten und eine bei der 10ten Frage. Viel Erfolg\n");
         this.startGui = startGui;
         soundManager.playSound(SoundType.QUESTION, false);
+        joker[0] = new Joker(JokerType.TELEPHONE_JOKER);
+        joker[1] = new Joker(JokerType.AUDIENCE_JOKER);
+        joker[2] = new Joker(JokerType.HALF_JOKER);
+
         game();
     }
 
+    /**
+     * used when the player wins the game
+     */
     private void gewonnen() {
         new EndGui(startGui,"Du hast gewonnen!","Normal",stufe,manager);
         soundManager.stopSound();
         soundManager.playSound(SoundType.WIN, false);
     }
 
+    /**
+     * return the correct text when the player has lost
+     * @return
+     */
     private String verlorentext() {
         if (stufe < 5) {
             cash = 0;
@@ -90,7 +102,10 @@ public class Normal {
         return "Fehler bei verlorentext()";
     }
 
-
+    /**
+     * updates the question and the gui
+     * stops the game and let the player win when he has completet level 15
+     */
     private void game(){
         if (stufe == 15) {
             gewonnen();
@@ -98,10 +113,12 @@ public class Normal {
         }
 
         newQuestion();
-        new NormalQuestionGUI(startGui, this, soundManager);
+        new NormalQuestionGUI(startGui, this, soundManager, joker);
     }
 
-
+    /**
+     * depending on the level, takes the appropriate question from the database
+     */
     public void newQuestion() {
         List<Question> fragenliste = manager.getRandomQuestionsFromLevel(stufe,1);
         fragenliste.toFirst();
@@ -110,6 +127,10 @@ public class Normal {
         frage = question;
     }
 
+    /**
+     * checks if the answer chosen in the GUI is correct
+     * @param pAnswer
+     */
     public void checkanswer(int pAnswer){
         if (pAnswer == frage.getCorrect()) {
             soundManager.stopSound();
@@ -125,17 +146,22 @@ public class Normal {
             soundManager.stopSound();
             soundManager.playSound(SoundType.WRONG_ANSWER, false);
 
-            System.out.println("Richtige Antwort: " + frage.getCorrect() + "\n" + "pAnswer: " + pAnswer);
-            System.out.println("Falsch. Die richtige Antwort lautet " + frage.getCorrect());
-
             new EndGui(startGui,verlorentext(),"normal",stufe,manager);
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Question getQuestion() {
         return frage;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getStufe() {
         return stufe;
     }
