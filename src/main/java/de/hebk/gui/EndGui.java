@@ -50,6 +50,7 @@ public class EndGui {
                     sqlManager.addHighscore(highscore);
 
                     saveLabel.setText("Highscore gespeichert...");
+                    acceptButton.setVisible(false);
                 }
                 else {
                     saveLabel.setText("Bitte gebe deinen Namen ein!");

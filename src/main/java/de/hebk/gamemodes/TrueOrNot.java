@@ -4,6 +4,7 @@ import de.hebk.game.Config;
 import de.hebk.game.Question;
 import de.hebk.game.SQLManager;
 import de.hebk.gui.trueOrNot.TrueOrNotStart;
+import de.hebk.model.list.List;
 import de.hebk.model.queue.Queue;
 
 import java.util.Random;
@@ -22,6 +23,8 @@ public class TrueOrNot {
 
     TrueOrNotStart start;
 
+    SQLManager sql1;
+
 
 
 
@@ -30,8 +33,23 @@ public class TrueOrNot {
     }
 
     public TrueOrNot(){
-        SQLManager sqlManager = new SQLManager(Config.getDatabaseURL());
-        questions = sqlManager.getQueueQuestions();
+        sql1 = new SQLManager(Config.getDatabaseURL());
+        questions = new Queue<>();
+
+        for (int i = 1; i < 30; i++) {
+            int num = i/2;
+            if (num == 0) {
+                num = 1;
+            }
+
+            List<Question> q = sql1.getRandomQuestionsFromLevel(num, 4);
+
+            q.toFirst();
+            for (int j = 0; j < 4; j++) {
+                questions.enqueue(q.getObject());
+                q.next();
+            }
+        }
     }
 
     public void setCurrentQuestion(){
@@ -55,7 +73,7 @@ public class TrueOrNot {
         String wrongAnswer;
         answers=currentQuestion.getAnswers();
         //String[] sortedAnswers = new String[3];
-        String correctAnswer = answers[currentQuestion.getCorrect()];
+        String correctAnswer = currentQuestion.getCorrectAnswer();
         //answers[currentQuestion.getCorrect()]=null;
         /*for(int i = 0; i < 4; i++){
             if (answers[i]==null){
@@ -68,11 +86,12 @@ public class TrueOrNot {
             }
         }*/
         if(currentQuestion.getCorrect()==1){
-            wrongAnswer=answers[2];
+            wrongAnswer=answers[1];
 
         }
         else{
-            wrongAnswer=answers[1];
+
+            wrongAnswer=answers[0];
         }
         Random rand = new Random();
         /*int upperbound1 = 2;
@@ -80,12 +99,12 @@ public class TrueOrNot {
         //choice[0] = sortedAnswers[random];
         choice[0]=wrongAnswer;
         choice[1] = correctAnswer;
-        int upperbound2 = 1;
+        int upperbound2 = 2;
         int finalRandom = rand.nextInt(upperbound2);
         if(finalRandom==0){
             correct = false;
         }
-        else{
+        else if(finalRandom==1){
             correct = true;
         }
         statement = choice[finalRandom];
@@ -94,15 +113,15 @@ public class TrueOrNot {
         return statement;
     }
 
-    public boolean checkCorrect(){
-        if(start.getAnswer()&&getCorrect()){
-            rightAnswer=true;
+    public boolean checkCorrect(boolean bool){
+        if(bool && !getCorrect()){
+            rightAnswer=false;
         }
-        else if(!start.getAnswer()&&!getCorrect()){
-            rightAnswer=true;
+        else if(!bool && getCorrect()){
+            rightAnswer=false;
         }
         else{
-            rightAnswer=false;
+            rightAnswer=true;
         }
 
         return rightAnswer;
@@ -161,5 +180,9 @@ public class TrueOrNot {
 
     public void deletequestion(){
         questions.dequeue();
+    }
+
+    public SQLManager getSql1() {
+        return sql1;
     }
 }
